@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Drinks — Chicha San Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+
+    /* ── MENU NAV OVERRIDE ── */
+    nav {
+      background: #fff;
+      pointer-events: all;
+    }
+    nav.scrolled {
+      background: rgba(250,249,247,0.96);
+    }
+    nav.scrolled {
+      padding: 28px 40px;
+    }
+    .nav-links a { color: var(--mid); }
+    .nav-links a.active {
+      color: var(--ink);
+    }
+
+    /* ── PAGE HEADER ── */
+    .menu-header {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      min-height: 540px;
+      background: #fff;
+      overflow: visible;
+    }
+    .menu-header-content {
+      padding: 100px 56px 32px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-header-text-group {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .menu-header-disclaimer {
+      font-size: 11px;
+      color: #aaa;
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 420px;
+      padding-top: 40px;
+    }
+    .menu-header-image {
+      padding: 32px 40px 32px 200px;
+      display: flex;
+      align-items: stretch;
+      overflow: visible;
+    }
+    .menu-header-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .menu-header-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: var(--mid);
+      border: 1px solid #ddd;
+      padding: 4px 10px;
+      margin-bottom: 24px;
+    }
+    .menu-header-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .menu-header-sub {
+      font-size: 14px;
+      color: var(--mid);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+      max-width: 420px;
+      line-height: 1.6;
+    }
+
+    /* ── DISCLAIMER BAR ── */
+    .menu-disclaimer {
+      background: #f7f6f4;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 14px 40px;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .menu-tabs-wrap {
+      position: sticky;
+      top: 61px;
+      z-index: 100;
+      background: #fff;
+      display: flex;
+      align-items: center;
+    }
+    .menu-tabs {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 40px;
+      flex: 1;
+    }
+    .menu-tabs::-webkit-scrollbar { display: none; }
+    .tabs-arrow {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 100%;
+      min-height: 54px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      color: var(--mid);
+      font-size: 14px;
+      flex-shrink: 0;
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .tabs-arrow:hover { color: var(--ink); }
+    .tabs-arrow.visible { display: flex; }
+    .tabs-arrow-left { border-right: 1px solid #e8e8e8; }
+    .tabs-arrow-right { border-left: 1px solid #e8e8e8; }
+    .menu-tab {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: 18px 24px;
+      white-space: nowrap;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      text-decoration: none;
+      display: block;
+    }
+    .menu-tab:first-child { padding-left: 0; }
+    .menu-tab:hover { color: var(--ink); }
+    .menu-tab.active {
+      color: var(--ink);
+      border-bottom-color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* ── MENU GRID ── */
+    .menu-body {
+      padding: 0 40px 120px;
+    }
+    .menu-category {
+      display: none;
+    }
+    .menu-category.active {
+      display: block;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px 24px;
+      margin-top: 48px;
+    }
+    .menu-item {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-item:hover .menu-item-photo { transform: scale(1.07); }
+    .menu-item-photo-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #ece9e4;
+    }
+    .menu-item-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transform: scale(1.02);
+      transform-origin: center;
+      transition: transform 0.5s ease;
+    }
+    .menu-item-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: #ece9e4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      color: #bbb;
+      text-transform: uppercase;
+    }
+    .menu-item-info {
+      padding: 14px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .menu-item-name {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .menu-item-desc {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+    .menu-item-price {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      margin-top: 2px;
+    }
+
+    /* ── ITEM TAG ── */
+    .menu-item-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 10.4px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid #ddd;
+      padding: 2px 7px;
+      margin-top: 2px;
+      align-self: flex-start;
+    }
+
+    /* ── CATEGORY SECTION LABEL ── */
+    .menu-category-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 40px 0 24px;
+    }
+
+    /* ── BUILD YOUR OWN / CUSTOMIZE ── */
+    .customize-intro {
+      max-width: 640px;
+      margin: 48px 0 8px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--mid);
+    }
+    .customize-rows { margin-top: 24px; }
+    .customize-row {
+      display: grid;
+      grid-template-columns: 48px 220px 1fr;
+      align-items: start;
+      gap: 24px;
+      padding: 32px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .customize-row:first-child { border-top: 1px solid #e8e8e8; }
+    .customize-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--faint);
+      padding-top: 6px;
+    }
+    .customize-label {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .customize-sub {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .customize-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: flex-start;
+    }
+    .customize-option {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid #ddd;
+      padding: 9px 16px;
+      transition: border-color 0.2s, color 0.2s;
+      cursor: default;
+    }
+    .customize-option:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .customize-footnote {
+      font-size: 11px;
+      font-style: italic;
+      color: #aaa;
+      line-height: 1.6;
+      margin-top: 32px;
+      max-width: 480px;
+    }
+    @media (max-width: 640px) {
+      .customize-row {
+        grid-template-columns: 32px 1fr;
+        row-gap: 12px;
+      }
+      .customize-row > .customize-options {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* ── TOPPINGS SECTION ── */
+    .toppings-section {
+      background: #fff;
+      padding: 56px 160px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .toppings-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .toppings-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      text-align: right;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .toppings-list-item {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.35;
+      padding: 0 24px;
+      border-left: 1px solid #e0e0e0;
+    }
+    .toppings-list-item:first-child {
+      padding-left: 0;
+      border-left: none;
+    }
+    .toppings-list-item:last-child {
+      padding-right: 0;
+    }
+    @media (max-width: 560px) {
+      .toppings-section { justify-content: flex-start; padding: 40px 24px; }
+      .toppings-list { justify-content: flex-start; text-align: left; }
+    }
+    @media (max-width: 768px) {
+      .menu-header { grid-template-columns: 1fr; min-height: auto; }
+      .menu-header-content { padding: 48px 24px 24px; }
+      .menu-header-image { padding: 0 24px 32px; }
+      .menu-disclaimer { padding: 14px 24px; }
+      .menu-tabs { padding: 0 24px; }
+      .menu-body { padding: 0 24px 80px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; margin-top: 32px; }
+    }
+
+    /* ── FEATURE STRIP ──
+       Responsive pattern: the two cards stay side-by-side at every
+       breakpoint (never stack into one column). Within each card,
+       image/text stack vertically until the "lg" breakpoint (1024px),
+       then switch to a horizontal image-left / text-right split. */
+    .feature-strip {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      margin: 0 40px 80px;
+    }
+    .feature-block {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .feature-block-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .feature-block-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .feature-block:hover .feature-block-img img { transform: scale(1.03); }
+    .feature-block-text {
+      background: #faf9f7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px 24px;
+      gap: 12px;
+      width: 100%;
+    }
+    .feature-block-title {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .feature-block-body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+    .feature-block-link {
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      width: fit-content;
+      margin-top: 6px;
+    }
+    @media (min-width: 640px) {
+      .feature-strip { gap: 32px; }
+      .feature-block-text { padding: 32px 36px; }
+      .feature-block-body { max-width: 320px; }
+    }
+    @media (min-width: 1024px) {
+      .feature-block {
+        flex-direction: row;
+        aspect-ratio: 2.4 / 1;
+      }
+      .feature-block-img { width: 53%; aspect-ratio: auto; }
+      .feature-block-text { width: 47%; padding: 32px 40px; }
+    }
+    @media (max-width: 480px) {
+      .feature-strip { margin: 0 24px 56px; gap: 16px; }
+      .feature-block-text { padding: 22px 18px; }
+    }
+
+  </style>
+</head>
+<body class="page-fade" style="padding-top: 75px; background: #fff;">
+<div class="load-bar" id="loadBar"></div>
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html"><img src="images/logo_header.png" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html" class="active">Menu</a>
+      <a href="locations.html">Locations</a>
+      <a href="#">Our Story</a>
+      <a href="#">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-cta-row">
+                    <a href="locations.html" class="nav-cta"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Order Online</a>
+        </div>
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="menu-header">
+    <div class="menu-header-content">
+      <div class="menu-header-text-group">
+        <div class="menu-header-title" id="headerTitle">Popular</div>
+        <div class="menu-header-sub" id="headerSub">At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.</div>
+        <div class="menu-header-disclaimer" style="display:flex; align-items:center; gap:28px;">
+          <img id="itiBadgeSimple" src="images/ITI_logo.webp" alt="International Taste Institute Brussels" style="display:none; width:80px; height:80px; object-fit:contain; flex-shrink:0; opacity:0.9;">
+          <span>Menu items and pricing vary by location.<br>Please check with your nearest store for current offerings.</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-header-image">
+      <div style="position:relative; width:100%; height:100%; overflow:visible;">
+        <img src="images/popular_section.webp" alt="Chicha San Chen">
+        <div id="headerImgCaption" style="display:none; position:absolute; bottom:0; left:0; right:0; padding:20px 24px; background:#000; color:#fff; font-family:'Inter',sans-serif; font-size:14px; letter-spacing:0.01em; line-height:1.6; font-weight:400;"></div>
+        <!-- Rotating badge: green tea only -->
+        <div id="itiBadgeRotating" style="display:none; position:absolute; top:20px; left:10px; width:163px; height:163px; z-index:10;">
+          <svg viewBox="0 0 136 136" width="163" height="163" style="position:absolute;top:0;left:0;animation:spinText 12s linear infinite reverse;">
+            <defs>
+              <path id="circle-path" d="M68,68 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/>
+            </defs>
+            <text font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="3.2" fill="#1a1a18" opacity="0.85">
+              <textPath href="#circle-path">ITI 3-STAR DIAMOND AWARD 2026 ✦ </textPath>
+            </text>
+          </svg>
+        </div>
+        <style>
+          @keyframes spinText { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        </style>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CATEGORY TABS -->
+  <div class="menu-tabs-wrap">
+    <button class="tabs-arrow tabs-arrow-left" id="tabsLeft" aria-label="Scroll left">←</button>
+    <div class="menu-tabs" id="menuTabs">
+      <a class="menu-tab active" href="#" data-cat="signature">Popular</a>
+      <a class="menu-tab" href="#" data-cat="seasonal">Seasonal</a>
+      <a class="menu-tab" href="#" data-cat="green">Green Tea</a>
+      <a class="menu-tab" href="#" data-cat="black">Black Tea</a>
+      <a class="menu-tab" href="#" data-cat="pouchong">High Mountain Pouchong Tea</a>
+      <a class="menu-tab" href="#" data-cat="oolong">Osmanthus Oolong Tea</a>
+      <a class="menu-tab" href="#" data-cat="dongding">Dong Ding Oolong Tea</a>
+      <a class="menu-tab" href="#" data-cat="cassia">Cassia Black Tea</a>
+      <a class="menu-tab" href="#" data-cat="customize">Build Your Own</a>
+    </div>
+    <button class="tabs-arrow tabs-arrow-right" id="tabsRight" aria-label="Scroll right">→</button>
+  </div>
+
+  <!-- MENU BODY -->
+  <div class="menu-body">
+
+    <!-- POPULAR -->
+    <div class="menu-category active" id="cat-signature">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_bubble_milk_tea.webp" alt="Bubble Milk Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Bubble Milk Tea</div>
+            <div class="menu-item-desc">Black Tea · Cream · Bubble</div>
+            <div class="menu-item-tag">No milk added</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_bubble_volcano.webp" alt="Bubble Volcano"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Bubble Volcano</div>
+            <div class="menu-item-desc">Milk · Brown Sugar · Bubble</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_classic_fruit_tea.webp" alt="Classic Fruit Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Classic Fruit Tea</div>
+            <div class="menu-item-desc">Black Tea · Pineapple Pulp · Passion Fruit · Lemon · Seasonal Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_creamy_mango_tart.webp" alt="Creamy Mango Tart"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Creamy Mango Tart</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Mango · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_honey.webp" alt="Honey Osmanthus Oolong Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Honey Osmanthus Oolong Tea</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_passion_fruit_green_tea.webp" alt="Passion Fruit Green Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Passion Fruit Green Tea</div>
+            <div class="menu-item-desc">Green Tea · Passion Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_creamy_lemon_tart.webp" alt="Creamy Lemon Tart"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Creamy Lemon Tart</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Lemon Juice · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_orange_lemon_pouchong_tea.webp" alt="Orange Lemon Pouchong Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Orange Lemon Pouchong Tea</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Orange · Lemon Juice · Blended Mousse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEASONAL -->
+    <div class="menu-category" id="cat-seasonal">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Sparkling Green Plum</div>
+            <div class="menu-item-desc">Sparkling Water · Plum Juice · Plum Jelly · Konjac</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Plum Tea</div>
+            <div class="menu-item-desc">Green Tea · Plum Juice · Plum Jelly</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Plumon</div>
+            <div class="menu-item-desc">Green Tea · Lemon · Plum Juice · Plum Jelly</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Bee My Plum</div>
+            <div class="menu-item-desc">Honey Osmanthus Oolong Tea · Plum Juice · Plum Jelly</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk With Passion Fruit</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk · Passion Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk With Mango</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk · Mango</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Iced Peach Green Tea</div>
+            <div class="menu-item-desc">Green Tea · Peach</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Iced Peach Green Tea With Konjac</div>
+            <div class="menu-item-desc">Green Tea · Peach · Konjac</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Iced Peach Oolong Tea</div>
+            <div class="menu-item-desc">Oolong Tea · Peach</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Iced Peach Oolong Tea With Konjac</div>
+            <div class="menu-item-desc">Oolong Tea · Peach · Konjac</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Peach Green Tea With Mousse</div>
+            <div class="menu-item-desc">Green Tea · Peach · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Peach Oolong Tea With Mousse</div>
+            <div class="menu-item-desc">Oolong Tea · Peach · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Sparkling Peach</div>
+            <div class="menu-item-desc">Sparkling Water · Peach</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEMON CONDENSED MILK -->
+    <div class="menu-category" id="cat-lemon">
+      <div class="menu-category-label">Lemon Condensed Milk</div>
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk Green Tea</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk · Green Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk Black Tea</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk · Black Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Condensed Milk Oolong</div>
+            <div class="menu-item-desc">Fresh Lemon · Condensed Milk · Oolong</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Lemon Mousse Green Tea</div>
+            <div class="menu-item-desc">Fresh Lemon · Cheese Mousse · Green Tea</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GREEN TEA -->
+    <div class="menu-category" id="cat-green">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea.webp" alt="Green Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea</div>
+            <div class="menu-item-desc">Premium Green Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_mango.webp" alt="Green Tea + Mango"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Mango</div>
+            <div class="menu-item-desc">Green Tea · Mango</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_orange.webp" alt="Green Tea + Orange"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Orange</div>
+            <div class="menu-item-desc">Green Tea · Orange</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_lemon_Juice.webp" alt="Green Tea + Lemon Juice"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Lemon Juice</div>
+            <div class="menu-item-desc">Green Tea · Lemon Juice</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_passion_fruit.webp" alt="Green Tea + Passion Fruit"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Passion Fruit</div>
+            <div class="menu-item-desc">Green Tea · Passion Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_honey.webp" alt="Green Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Honey</div>
+            <div class="menu-item-desc">Green Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_mousse.webp" alt="Green Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Mousse</div>
+            <div class="menu-item-desc">Green Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_cream.webp" alt="Green Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Cream</div>
+            <div class="menu-item-desc">Green Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_milk.webp" alt="Green Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Fresh Milk</div>
+            <div class="menu-item-desc">Green Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_green_tea_oat_milk.webp" alt="Green Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea + Oat Milk</div>
+            <div class="menu-item-desc">Green Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLASSIC BLACK TEA -->
+    <div class="menu-category" id="cat-black">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea.webp" alt="Black Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea</div>
+            <div class="menu-item-desc">Premium Black Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea_honey.webp" alt="Black Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea + Honey</div>
+            <div class="menu-item-desc">Black Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea_mousse.webp" alt="Black Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea + Mousse</div>
+            <div class="menu-item-desc">Black Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea_cream.webp" alt="Black Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea + Cream</div>
+            <div class="menu-item-desc">Black Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea_fresh_milk.webp" alt="Black Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea + Fresh Milk</div>
+            <div class="menu-item-desc">Black Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_black_tea_oat_milk.webp" alt="Black Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Black Tea + Oat Milk</div>
+            <div class="menu-item-desc">Black Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGH MOUNTAIN POUCHONG -->
+    <div class="menu-category" id="cat-pouchong">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_high_mountain_pouchong_tea.webp" alt="High Mountain Pouchong Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea</div>
+            <div class="menu-item-desc">Premium High Mountain Pouchong Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_mango.webp" alt="High Mountain Pouchong Tea + Mango"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Mango</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Mango</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_orange.webp" alt="High Mountain Pouchong Tea + Orange"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Orange</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Orange</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_lemon_juice.webp" alt="High Mountain Pouchong Tea + Lemon Juice"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Lemon Juice</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Lemon Juice</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_passion_fruit.webp" alt="High Mountain Pouchong Tea + Passion Fruit"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Passion Fruit</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Passion Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_honey.webp" alt="High Mountain Pouchong Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Honey</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_mousse.webp" alt="High Mountain Pouchong Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Mousse</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_cream.webp" alt="High Mountain Pouchong Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Cream</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_fresh_milk.webp" alt="High Mountain Pouchong Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Fresh Milk</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_pouchong_oat_milk.webp" alt="High Mountain Pouchong Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">High Mountain Pouchong Tea + Oat Milk</div>
+            <div class="menu-item-desc">High Mountain Pouchong Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGH MOUNTAIN OOLONG -->
+    <div class="menu-category" id="cat-oolong">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea.webp" alt="Osmanthus Oolong Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea</div>
+            <div class="menu-item-desc">Premium Osmanthus Oolong Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_mango.webp" alt="Osmanthus Oolong Tea + Mango"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Mango</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Mango</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_passion_fruit.webp" alt="Osmanthus Oolong Tea + Passion Fruit"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Passion Fruit</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Passion Fruit</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_orange.webp" alt="Osmanthus Oolong Tea + Orange"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Orange</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Orange</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_lemon_juice.webp" alt="Osmanthus Oolong Tea + Lemon Juice"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Lemon Juice</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Lemon Juice</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_honey.webp" alt="Osmanthus Oolong Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Honey</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_mousse.webp" alt="Osmanthus Oolong Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Mousse</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_fresh_milk.webp" alt="Osmanthus Oolong Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Fresh Milk</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_cream.webp" alt="Osmanthus Oolong Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Cream</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_osmanthus_oolong_tea_oat_milk.webp" alt="Osmanthus Oolong Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Osmanthus Oolong Tea + Oat Milk</div>
+            <div class="menu-item-desc">Osmanthus Oolong Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOUSSE SERIES -->
+    <div class="menu-category" id="cat-mousse">
+      <div class="menu-category-label">Mousse Series</div>
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_mousse.webp" alt="Cassia Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea Mousse</div>
+            <div class="menu-item-desc">Cassia Black · Cheese Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Oolong Mousse</div>
+            <div class="menu-item-desc">High Mountain Oolong · Cheese Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Green Tea Mousse</div>
+            <div class="menu-item-desc">Jasmine Green Tea · Cheese Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-placeholder">Photo</div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Pouchong Mousse</div>
+            <div class="menu-item-desc">High Mountain Pouchong · Cheese Mousse</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DONG DING OOLONG TEA -->
+    <div class="menu-category" id="cat-dongding">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong.webp" alt="Dong Ding Oolong Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea</div>
+            <div class="menu-item-desc">Dong Ding High Mountain Oolong</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong_honey.webp" alt="Dong Ding Oolong Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea + Honey</div>
+            <div class="menu-item-desc">Dong Ding Oolong Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong_mousse.webp" alt="Dong Ding Oolong Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea + Mousse</div>
+            <div class="menu-item-desc">Dong Ding Oolong Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong_cream.webp" alt="Dong Ding Oolong Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea + Cream</div>
+            <div class="menu-item-desc">Dong Ding Oolong Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong_fresh_milk.webp" alt="Dong Ding Oolong Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea + Fresh Milk</div>
+            <div class="menu-item-desc">Dong Ding Oolong Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_dong_ding_oolong_oat_milk.webp" alt="Dong Ding Oolong Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Dong Ding Oolong Tea + Oat Milk</div>
+            <div class="menu-item-desc">Dong Ding Oolong Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASSIA BLACK TEA -->
+    <div class="menu-category" id="cat-cassia">
+      <div class="menu-grid">
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_black_tea.webp" alt="Cassia Black Tea"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea</div>
+            <div class="menu-item-desc">Premium Cassia Black Tea</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_black_tea_honey.webp" alt="Cassia Black Tea + Honey"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea + Honey</div>
+            <div class="menu-item-desc">Cassia Black Tea · Honey</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_mousse.webp" alt="Cassia Black Tea + Mousse"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea + Mousse</div>
+            <div class="menu-item-desc">Cassia Black Tea · Mousse</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_black_tea_cream.webp" alt="Cassia Black Tea + Cream"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea + Cream</div>
+            <div class="menu-item-desc">Cassia Black Tea · Cream</div>
+          </div>
+        </div>
+        <div class="menu-item r">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_black_tea_fresh_milk.webp" alt="Cassia Black Tea + Fresh Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea + Fresh Milk</div>
+            <div class="menu-item-desc">Cassia Black Tea · Fresh Milk</div>
+          </div>
+        </div>
+        <div class="menu-item r d1">
+          <div class="menu-item-photo-wrap"><img class="menu-item-photo" src="images/drink_cassia_black_tea_oat_milk.webp" alt="Cassia Black Tea + Oat Milk"></div>
+          <div class="menu-item-info">
+            <div class="menu-item-name">Cassia Black Tea + Oat Milk</div>
+            <div class="menu-item-desc">Cassia Black Tea · Oat Milk</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILD YOUR OWN -->
+    <div class="menu-category" id="cat-customize">
+      <div class="customize-intro">Every cup follows the same five steps, in the same order, every time — the only thing that changes is what you choose. Select a tea, a flavor, one topping, your sweetness, and your ice, and we'll brew it exactly to spec.</div>
+      <div class="customize-rows">
+        <div class="customize-row r">
+          <div class="customize-num">01</div>
+          <div>
+            <div class="customize-label">Tea</div>
+            <div class="customize-sub">Choose your base</div>
+          </div>
+          <div class="customize-options">
+            <span class="customize-option">Green Tea</span>
+            <span class="customize-option">Black Tea</span>
+            <span class="customize-option">Osmanthus Oolong Tea</span>
+            <span class="customize-option">Dong Ding Oolong Tea</span>
+            <span class="customize-option">High Mountain Pouchong Tea</span>
+            <span class="customize-option">Cassia Black Tea</span>
+          </div>
+        </div>
+        <div class="customize-row r">
+          <div class="customize-num">02</div>
+          <div>
+            <div class="customize-label">Flavor</div>
+            <div class="customize-sub">Milk &amp; juice, mixed to taste</div>
+          </div>
+          <div class="customize-options">
+            <span class="customize-option">Honey</span>
+            <span class="customize-option">Lemon Juice</span>
+            <span class="customize-option">Passion Fruit</span>
+            <span class="customize-option">Mango</span>
+            <span class="customize-option">Cream</span>
+            <span class="customize-option">Mousse</span>
+            <span class="customize-option">Fresh Milk</span>
+            <span class="customize-option">Oat Milk</span>
+          </div>
+        </div>
+        <div class="customize-row r">
+          <div class="customize-num">03</div>
+          <div>
+            <div class="customize-label">Topping</div>
+            <div class="customize-sub">One per cup</div>
+          </div>
+          <div class="customize-options">
+            <span class="customize-option">Bubble</span>
+            <span class="customize-option">Konjac</span>
+            <span class="customize-option">Coconut Jelly</span>
+            <span class="customize-option">Grass Jelly</span>
+            <span class="customize-option">Taro Ball</span>
+          </div>
+        </div>
+        <div class="customize-row r">
+          <div class="customize-num">04</div>
+          <div>
+            <div class="customize-label">Sugar</div>
+            <div class="customize-sub">Sweetness level</div>
+          </div>
+          <div class="customize-options">
+            <span class="customize-option">Perfect</span>
+            <span class="customize-option">Light</span>
+            <span class="customize-option">No Sugar</span>
+          </div>
+        </div>
+        <div class="customize-row r">
+          <div class="customize-num">05</div>
+          <div>
+            <div class="customize-label">Ice</div>
+            <div class="customize-sub">Temperature &amp; volume</div>
+          </div>
+          <div class="customize-options">
+            <span class="customize-option">Normal Ice</span>
+            <span class="customize-option">Less Ice</span>
+            <span class="customize-option">Ice Free</span>
+            <span class="customize-option">Hot</span>
+          </div>
+        </div>
+      </div>
+      <div class="customize-footnote">Available toppings, flavors, and hot preparation vary by location. Please check with your nearest store for current customization options.</div>
+    </div>
+
+  </div><!-- /menu-body -->
+
+  <!-- TOPPINGS -->
+  <div class="toppings-section">
+    <div class="toppings-tag">TOPPINGS</div>
+    <div class="toppings-list">
+      <div class="toppings-list-item">Bubble</div>
+      <div class="toppings-list-item">Konjac</div>
+      <div class="toppings-list-item">Coconut Jelly</div>
+      <div class="toppings-list-item">Grass Jelly</div>
+      <div class="toppings-list-item">Taro Ball</div>
+    </div>
+  </div>
+
+  <!-- FEATURE STRIP -->
+  <div class="feature-strip">
+    <div class="feature-block r">
+      <div class="feature-block-img"><img id="feature1Img" src="images/HANDPICKED.webp" alt=""></div>
+      <div class="feature-block-text">
+        <div class="feature-block-title" id="feature1Title">Premium by Nature</div>
+        <div class="feature-block-body" id="feature1Body">High-altitude cultivation and hand-selected young shoots ensure exceptional quality and flavor.</div>
+      </div>
+    </div>
+    <div class="feature-block r d1">
+      <div class="feature-block-img"><img id="feature2Img" src="images/ITI.webp" alt=""></div>
+      <div class="feature-block-text">
+        <div class="feature-block-title" id="feature2Title">ITI Recognition</div>
+        <div class="feature-block-body" id="feature2Body">All six of its signature base teas have received recognition from the International Taste Institute (ITI).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <p class="footer-brand-desc">Overseas brand licensing and master franchise partnerships with one of Asia's most celebrated tea brands — built on 25+ years of tea expertise.</p>
+      </div>
+      <a href="#" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="#">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+      <span class="footer-bottom-copy">Premium Taiwanese Tea</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav border on scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Header content per category
+    const headerContent = {
+      signature: { title: 'Popular', desc: 'At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.', img: 'images/popular_section.webp' },
+      seasonal:  { title: 'Seasonal', desc: 'Limited creations crafted with the freshest seasonal ingredients. Bright, expressive, and available for a short time only.', img: 'images/dong_ding_oolong_tea_cover.webp' },
+      green:     { title: 'Green Tea', desc: 'With its exceptional quality, it has been awarded the prestigious iTi 3-Star Superior Taste Award—known as the "Michelin Guide of the food and beverage industry"—for seven consecutive years.', img: 'images/cover.webp' },
+      black:     { title: 'Black Tea', desc: 'Bold and full-bodied with a distinct malty aroma and a rich, lingering finish, enhanced by the smooth richness of cream, milk, and honey.', img: 'images/cover.webp' },
+      pouchong:  { title: 'High Mountain Pouchong Tea', desc: 'It is highly celebrated for its clean, smooth finish, natural floral notes, and subtle, creamy "milky" undertone.', img: 'images/cover.webp' },
+      oolong:    { title: 'Osmanthus Oolong Tea', desc: 'Lightly floral with a natural sweetness, our Osmanthus Oolong balances the complexity of oolong with the gentle fragrance of osmanthus blossom.', img: 'images/cover.webp' },
+      dongding:  { title: 'Dong Ding Oolong Tea', desc: 'A classic Taiwanese oolong from the Dong Ding mountains — smooth, roasted, and richly layered with depth.', img: 'images/cover.webp' },
+      cassia:    { title: 'Cassia Black Tea', desc: 'A distinctive black tea with warm, spiced character — bold yet nuanced, with a natural sweetness that lingers.', img: 'images/cover.webp' },
+      customize: { title: 'Build Your Own', desc: 'Every cup begins the same way — choose your tea, your flavor, one topping, your sweetness, and your ice. Five decisions, one perfectly balanced drink.', img: 'images/drink_bubble_milk_tea.webp' },
+    };
+
+    const headerTitle = document.getElementById('headerTitle');
+    const headerSub = document.getElementById('headerSub');
+    const headerImg = document.querySelector('.menu-header-image div img:first-child');
+    const itiBadgeRotating = document.getElementById('itiBadgeRotating');
+    const itiBadgeSimple = document.getElementById('itiBadgeSimple');
+    const headerImgCaption = document.getElementById('headerImgCaption');
+    const imgCaptions = {
+      customize: 'The order never changes: tea, flavor, topping, sugar, ice. Same sequence, same precision, every single cup.'
+    };
+
+    // Feature strip content per category (two cards: process/quality fact + recognition)
+    const featureContent = {
+      signature: [
+        { img: 'images/HANDPICKED.webp', title: 'Premium by Nature', body: 'High-altitude cultivation and hand-selected young shoots ensure exceptional quality and flavor.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'All six of its signature base teas have received recognition from the International Taste Institute (ITI).', bw: true },
+      ],
+      seasonal: [
+        { img: 'images/tasting.webp', title: 'Daily Tea Tastings', body: 'Daily tea tastings are conducted to catch any deviation in raw material quality before it reaches customers.' },
+        { img: 'images/seasonal_section.webp', title: 'Crafted for the Season', body: 'Limited-time creations made fresh from the season\'s best ingredients, available for a short time only.', bw: true },
+      ],
+      green: [
+        { img: 'images/green_tea_section.webp', title: 'Golden Ratio Brewing', body: 'The Teapresso machine operates at a precisely calibrated golden ratio — the specific combination of time, temperature, and amount.', bw: true },
+        { img: 'images/diamond.webp', title: 'ITI Diamond Certification', body: 'Green tea has held the ITI Three-Star rating for seven consecutive years, earning the prestigious ITI Diamond Certification.', bw: true },
+      ],
+      black: [
+        { img: 'images/water.webp', title: 'Water Quality Control', body: 'Water quality is carefully managed, accounting for the difference between soft and hard water and how each affects flavor extraction.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Our Black tea awarded the 2025 ITI Superior Taste Award – Two Stars for its exceptional taste and outstanding quality.', bw: true },
+      ],
+      pouchong: [
+        { img: 'images/high_mountain_cover.webp', title: 'Precision Brewing', body: 'Precision-controlled brewing temperatures are tailored to each tea, maximizing aroma, flavor complexity, and overall drinking experience.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Proud recipient of the 2025 ITI Superior Taste Award – Two Stars, a testament to its remarkable taste, quality, and expertly crafted character.', bw: true },
+      ],
+      oolong: [
+        { img: 'images/osmanthus_oolong_cover.webp', title: 'Monthly Recalibration', body: 'The Teapresso machine is recalibrated monthly to ensure machines stay within spec — drift is caught before it reaches the cup.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Our osmanthus oolong tea was awarded the 2025 ITI Superior Taste Award – Two Stars for its exceptional taste and outstanding quality.', bw: true },
+      ],
+      dongding: [
+        { img: 'images/halfmoon_ice.webp', title: 'Half-Moon Ice', body: 'Ice cubes are half-moon shaped, engineered for a consistent melt rate so the drink doesn\'t dilute unevenly between first and last sip.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Our Dong Ding Oolong Tea was awarded the 2025 ITI Superior Taste Award – Two Stars for its exceptional taste and outstanding quality.', bw: true },
+      ],
+      cassia: [
+        { img: 'images/cassia_cover.webp', title: 'Leveled Tea Bed', body: 'A flat, even bed ensures every leaf is exposed to the same water flow, pressure, and brew time, eliminating inconsistency within a single serving.' },
+        { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Our Cassia black tea awarded the 2025 ITI Superior Taste Award – Two Stars for its exceptional taste and outstanding quality.', bw: true },
+      ],
+      customize: [
+        { img: 'images/drink_bubble_milk_tea.webp', title: 'Five-Step Precision', body: 'The order never changes: tea, flavor, topping, sugar, ice. Same sequence, same precision, every single cup.' },
+        { img: 'images/drink_bubble_volcano.webp', title: '0.3mg Tolerance', body: 'All raw materials, including sugar, are measured with a margin of error of no more than 0.3mg — eliminating variation across every cup.' },
+      ],
+    };
+    const feature1Img = document.getElementById('feature1Img');
+    const feature1Title = document.getElementById('feature1Title');
+    const feature1Body = document.getElementById('feature1Body');
+    const feature2Img = document.getElementById('feature2Img');
+    const feature2Title = document.getElementById('feature2Title');
+    const feature2Body = document.getElementById('feature2Body');
+
+    function updateFeatures(cat) {
+      const cards = featureContent[cat];
+      if (!cards) return;
+      const [c1, c2] = cards;
+      feature1Img.src = c1.img;
+      feature1Img.style.filter = c1.bw ? 'grayscale(100%)' : '';
+      feature1Title.textContent = c1.title;
+      feature1Body.textContent = c1.body;
+      feature2Img.src = c2.img;
+      feature2Img.style.filter = c2.bw ? 'grayscale(100%)' : '';
+      feature2Title.textContent = c2.title;
+      feature2Body.textContent = c2.body;
+    }
+
+    function updateHeader(cat) {
+      const content = headerContent[cat];
+      if (!content) return;
+      headerTitle.textContent = content.title;
+      headerSub.textContent = content.desc;
+      if (content.img) headerImg.src = content.img;
+      updateFeatures(cat);
+      itiBadgeRotating.style.display = cat === 'green' ? 'block' : 'none';
+      itiBadgeSimple.style.display = ['green', 'black', 'pouchong', 'oolong', 'dongding', 'cassia'].includes(cat) ? 'block' : 'none';
+      const caption = imgCaptions[cat];
+      headerImgCaption.textContent = caption || '';
+      headerImgCaption.style.display = caption ? 'block' : 'none';
+    }
+
+    // Tab switching
+    const tabs = document.querySelectorAll('.menu-tab');
+    const categories = document.querySelectorAll('.menu-category');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.preventDefault();
+        const cat = tab.dataset.cat;
+
+        tabs.forEach(t => t.classList.remove('active'));
+        categories.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        updateHeader(cat);
+        const target = document.getElementById('cat-' + cat);
+        if (target) {
+          target.classList.add('active');
+          // Re-trigger scroll reveal for newly shown items
+          target.querySelectorAll('.r').forEach(el => {
+            el.classList.remove('on');
+            setTimeout(() => el.classList.add('on'), 30);
+          });
+        }
+      });
+    });
+
+    // Init header on load
+    updateHeader('signature');
+
+    // Tab scroll arrows
+    const menuTabs = document.getElementById('menuTabs');
+    const tabsLeft = document.getElementById('tabsLeft');
+    const tabsRight = document.getElementById('tabsRight');
+
+    function updateArrows() {
+      const atStart = menuTabs.scrollLeft <= 4;
+      const atEnd = menuTabs.scrollLeft >= menuTabs.scrollWidth - menuTabs.clientWidth - 4;
+      tabsLeft.classList.toggle('visible', !atStart);
+      tabsRight.classList.toggle('visible', !atEnd);
+    }
+
+    tabsLeft.addEventListener('click', () => {
+      menuTabs.scrollBy({ left: -160, behavior: 'smooth' });
+    });
+    tabsRight.addEventListener('click', () => {
+      menuTabs.scrollBy({ left: 160, behavior: 'smooth' });
+    });
+    menuTabs.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+
+    // Touch swipe to scroll tab bar
+    let startX = 0, startScroll = 0;
+    menuTabs.addEventListener('touchstart', e => {
+      startX = e.touches[0].pageX; startScroll = menuTabs.scrollLeft;
+    }, { passive: true });
+    menuTabs.addEventListener('touchmove', e => {
+      menuTabs.scrollLeft = startScroll - (e.touches[0].pageX - startX);
+    }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+  <script>
+    (function() {
+      var bar = document.getElementById('loadBar');
+      requestAnimationFrame(function() { bar.style.width = '75%'; });
+      window.addEventListener('load', function() {
+        bar.style.width = '100%';
+        document.body.classList.add('is-loaded');
+        setTimeout(function() { bar.classList.add('done'); }, 250);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

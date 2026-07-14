@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicha San Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Wireframe terrain hero background */
+    .hero-video-bg canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      background: #e8e8e6;
+    }
+    /* Dark gradient (bottom-up) so the headline stays legible over the light terrain */
+    .hero .hero-video-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.30) 42%, rgba(0,0,0,0) 72%);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- INTRO CURTAIN -->
+  <div id="intro">
+    <div class="intro-headline">A Moment<br>Worth Sharing</div>
+  </div>
+
+
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#"><img src="images/logo_header.png" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html">Menu</a>
+      <a href="locations.html">Locations</a>
+      <a href="#">Our Story</a>
+      <a href="#">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-cta-row">
+                    <a href="locations.html" class="nav-cta"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Order Online</a>
+        </div>
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Wireframe terrain background -->
+    <div class="hero-video-bg">
+      <canvas id="heroCanvas"></canvas>
+      <div class="hero-video-overlay"></div>
+    </div>
+<div class="hero-name">A Moment<br>Worth Sharing</div>
+    <div class="hero-subline">
+      <span class="hero-subline-left"></span>
+      <span class="hero-subline-right">Scroll ↓</span>
+    </div>
+  </section>
+
+  <!-- TEXT BAND -->
+  <div class="text-band">
+    <div class="text-band-track">
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- DRINKS -->
+  <section class="drinks-section" id="drinks">
+    <div class="drinks-header r">
+      <div>
+        <div class="sec-label">Popular Drinks</div>
+      </div>
+      <div class="drinks-header-right">
+        <a href="#">View Full Menu →</a>
+      </div>
+    </div>
+    <div class="drinks-grid">
+      <div class="drink-item r">
+        <img class="drink-cover" src="images/drink_osmanthus_oolong_tea_honey.webp" alt="Honey Osmanthus Oolong Tea" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-label">Honey Osmanthus Oolong</div>
+          <div class="drink-note">Osmanthus · Oolong · Honey</div>
+        </div>
+      </div>
+      <div class="drink-item r d1">
+        <img class="drink-cover" src="images/drink_cassia_mousse.jpg" alt="Cassia Black Tea Mousse" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-label">Cassia Black Tea Mousse</div>
+          <div class="drink-note">Cassia Black · Mousse</div>
+        </div>
+      </div>
+      <div class="drink-item r d2">
+        <img class="drink-cover" src="images/drink_dong_ding.jpg" alt="Dong Ding Oolong Latte" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-label">Dong Ding Oolong Latte</div>
+          <div class="drink-note">Dong Ding · Fresh Milk</div>
+        </div>
+      </div>
+      <div class="drink-item r d3">
+        <img class="drink-cover" src="images/drink_brown_sugar.jpg" alt="Brown Sugar Bubble Milk" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-label">Brown Sugar Bubble Milk</div>
+          <div class="drink-note">Fresh Milk · Brown Sugar · Tapioca</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section">
+    <div class="philosophy-img r">
+      <video src="videos/philosophy_video2.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;object-position:bottom;display:block;position:absolute;top:0;left:0;"></video>
+    </div>
+    <div class="philosophy-text">
+      <div class="phil-index r">Our Philosophy</div>
+      <div class="phil-title r d1">Tea is one of the best<br>gifts from nature.</div>
+      <p class="phil-body r d2">We follow each process rigorously — from cultivating, plucking, roasting, and farm management. This is our persistence and belief since 1998.</p>
+      <a href="#" class="phil-link r d3">Read More</a>
+    </div>
+  </section>
+
+  <!-- FULL BANNER -->
+  <div class="full-image-block r">
+    <img src="images/homepage_bottom.webp" alt="Tea Process" loading="lazy">
+    <div class="full-image-text">
+      <div class="fig-label">Professionalism</div>
+      <div class="fig-title">Devoting ourselves to tea brewing<br>for more than two decades.</div>
+      <a href="#" class="fig-link">Our Story</a>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <section class="news-section">
+    <div class="news-section-header r">
+      <div class="sec-label">Latest News</div>
+      <div style="text-align:right">
+        <a href="#" style="font-family:var(--mono);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;">View All →</a>
+      </div>
+    </div>
+    <div class="news-list">
+      <a href="#" class="news-row r">
+        <div class="news-row-num">01</div>
+        <div class="news-row-title">Summer Seasonal Teas Arriving — Explore This Season's Collection</div>
+        <div class="news-row-tag">June 1</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+      <a href="#" class="news-row r d1">
+        <div class="news-row-num">02</div>
+        <div class="news-row-title">New Los Angeles Location Now Open in Arcadia</div>
+        <div class="news-row-tag">May 20</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+      <a href="#" class="news-row r d2">
+        <div class="news-row-num">03</div>
+        <div class="news-row-title">Chicha San Chen Named Asia's Best Tea Brand 2026</div>
+        <div class="news-row-tag">May 10</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <!-- Left: image + description + brand link -->
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <p class="footer-brand-desc">Overseas brand licensing and master franchise partnerships with one of Asia's most celebrated tea brands — built on 25+ years of tea expertise.</p>
+      </div>
+      <a href="#" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+
+    <!-- Middle: navigation -->
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="#">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+
+    <!-- Right: newsletter -->
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>
+        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+      <span class="footer-bottom-copy">Premium Taiwanese Tea</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── INTRO CURTAIN ──
+    (function() {
+      const intro = document.getElementById('intro');
+      // Trigger text reveal on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => intro.classList.add('reveal'));
+      });
+      // After text is visible, wipe curtain up
+      setTimeout(() => {
+        intro.classList.add('exit');
+        intro.addEventListener('animationend', () => {
+          intro.style.display = 'none';
+        }, { once: true });
+      }, 1800);
+    })();
+
+    // Nav scroll background
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+    // ── HERO WIREFRAME MOUNTAIN (true perspective projection, plain 2D canvas) ──
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      const container = canvas && canvas.parentElement;
+      if (!canvas || !container) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const COLS = 130, ROWS = 80;
+
+      // ── Smooth fractal value noise (rounded organic terrain, no ridging) ──
+      function hash(x, y) {
+        const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
+        return s - Math.floor(s);
+      }
+      function valueNoise(x, y) {
+        const xi = Math.floor(x), yi = Math.floor(y);
+        const xf = x - xi, yf = y - yi;
+        const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+        const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+        return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+      }
+      function fbm(x, y) {
+        let sum = 0, amp = 1, freq = 1, norm = 0;
+        for (let o = 0; o < 5; o++) {
+          sum += valueNoise(x * freq, y * freq) * amp;
+          norm += amp;
+          amp *= 0.5;
+          freq *= 2.05;
+        }
+        return sum / norm; // ~0..1
+      }
+
+      // World-space grid: x across, z into the distance (0 = near camera, D = far)
+      const WORLD_W = 46, WORLD_D = 60;
+      // Main peak plus a cluster of smaller humps trailing off to the left
+      const PEAKS = [
+        { x: 6,   z: 34, radius: 23, height: 15,  sharpness: 1.15 },
+        { x: -10, z: 30, radius: 13, height: 8,   sharpness: 1.4 },
+        { x: -20, z: 26, radius: 11, height: 6.5, sharpness: 1.4 },
+        { x: -28, z: 36, radius: 10, height: 5,   sharpness: 1.4 },
+        { x: -16, z: 42, radius: 9,  height: 4.5, sharpness: 1.4 },
+      ];
+
+      function heightAt(x, z, t) {
+        const drift = t * 0.015;
+        // Lower, more dramatic valley floor — peak heights stay the same, they add on top
+        const rolling = fbm(x * 0.09 + drift, z * 0.09) * 1.4 - 2.6;
+        let peakSum = 0;
+        for (let p = 0; p < PEAKS.length; p++) {
+          const peak = PEAKS[p];
+          const dx = (x - peak.x), dz = (z - peak.z) * 0.7;
+          const dist = Math.sqrt(dx * dx + dz * dz);
+          const dome = Math.max(0, 1 - dist / peak.radius);
+          const domeNoise = 0.75 + fbm(x * 0.15 + peak.x, z * 0.15 + peak.z) * 0.5;
+          peakSum += Math.pow(dome, peak.sharpness) * peak.height * domeNoise;
+        }
+        return rolling + peakSum;
+      }
+
+      let W = 0, H = 0, dpr = 1;
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = container.clientWidth || 1;
+        H = container.clientHeight || 1;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      // ── Mouse parallax: cursor position gently steers the camera ──
+      let targetMouseX = 0, targetMouseY = 0;
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        targetMouseX = ((e.clientX - rect.left) / rect.width) - 0.5;
+        targetMouseY = ((e.clientY - rect.top) / rect.height) - 0.5;
+      }, { passive: true });
+
+      // Camera sits low and just off-axis; composition biased to the right of the frame
+      const centerXFactor = 0.60;
+      const horizonYFactor = 0.42;
+      const camY = 3.2, camZ = -9, focal = 1.35;
+
+      function project(x, z, y) {
+        const camX = mouseX * 6;
+        const dx = x - camX;
+        const dy = y - (camY + mouseY * 1.5);
+        const dz = z - camZ;
+        const sx = W * centerXFactor + (dx / dz) * focal * W;
+        const sy = H * horizonYFactor - (dy / dz) * focal * H * 0.9;
+        return { x: sx, y: sy, dz: dz };
+      }
+
+      function draw(t) {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#e8e8e6';
+        ctx.fillRect(0, 0, W, H);
+
+        const pts = [];
+        for (let j = 0; j < ROWS; j++) {
+          const z = (j / (ROWS - 1)) * WORLD_D + 0.6;
+          const row = [];
+          for (let i = 0; i < COLS; i++) {
+            const x = (i / (COLS - 1) - 0.5) * WORLD_W;
+            const y = heightAt(x, z, t);
+            row.push(project(x, z, y));
+          }
+          pts.push(row);
+        }
+
+        function shade(dz) {
+          // Nearer (small dz) = darker/heavier line; far = lighter, fading toward the haze
+          const depthT = Math.max(0, Math.min(1, 1 - (dz - 1) / (WORLD_D)));
+          const c = Math.round(60 + (1 - depthT) * 120);
+          const a = 0.18 + depthT * 0.55;
+          return 'rgba(' + c + ',' + c + ',' + (c + 6) + ',' + a.toFixed(3) + ')';
+        }
+
+        // Row lines, far to near so nearer rows draw on top
+        for (let j = 0; j < ROWS; j++) {
+          const refDz = pts[j][Math.floor(COLS / 2)].dz;
+          ctx.strokeStyle = shade(refDz);
+          ctx.lineWidth = 0.5 + Math.max(0, 1 - refDz / WORLD_D) * 1.1;
+          ctx.beginPath();
+          for (let i = 0; i < COLS; i++) {
+            const p = pts[j][i];
+            if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+          }
+          ctx.stroke();
+        }
+
+        // Column lines
+        for (let i = 0; i < COLS; i++) {
+          ctx.beginPath();
+          for (let j = 0; j < ROWS; j++) {
+            const p = pts[j][i];
+            if (j === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+          }
+          const refDz = pts[Math.floor(ROWS / 2)][i].dz;
+          ctx.strokeStyle = shade(refDz);
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+
+      const start = performance.now();
+      function animate(now) {
+        mouseX += (targetMouseX - mouseX) * 0.06;
+        mouseY += (targetMouseY - mouseY) * 0.06;
+        draw((now - start) / 1000);
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Cha San Chen — The Art of Tea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0d0d0d;
+      --ink2: #f5f1eb;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --dim: rgba(0,0,0,0.5);
+      --dimmer: rgba(0,0,0,0.38);
+      --accent: #93C90F;
+      --border: rgba(0,0,0,0.08);
+      --border-light: rgba(0,0,0,0.05);
+      --sans: 'Inter', -apple-system, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .announce {
+      background: var(--ink2);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      padding: 10px 24px;
+      font-size: 11.5px;
+      font-family: var(--mono);
+      letter-spacing: 0.06em;
+      color: var(--dim);
+    }
+    .announce a { color: var(--accent); text-decoration: none; margin-left: 8px; }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+    .nav-logo img {
+      height: 11px;
+      width: auto;
+      transition: opacity 0.3s;
+    }
+    .nav-logo .logo-default { display: block; }
+    .nav-logo .logo-scrolled { display: none; }
+    nav.scrolled .nav-logo .logo-default { display: none; }
+    nav.scrolled .nav-logo .logo-scrolled { display: block; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(160,160,160,0.95);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav.scrolled .nav-links a { color: var(--dim); }
+    .nav-links a:hover { color: var(--white); }
+    nav.scrolled .nav-links a:hover { color: var(--ink); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-cta {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--ink);
+      padding: 9px 20px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/tw_banner_list_18l18_v2yjwwsjmk.png');
+      background-size: cover;
+      background-position: center 30%;
+      transition: transform 0.6s ease-out;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.1) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.55) 70%,
+        rgba(0,0,0,0.85) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0 80px 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(52px, 6vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 28px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: #f5f0e8;
+    }
+    .hero-sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.95);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: #ffffff;
+      padding: 14px 32px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); color: var(--white); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: #ffffff; border-color: rgba(255,255,255,0.6); }
+    .hero-right {
+      text-align: right;
+      padding-bottom: 4px;
+    }
+    .hero-scroll-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      writing-mode: vertical-rl;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-scroll-label::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ── SECTION SHARED ── */
+    section {
+      position: relative;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .section-title em {
+      font-style: italic;
+      color: #7a6040;
+    }
+
+    /* ── SHARED SPLIT SECTION ── */
+    .split-section {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      padding: 0 0 0 80px;
+      margin: 100px 0;
+      align-items: flex-start;
+    }
+    .split-left {
+      padding-top: 8px;
+      padding-right: 60px;
+    }
+    .split-heading {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .split-left p {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.6);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+    .split-btn {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid rgba(0,0,0,0.3);
+      padding: 9px 18px;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .split-btn:hover { background: var(--ink); color: var(--white); }
+
+    /* ── DRINKS ── */
+    .drinks-wrapper {
+      position: relative;
+    }
+    .drinks-right {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      overflow: hidden;
+    }
+    .drinks-arrow {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: calc(100% - 44px); /* image height only, not caption */
+      width: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgba(255,255,255,0.0);
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .drinks-arrow:hover { background: rgba(255,255,255,0.15); }
+    .drinks-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--ink);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .drink-card {
+      background: var(--white);
+      cursor: pointer;
+    }
+    .drink-card:hover .drink-img { transform: scale(1.04); }
+    .drink-img-wrap {
+      overflow: hidden;
+      height: 320px;
+      background: #f0ece4;
+      margin-bottom: 14px;
+    }
+    .drink-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+      display: block;
+    }
+    .drink-name {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .drink-desc {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.45);
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-right {
+      overflow: hidden;
+      height: 560px;
+    }
+    .philosophy-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+
+    /* ── BRAND STORY ── */
+    .brand-story {
+      padding: 0;
+      background: var(--white);
+    }
+    .story-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+      border-top: 1px solid var(--border);
+    }
+    .story-row.reverse { direction: rtl; }
+    .story-row.reverse > * { direction: ltr; }
+    .story-text {
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .story-image {
+      overflow: hidden;
+      position: relative;
+    }
+    .story-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .story-row:hover .story-image img { transform: scale(1.03); }
+    .story-text .section-label { margin-bottom: 20px; }
+    .story-text .section-title { margin-bottom: 24px; }
+    .story-text p {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.8;
+      max-width: 400px;
+      margin-bottom: 36px;
+    }
+    .link-underline {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      padding-bottom: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .link-underline:hover { color: var(--ink); border-color: rgba(0,0,0,0.5); }
+
+    /* ── STAT BAR ── */
+    .stat-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--ink2);
+    }
+    .stat-item {
+      padding: 48px 36px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-num sup {
+      font-size: 20px;
+      vertical-align: super;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dimmer);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 18px 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      gap: 48px;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-track span {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── NEWS ── */
+    .news {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      padding: 100px 0 100px 80px;
+      margin: 0;
+      align-items: flex-start;
+      border-top: none;
+      background: var(--accent);
+    }
+    .news-left {
+      padding-top: 8px;
+      padding-right: 60px;
+      position: sticky;
+      top: 100px;
+    }
+    .news .split-heading { color: var(--ink); }
+    .news .split-left p, .news-left p { color: rgba(0,0,0,0.6); }
+    .news .split-btn { color: var(--ink); border-color: rgba(0,0,0,0.35); margin-top: 120px; }
+    .news .split-btn:hover { background: var(--ink); color: var(--accent); }
+    .news-right {
+      border-top: 1px solid rgba(0,0,0,0.15);
+    }
+    .news-card {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 28px 80px 28px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .news-card:hover { background: rgba(0,0,0,0.06); }
+    .news-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .news-tag {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+    }
+    .news-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--ink);
+    }
+    .news-date {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+    .news-arrow {
+      font-size: 13px;
+      color: rgba(0,0,0,0.4);
+      transition: transform 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .news-card:hover .news-arrow { transform: translateX(4px); color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1e1a17;
+      color: #fff;
+    }
+    .footer-hero {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      align-items: flex-start;
+      padding: 72px 80px 56px;
+      gap: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-statement {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      font-weight: 300;
+      line-height: 1.35;
+      color: rgba(255,255,255,0.9);
+      max-width: 680px;
+    }
+    .footer-statement a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(255,255,255,0.3);
+      transition: text-decoration-color 0.2s;
+    }
+    .footer-statement a:hover { text-decoration-color: rgba(255,255,255,0.8); }
+    .footer-thumb {
+      width: 100%;
+      height: 240px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .footer-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .footer-email-section {
+      padding: 40px 80px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-email-label {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 12px;
+    }
+    .footer-email-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      max-width: 480px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 8px;
+    }
+    .footer-email-row input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: #fff;
+      padding: 0;
+    }
+    .footer-email-row input::placeholder { color: rgba(255,255,255,0.3); }
+    .footer-email-row button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      padding: 0;
+      transition: color 0.2s;
+    }
+    .footer-email-row button:hover { color: #fff; }
+    .footer-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 48px 80px;
+      gap: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-nav-col-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+    }
+    .footer-nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .footer-nav-col a, .footer-nav-col span {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.80);
+      text-decoration: none;
+      padding: 5px 0;
+      transition: color 0.2s;
+      display: block;
+    }
+    .footer-nav-col a:hover { color: #fff; }
+    .footer-nav-col .ft-location-name {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.88);
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+    .footer-nav-col .ft-location-addr {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+    }
+    .footer-bottom {
+      padding: 20px 80px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .footer-copy {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="mainNav">
+    <div class="nav-logo">
+      <a href="#">
+        <img class="logo-default" src="images/logo_header2.png" alt="Chi Cha San Chen">
+        <img class="logo-scrolled" src="images/logo_header.png" alt="Chi Cha San Chen">
+      </a>
+    </div>
+    <div class="nav-links">
+      <a href="#drinks">Menu</a>
+      <a href="#">Locations</a>
+      <a href="#story">Our Story</a>
+      <a href="#">Experiences</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-cta">Franchise Inquiry</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Tea Heritage Since 1998 &nbsp;·&nbsp; Taiwan</div>
+        <h1 class="hero-title">The Art<br>of <em>Tea.</em></h1>
+        <p class="hero-sub">Over two decades of craft, ritual, and obsession — distilled into every cup we make.</p>
+        <div class="hero-actions">
+          <a href="#drinks" class="btn-primary">Explore the Menu</a>
+          <a href="#" class="btn-ghost">Our Story ↗</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <span class="hero-scroll-label">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE DRINKS -->
+  <section class="split-section" id="drinks">
+    <div class="split-left">
+      <div class="split-heading reveal">Signature Drinks</div>
+      <p class="reveal reveal-delay-1">Each cup is made to order — drawing on over two decades of tea expertise and the finest Taiwanese ingredients.</p>
+      <a href="#" class="split-btn reveal reveal-delay-2">View Full Menu</a>
+    </div>
+    <div class="drinks-wrapper">
+    <div class="drinks-right">
+      <div class="drink-card reveal">
+        <div class="drink-img-wrap">
+          <img class="drink-img" src="images/drink_honey_osmanthus.jpg" alt="Honey Osmanthus Oolong Tea" loading="lazy">
+        </div>
+        <div class="drink-name">Honey Osmanthus Oolong</div>
+        <div class="drink-desc">Osmanthus · Oolong · Honey</div>
+      </div>
+      <div class="drink-card reveal reveal-delay-1">
+        <div class="drink-img-wrap">
+          <img class="drink-img" src="images/drink_cassia_mousse.jpg" alt="Cassia Black Tea With Mousse" loading="lazy">
+        </div>
+        <div class="drink-name">Cassia Black Tea Mousse</div>
+        <div class="drink-desc">Cassia Black · Mousse</div>
+      </div>
+      <div class="drink-card reveal reveal-delay-2">
+        <div class="drink-img-wrap">
+          <img class="drink-img" src="images/drink_dong_ding.jpg" alt="Dong Ding Oolong Tea Latte" loading="lazy">
+        </div>
+        <div class="drink-name">Dong Ding Oolong Latte</div>
+        <div class="drink-desc">Dong Ding · Fresh Milk</div>
+      </div>
+      <div class="drink-card reveal reveal-delay-3">
+        <div class="drink-img-wrap">
+          <img class="drink-img" src="images/drink_brown_sugar.jpg" alt="Fresh Milk With Brown Sugar Bubble" loading="lazy">
+        </div>
+        <div class="drink-name">Brown Sugar Bubble Milk</div>
+        <div class="drink-desc">Fresh Milk · Brown Sugar · Tapioca</div>
+      </div>
+    </div>
+    <div class="drinks-arrow">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <div class="split-section">
+    <div class="split-left">
+      <div class="split-heading reveal">Our Philosophy</div>
+      <p class="reveal reveal-delay-1">Tea is one of the best crops for human beings. We follow each process rigorously — from cultivating, plucking, roasting, and farm management. This is our persistence and belief.</p>
+      <a href="#" class="split-btn reveal reveal-delay-2">Read More</a>
+    </div>
+    <div class="philosophy-right reveal reveal-delay-1">
+      <img src="images/tw_homearticle_list_18j23_nh6wn2mu82.jpg" alt="Tea Process" loading="lazy">
+    </div>
+  </div>
+
+  <!-- BRAND STORY -->
+  <div class="split-section" id="story">
+    <div class="split-left">
+      <div class="split-heading reveal">Professionalism</div>
+      <p class="reveal reveal-delay-1">Devoting ourselves to tea brewing for more than two decades, we've been insisting on repeating each detail and striving towards perfection. The process is never tiresome, and we will insist on the spirit forever.</p>
+      <a href="#" class="split-btn reveal reveal-delay-2">Read More</a>
+    </div>
+    <div class="philosophy-right reveal reveal-delay-1">
+      <img src="images/tw_banner_list_18l18_2fjudqvcsy.png" alt="Tea Professionalism" loading="lazy">
+    </div>
+  </div>
+
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+      <span aria-hidden="true">A Moment Worth Sharing</span>
+      <span aria-hidden="true">·</span>
+    </div>
+  </div>
+
+  <!-- LATEST NEWS -->
+  <section class="news">
+    <div class="news-left">
+      <div class="split-heading reveal">Latest News</div>
+      <p class="reveal reveal-delay-1">Stories, announcements, and moments from the world of Chi Cha San Chen.</p>
+      <a href="#" class="split-btn reveal reveal-delay-2">View All</a>
+    </div>
+    <div class="news-right">
+      <a href="#" class="news-card reveal">
+        <div class="news-card-left">
+          <div class="news-tag">Promotions</div>
+          <div class="news-title">Summer Seasonal Teas Arriving — Explore This Season's Collection</div>
+        </div>
+        <div class="news-date">June 1, 2026</div>
+        <div class="news-arrow">→</div>
+      </a>
+      <a href="#" class="news-card reveal reveal-delay-1">
+        <div class="news-card-left">
+          <div class="news-tag">Announcement</div>
+          <div class="news-title">New Los Angeles Location Now Open in Arcadia</div>
+        </div>
+        <div class="news-date">May 20, 2026</div>
+        <div class="news-arrow">→</div>
+      </a>
+      <a href="#" class="news-card reveal reveal-delay-2">
+        <div class="news-card-left">
+          <div class="news-tag">Press</div>
+          <div class="news-title">Chi Cha San Chen Named Asia's Best Tea Brand 2026</div>
+        </div>
+        <div class="news-date">May 10, 2026</div>
+        <div class="news-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <!-- Hero row: statement + image -->
+    <div class="footer-hero">
+      <div>
+        <div class="footer-statement">
+          Discover teas worth sharing.<br>
+          Explore our <a href="#">menu</a>, <a href="#">locations</a>,<br>
+          and <a href="#">franchise</a> opportunities.
+        </div>
+      </div>
+      <div class="footer-thumb">
+        <img src="images/footer_thumb.jpg" alt="Chi Cha San Chen tea" onerror="this.parentElement.style.background='rgba(255,255,255,0.05)'">
+      </div>
+    </div>
+
+    <!-- Email signup -->
+    <div class="footer-email-section">
+      <div class="footer-email-label">Keep in touch</div>
+      <div class="footer-email-row">
+        <input type="email" placeholder="Your email address">
+        <button type="button">Subscribe →</button>
+      </div>
+    </div>
+
+    <!-- Nav columns -->
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <div class="footer-nav-col-title">Explore</div>
+        <a href="#">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-col-title">Support</div>
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-col-title">Locations</div>
+        <span class="ft-location-name">Taipei — Flagship</span>
+        <span class="ft-location-addr">No. 6, Lane 32, Zhongshan N. Rd,<br>Zhongshan District, Taipei</span>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 CHI CHA SAN CHEN &nbsp;·&nbsp; FANG YUAN F&amp;B INTERNATIONAL CO., LTD</div>
+    </div>
+  </footer>
+
+  <script>
+    // ── NAV SCROLL BEHAVIOR ──
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── PARALLAX ON HERO ──
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrolled * 0.35}px)`;
+      }
+    }, { passive: true });
+
+    // ── SCROLL REVEAL ──
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ── SMOOTH ANCHOR SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

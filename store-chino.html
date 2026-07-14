@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chino — Chicha San Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    nav { background: #fff; pointer-events: all; border-bottom: none !important; }
+    nav.scrolled { background: rgba(250,249,247,0.96); padding: 28px 40px; border-bottom: 1px solid #e8e8e8 !important; }
+    .nav-links a { color: var(--mid); }
+    .nav-links a.active { color: var(--ink); }
+    body { padding-top: 75px; background: #fff; }
+  </style>
+</head>
+<body class="page-fade">
+<div class="load-bar" id="loadBar"></div>
+
+  <nav id="mainNav">
+    <a href="index.html"><img src="images/logo_header.png" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html">Menu</a>
+      <a href="locations.html" class="active">Locations</a>
+      <a href="#">Our Story</a>
+      <a href="#">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-cta-row">
+                    <a href="locations.html" class="nav-cta"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Order Online</a>
+        </div>
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="su-wrap">
+  <div class="su-photo">
+    <img class="su-photo-img" src="images/franchise.webp" alt="Chicha San Chen shop interior">
+    <img class="su-photo-img" src="images/teapresso.webp" alt="Chicha San Chen Teapresso brewing machine">
+    <img class="su-photo-img" src="images/tasting.webp" alt="Chicha San Chen tea tasting">
+    <img class="su-photo-img" src="images/HANDPICKED.webp" alt="Chicha San Chen hand-picked tea leaves">
+  </div>
+  <div class="su-content">
+    <div class="su-header-row">
+      <div class="su-eyebrow"><a href="locations.html">Locations</a> — California (SoCal)</div>
+      <a href="locations.html" class="su-back">← Back to all locations</a>
+    </div>
+    <div class="su-title">Chino</div>
+
+    <div class="su-row">
+      <div class="su-row-label">Address</div>
+      <div class="su-row-value">4110 Edison Ave Ste 101<br>Chino, CA 91710</div>
+    </div>
+    <div class="su-row">
+      <div class="su-row-label">Phone</div>
+      <div class="su-row-value"><a href="tel:+19092480469">(909) 248-0469</a></div>
+    </div>
+    <div class="su-row">
+      <div class="su-row-label">Hours</div>
+      <div class="su-row-value su-hours-value">Monday: 12:00 PM — 8:00 PM<br>Tuesday: 12:00 PM — 8:00 PM<br>Wednesday: 12:00 PM — 8:00 PM<br>Thursday: 12:00 PM — 8:00 PM<br>Friday: 12:00 PM — 8:00 PM<br>Saturday: 12:00 PM — 8:00 PM<br>Sunday: 12:00 PM — 8:00 PM</div>
+    </div>
+
+    <div class="su-btn-row">
+      <a href="https://www.clover.com/online-ordering/chicha-san-chen-chino" target="_blank" class="su-btn su-order-btn"><span class="arrow-circle">→</span>Order Online</a>
+      <a href="https://maps.google.com/?q=4110+Edison+Ave+Ste+101+Chino+CA+91710" target="_blank" class="su-btn"><span class="arrow-circle">→</span>Get Directions</a>
+    </div>
+
+    <div class="su-social"><a href="#" aria-label="Website"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.8 5.6 3.8 9s-1.4 6.5-3.8 9c-2.4-2.5-3.8-5.6-3.8-9s1.4-6.5 3.8-9z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.6 21v-7.8h2.6l.4-3h-3v-1.9c0-.87.24-1.46 1.5-1.46h1.6V4.14C15.9 4.1 15 4 13.9 4c-2.3 0-3.9 1.4-3.9 4v2.2H7.4v3H10V21h3.6z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a></div>
+  </div>
+</div>
+
+  <footer>
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
+      </div>
+      <a href="#" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="#">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+          <div class="footer-field"><label>First Name</label><input type="text" placeholder="Jane"></div>
+        </div>        <button class="footer-subscribe" type="submit"><span class="arrow-circle">→</span> Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+      <span class="footer-bottom-copy">Premium Taiwanese Tea</span>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  </script>
+  <script>
+    (function() {
+      var bar = document.getElementById('loadBar');
+      requestAnimationFrame(function() { bar.style.width = '75%'; });
+      window.addEventListener('load', function() {
+        bar.style.width = '100%';
+        document.body.classList.add('is-loaded');
+        setTimeout(function() { bar.classList.add('done'); }, 250);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

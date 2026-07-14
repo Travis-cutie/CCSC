@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alhambra — Option 2: Sidebar Unified</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  nav { background: #fff; pointer-events: all; border-bottom: none !important; }
+  nav.scrolled { background: rgba(250,249,247,0.96); padding: 28px 40px; border-bottom: 1px solid #e8e8e8 !important; }
+  .nav-links a { color: var(--mid); }
+  .nav-links a.active { color: var(--ink); }
+  body { padding-top: 75px; background: #fff; }
+
+  .opt-tag { position: fixed; top: 14px; right: 14px; z-index: 999; background: #1a1a1a; color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border-radius: 20px; }
+
+  .su-wrap { display: grid; grid-template-columns: 42% 1fr; min-height: 640px; }
+  .su-photo { position: sticky; top: 75px; height: calc(100vh - 75px); overflow: hidden; background: #e8e5e0; }
+  .su-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .su-content { padding: 72px 64px; display: flex; flex-direction: column; }
+  .su-eyebrow { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mid); margin-bottom: 16px; }
+  .su-eyebrow a { color: var(--mid); text-decoration: none; }
+  .su-title { font-family: 'Sentient', serif; font-weight: 300; font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.02em; line-height: 0.95; color: var(--ink); margin-bottom: 40px; }
+
+  .su-row { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-top: 1px solid #e8e8e8; }
+  .su-row:last-of-type { border-bottom: 1px solid #e8e8e8; }
+  .su-row-label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mid); }
+  .su-row-value { font-size: 14pt; color: var(--ink); text-align: right; }
+  .su-row-value a { color: var(--ink); text-decoration: none; }
+  .su-hours-value { font-size: 13px; color: var(--ink); text-align: right; line-height: 1.7; }
+
+  .su-btn-row { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; }
+  .su-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+  }
+  .su-btn .arrow-circle {
+    width: 36px; height: 36px; background: var(--accent); border: 1px solid var(--accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: #fff;
+  }
+  .su-social { display: flex; gap: 10px; margin-top: auto; padding-top: 40px; }
+  .su-social a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; color: var(--ink); }
+
+  .su-back { padding: 28px 64px; }
+  .su-back a { font-family: var(--mono); font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="opt-tag">Option 2 — Sidebar, unified list</div>
+
+<nav id="mainNav">
+  <a href="../index.html"><img src="../images/logo_header.png" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"></a>
+  <div class="nav-links">
+    <a href="../menu.html">Menu</a>
+    <a href="../locations.html" class="active">Locations</a>
+    <a href="#">Our Story</a>
+    <a href="#">Franchise</a>
+  </div>
+</nav>
+
+<div class="su-wrap">
+  <div class="su-photo">
+    <img src="../images/franchise.webp" alt="Chicha San Chen shop interior">
+  </div>
+  <div class="su-content">
+    <div class="su-eyebrow"><a href="../locations.html">Locations</a> — California (SoCal)</div>
+    <div class="su-title">Alhambra</div>
+
+    <div class="su-row">
+      <div class="su-row-label">Address</div>
+      <div class="su-row-value">30 W Main St<br>Alhambra, CA 91801</div>
+    </div>
+    <div class="su-row">
+      <div class="su-row-label">Phone</div>
+      <div class="su-row-value"><a href="tel:+16264271166">(626) 427-1166</a></div>
+    </div>
+    <div class="su-row">
+      <div class="su-row-label">Hours</div>
+      <div class="su-hours-value">
+        Mon–Fri: 6:00 AM – 6:00 PM<br>
+        Sat–Sun: 7:30 AM – 2:00 PM
+      </div>
+    </div>
+
+    <div class="su-btn-row">
+      <a href="https://www.clover.com/online-ordering/chicha-san-chen-alhambra" target="_blank" class="su-btn"><span class="arrow-circle">→</span>Order Online</a>
+      <a href="https://maps.google.com/?q=30+W+Main+St+Alhambra+CA+91801" target="_blank" class="su-btn"><span class="arrow-circle">→</span>Get Directions</a>
+    </div>
+
+    <div class="su-social">
+      <a href="#" aria-label="Website"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.8 5.6 3.8 9s-1.4 6.5-3.8 9c-2.4-2.5-3.8-5.6-3.8-9s1.4-6.5 3.8-9z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<div class="su-back">
+  <a href="../locations.html">← Back to all locations</a>
+</div>
+
+</body>
+</html>

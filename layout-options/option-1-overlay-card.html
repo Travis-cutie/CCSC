@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alhambra — Option 1: Overlay Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  nav { background: #fff; pointer-events: all; border-bottom: none !important; }
+  nav.scrolled { background: rgba(250,249,247,0.96); padding: 28px 40px; border-bottom: 1px solid #e8e8e8 !important; }
+  .nav-links a { color: var(--mid); }
+  .nav-links a.active { color: var(--ink); }
+  body { padding-top: 0; background: #fff; }
+
+  .opt-tag { position: fixed; top: 14px; right: 14px; z-index: 999; background: #1a1a1a; color: #fff; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border-radius: 20px; }
+
+  .ov-hero {
+    position: relative;
+    height: 62vh;
+    min-height: 460px;
+    overflow: hidden;
+    background: #111;
+  }
+  .ov-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ov-hero-fade {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  }
+
+  .ov-card-wrap { display: flex; justify-content: center; margin-top: -110px; padding: 0 24px; position: relative; z-index: 5; }
+  .ov-card {
+    background: #fff;
+    width: 100%;
+    max-width: 640px;
+    padding: 40px 48px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .ov-eyebrow { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mid); margin-bottom: 14px; }
+  .ov-title { font-family: 'Sentient', serif; font-weight: 300; font-size: clamp(34px, 4vw, 48px); letter-spacing: -0.02em; color: var(--ink); margin-bottom: 18px; }
+  .ov-address { font-size: 14pt; color: var(--ink); margin-bottom: 6px; }
+  .ov-phone a { font-size: 13px; color: var(--mid); text-decoration: none; }
+  .ov-divider { width: 40px; height: 1px; background: #ddd; margin: 24px auto; }
+  .ov-hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 380px; margin: 0 auto 28px; text-align: left; }
+  .ov-hours-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 6px; }
+  .ov-hours-value { font-size: 13px; color: var(--ink); }
+  .ov-btn-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .ov-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+  }
+  .ov-btn .arrow-circle {
+    width: 36px; height: 36px; background: var(--accent); border: 1px solid var(--accent); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: #fff;
+  }
+  .ov-back { text-align: center; padding: 48px 24px 60px; }
+  .ov-back a { font-family: var(--mono); font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="opt-tag">Option 1 — Overlay card</div>
+
+<nav id="mainNav">
+  <a href="../index.html"><img src="../images/logo_header.png" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"></a>
+  <div class="nav-links">
+    <a href="../menu.html">Menu</a>
+    <a href="../locations.html" class="active">Locations</a>
+    <a href="#">Our Story</a>
+    <a href="#">Franchise</a>
+  </div>
+</nav>
+
+<div class="ov-hero">
+  <img src="../images/franchise.webp" alt="Chicha San Chen shop interior">
+  <div class="ov-hero-fade"></div>
+</div>
+
+<div class="ov-card-wrap">
+  <div class="ov-card">
+    <div class="ov-eyebrow">Locations — California (SoCal)</div>
+    <div class="ov-title">Alhambra</div>
+    <div class="ov-address">30 W Main St, Alhambra, CA 91801</div>
+    <div class="ov-phone"><a href="tel:+16264271166">(626) 427-1166</a></div>
+    <div class="ov-divider"></div>
+    <div class="ov-hours-grid">
+      <div>
+        <div class="ov-hours-label">Mon — Fri</div>
+        <div class="ov-hours-value">6:00 AM – 6:00 PM</div>
+      </div>
+      <div>
+        <div class="ov-hours-label">Sat — Sun</div>
+        <div class="ov-hours-value">7:30 AM – 2:00 PM</div>
+      </div>
+    </div>
+    <div class="ov-btn-row">
+      <a href="https://www.clover.com/online-ordering/chicha-san-chen-alhambra" target="_blank" class="ov-btn"><span class="arrow-circle">→</span>Order Online</a>
+      <a href="https://maps.google.com/?q=30+W+Main+St+Alhambra+CA+91801" target="_blank" class="ov-btn"><span class="arrow-circle">→</span>Get Directions</a>
+    </div>
+  </div>
+</div>
+
+<div class="ov-back">
+  <a href="../locations.html">← Back to all locations</a>
+</div>
+
+</body>
+</html>

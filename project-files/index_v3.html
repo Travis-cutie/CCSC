@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi Cha San Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── INTRO CURTAIN ── */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #93C90F;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 32px 56px;
+      pointer-events: none;
+    }
+    .intro-tagline {
+      font-family: var(--mono, 'JetBrains Mono', monospace);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 14px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .intro-headline {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 10.5vw;
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 1s cubic-bezier(0.76, 0, 0.24, 1) 0.2s;
+    }
+    #intro.reveal .intro-tagline {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #intro.reveal .intro-headline {
+      clip-path: inset(0 0% 0 0);
+    }
+    #intro.exit {
+      clip-path: inset(0 0 0 0);
+      animation: curtainUp 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    }
+    @keyframes curtainUp {
+      from { clip-path: inset(0 0 0% 0); }
+      to   { clip-path: inset(0 0 100% 0); }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --ink: #1a1a1a;
+      --mid: #888;
+      --faint: #c8c8c8;
+      --accent: #93C90F;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px;
+      pointer-events: none;
+      transition: background 0.3s, border-color 0.3s, padding 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-color: #e8e8e8;
+      padding: 18px 40px;
+      pointer-events: all;
+    }
+    nav a img { pointer-events: all; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      pointer-events: all;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      background: #faf9f7;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .hero-tagline {
+      padding: 0 40px 12px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1.65;
+    }
+    .hero-name {
+      font-family: 'Times New Roman', Times, serif;
+      font-weight: 700;
+      font-size: 10.5vw;
+      line-height: 0.88;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      padding: 0 32px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .hero-subline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px 40px;
+    }
+    .hero-subline-left {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero-subline-right {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── SECTION LABEL ── */
+    .sec-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--faint);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+    .news-section-header .sec-label,
+    .drinks-header .sec-label {
+      color: var(--ink);
+    }
+    .news-section-header .sec-label::after,
+    .drinks-header .sec-label::after {
+      display: none;
+    }
+
+    /* ── DRINKS ── */
+    .drinks-section {
+      padding: 120px 40px 80px;
+      background: #fff;
+    }
+    .drinks-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+    .drinks-header-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .drinks-header-right {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .drinks-header-right a {
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .drinks-header-right a:hover { color: var(--ink); }
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .drink-item {
+      cursor: pointer;
+    }
+    .drink-item:hover .drink-cover { filter: brightness(0.92); }
+    .drink-cover {
+      width: 100%;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.4s;
+    }
+    .drink-meta {
+      padding: 14px 0 0;
+    }
+    .drink-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      color: var(--faint);
+      margin-bottom: 5px;
+    }
+    .drink-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 3px;
+      line-height: 1.4;
+    }
+    .drink-note {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── FULL IMAGE ── */
+    .full-image-block {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      overflow: hidden;
+      background: #111;
+      outline: 40px solid #fff;
+      margin: 40px;
+    }
+    .full-image-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.85;
+    }
+    .full-image-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 40px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
+    }
+    .fig-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+    }
+    .fig-title {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: clamp(13px, 1.8vw, 22px);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      max-width: 560px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .fig-link {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+    .fig-link::after { content: '→'; }
+    .fig-link:hover { color: rgba(255,255,255,0.85); }
+
+    /* ── DIVIDER TEXT ── */
+    .text-band {
+      background: var(--accent);
+      padding: 20px 40px;
+      overflow: hidden;
+    }
+    .text-band-track {
+      display: inline-flex;
+      gap: 64px;
+      animation: slide 32s linear infinite;
+      white-space: nowrap;
+    }
+    .text-band-track span {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .text-band-track .accent-dot {
+      color: rgba(255,255,255,0.5);
+    }
+    @keyframes slide {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+      margin: 0 40px;
+    }
+    .philosophy-img {
+      overflow: hidden;
+      position: relative;
+    }
+    .philosophy-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .philosophy-img:hover img { transform: scale(1.03); }
+    .philosophy-text {
+      background: #faf9f7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px;
+      gap: 28px;
+      border-left: 1px solid #e8e8e8;
+    }
+    .phil-index {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .phil-title {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 20px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .phil-body {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.9;
+      max-width: 360px;
+    }
+    .phil-link {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      width: fit-content;
+      transition: gap 0.2s, border-color 0.2s;
+    }
+    .phil-link::after { content: '→'; }
+    .phil-link:hover { gap: 16px; border-color: var(--ink); }
+
+    /* ── NEWS ── */
+    .news-section {
+      padding: 60px 40px 120px;
+      background: #fff;
+    }
+    .news-section-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+    .news-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .news-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 140px 32px;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid #e8e8e8;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+      gap: 32px;
+    }
+    .news-row:first-child { border-top: 1px solid #e8e8e8; }
+    .news-row:hover .news-row-arrow { transform: translateX(5px); }
+    .news-row-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+    }
+    .news-row-title {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.45;
+    }
+    .news-row-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .news-row-arrow {
+      font-size: 13px;
+      color: var(--mid);
+      transition: transform 0.2s, color 0.2s;
+      text-align: right;
+    }
+    .news-row:hover .news-row-arrow { color: var(--ink); }
+
+    /* ── PROFESSIONALISM ── */
+    .prof-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+      margin: 0 40px;
+    }
+    .prof-text {
+      background: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px;
+      gap: 28px;
+    }
+    .prof-text .phil-index { color: rgba(255,255,255,0.9); }
+    .prof-text .phil-title { color: rgba(255,255,255,0.95); font-family: 'Times New Roman', Times, serif; font-size: 20px; }
+    .prof-text .phil-body { color: #fff; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 400; line-height: 1.9; }
+    .prof-text .phil-link { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.2); }
+    .prof-text .phil-link:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+    .prof-img { overflow: hidden; }
+    .prof-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s ease; }
+    .prof-img:hover img { transform: scale(1.03); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #faf9f7;
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      min-height: 480px;
+    }
+    .footer-col {
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .footer-divider {
+      background: #e8e8e8;
+      width: 1px;
+    }
+    /* Left column */
+    .footer-col-left {
+      justify-content: space-between;
+    }
+    .footer-col-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 28px;
+    }
+    .footer-brand-desc {
+      font-size: 12px;
+      line-height: 1.85;
+      color: #888;
+      flex: 1;
+      max-width: 280px;
+    }
+    .footer-brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .footer-brand-link .arrow-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .footer-brand-link:hover .arrow-circle { background: var(--ink); }
+    /* Middle column — navigation */
+    .footer-col-nav {
+      display: block;
+      padding: 60px 40px;
+    }
+    .footer-col-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 36px;
+    }
+    .footer-nav-group-label {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 36px;
+    }
+    .footer-col-nav > .footer-nav-group-label:first-child { margin-top: 0; }
+    .footer-nav-links {
+      display: block;
+      width: 100%;
+    }
+    .footer-nav-links a {
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid #e8e8e8;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-nav-links a:hover { color: var(--accent); }
+    .footer-nav-links a.external::after { content: '↗'; font-size: 10px; color: var(--mid); }
+    /* Right column — newsletter */
+    .footer-col-news {
+      justify-content: flex-start;
+    }
+    .footer-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+    .footer-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .footer-field {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 14px 0;
+    }
+    .footer-field:first-child { border-right: 1px solid #e8e8e8; padding-right: 20px; }
+    .footer-field + .footer-field { padding-left: 20px; }
+    .footer-field label {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 6px;
+    }
+    .footer-field input {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 13px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+    }
+    .footer-field input::placeholder { color: #bbb0a0; }
+    .footer-field-full {
+      border-bottom: 1px solid #e8e8e8;
+      padding: 14px 0;
+    }
+    .footer-field-full label {
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .footer-field-full input {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 13px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+    .footer-field-full input::placeholder { color: #bbb0a0; }
+    .footer-subscribe {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .footer-subscribe .arrow-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .footer-subscribe:hover .arrow-circle { background: var(--ink); }
+    .footer-bottom {
+      background: #faf9f7;
+      border-top: 1px solid #e8e8e8;
+      grid-column: 1 / -1;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom-copy {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+    }
+
+    /* ── REVEAL ── */
+    .r {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .r.d1 { transition-delay: 0.1s; }
+    .r.d2 { transition-delay: 0.2s; }
+    .r.d3 { transition-delay: 0.3s; }
+    .r.on { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <!-- INTRO CURTAIN -->
+  <div id="intro">
+    <div class="intro-headline">A Moment<br>Worth Sharing</div>
+  </div>
+
+
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#"><img src="../images/logo_header.png" alt="Chi Cha San Chen" style="height:11px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="#">Menu</a>
+      <a href="#">Locations</a>
+      <a href="#">Our Story</a>
+      <a href="#">Franchise</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tagline">
+      The Art of Tea. Premium Taiwanese tea crafted with devotion.
+    </div>
+    <div class="hero-name">A Moment<br>Worth Sharing</div>
+    <div class="hero-subline">
+      <span class="hero-subline-left"></span>
+      <span class="hero-subline-right">Scroll ↓</span>
+    </div>
+  </section>
+
+  <!-- TEXT BAND -->
+  <div class="text-band">
+    <div class="text-band-track">
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+      <span>Freshly Brewed Original Tea</span>
+      <span class="accent-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- DRINKS -->
+  <section class="drinks-section" id="drinks">
+    <div class="drinks-header r">
+      <div>
+        <div class="sec-label">Signature Drinks</div>
+      </div>
+      <div class="drinks-header-right">
+        <a href="#">View Full Menu →</a>
+      </div>
+    </div>
+    <div class="drinks-grid">
+      <div class="drink-item r">
+        <img class="drink-cover" src="../images/drink_honey_osmanthus.jpg" alt="Honey Osmanthus Oolong Tea" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-num">01</div>
+          <div class="drink-label">Honey Osmanthus Oolong</div>
+          <div class="drink-note">Osmanthus · Oolong · Honey</div>
+        </div>
+      </div>
+      <div class="drink-item r d1">
+        <img class="drink-cover" src="../images/drink_cassia_mousse.jpg" alt="Cassia Black Tea Mousse" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-num">02</div>
+          <div class="drink-label">Cassia Black Tea Mousse</div>
+          <div class="drink-note">Cassia Black · Mousse</div>
+        </div>
+      </div>
+      <div class="drink-item r d2">
+        <img class="drink-cover" src="../images/drink_dong_ding.jpg" alt="Dong Ding Oolong Latte" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-num">03</div>
+          <div class="drink-label">Dong Ding Oolong Latte</div>
+          <div class="drink-note">Dong Ding · Fresh Milk</div>
+        </div>
+      </div>
+      <div class="drink-item r d3">
+        <img class="drink-cover" src="../images/drink_brown_sugar.jpg" alt="Brown Sugar Bubble Milk" loading="lazy">
+        <div class="drink-meta">
+          <div class="drink-num">04</div>
+          <div class="drink-label">Brown Sugar Bubble Milk</div>
+          <div class="drink-note">Fresh Milk · Brown Sugar · Tapioca</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section">
+    <div class="philosophy-img r">
+      <video src="../videos/philosophy_video2.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;object-position:bottom;display:block;position:absolute;top:0;left:0;"></video>
+    </div>
+    <div class="philosophy-text">
+      <div class="phil-index r">Our Philosophy</div>
+      <div class="phil-title r d1">Tea is one of the best<br>gifts from nature.</div>
+      <p class="phil-body r d2">We follow each process rigorously — from cultivating, plucking, roasting, and farm management. This is our persistence and belief since 1998.</p>
+      <a href="#" class="phil-link r d3">Read More</a>
+    </div>
+  </section>
+
+  <!-- FULL BANNER -->
+  <div class="full-image-block r">
+    <img src="../images/tw_banner_list_18l18_2fjudqvcsy.png" alt="Tea Process" loading="lazy">
+    <div class="full-image-text">
+      <div class="fig-label">Professionalism</div>
+      <div class="fig-title">Devoting ourselves to tea brewing<br>for more than two decades.</div>
+      <a href="#" class="fig-link">Our Story</a>
+    </div>
+  </div>
+
+  <!-- NEWS -->
+  <section class="news-section">
+    <div class="news-section-header r">
+      <div class="sec-label">Latest News</div>
+      <div style="text-align:right">
+        <a href="#" style="font-family:var(--mono);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);text-decoration:none;">View All →</a>
+      </div>
+    </div>
+    <div class="news-list">
+      <a href="#" class="news-row r">
+        <div class="news-row-num">01</div>
+        <div class="news-row-title">Summer Seasonal Teas Arriving — Explore This Season's Collection</div>
+        <div class="news-row-tag">Promotions &nbsp;·&nbsp; June 1</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+      <a href="#" class="news-row r d1">
+        <div class="news-row-num">02</div>
+        <div class="news-row-title">New Los Angeles Location Now Open in Arcadia</div>
+        <div class="news-row-tag">Announcement &nbsp;·&nbsp; May 20</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+      <a href="#" class="news-row r d2">
+        <div class="news-row-num">03</div>
+        <div class="news-row-title">Chi Cha San Chen Named Asia's Best Tea Brand 2026</div>
+        <div class="news-row-tag">Press &nbsp;·&nbsp; May 10</div>
+        <div class="news-row-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <!-- Left: image + description + brand link -->
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="../images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chi Cha San Chen tea">
+        <p class="footer-brand-desc">Overseas brand licensing and master franchise partnerships with one of Asia's most celebrated tea brands — built on 25+ years of tea expertise.</p>
+      </div>
+      <a href="#" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+
+    <!-- Middle: navigation -->
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="#">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+
+    <!-- Right: newsletter -->
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>
+        <div class="footer-field-full">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe">
+        </div>
+        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chi Cha San Chen. All rights reserved.</span>
+      <span class="footer-bottom-copy">Premium Taiwanese Tea</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── INTRO CURTAIN ──
+    (function() {
+      const intro = document.getElementById('intro');
+      // Trigger text reveal on next frame
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => intro.classList.add('reveal'));
+      });
+      // After text is visible, wipe curtain up
+      setTimeout(() => {
+        intro.classList.add('exit');
+        intro.addEventListener('animationend', () => {
+          intro.style.display = 'none';
+        }, { once: true });
+      }, 1800);
+    })();
+
+    // Nav scroll background
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
