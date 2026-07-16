@@ -280,12 +280,12 @@ body.nav-open { overflow: hidden; }
 .hero-tagline, .hero-name, .hero-subline {
   position: relative;
   z-index: 1;
-  color: #fff;
+  color: var(--ink);
 }
 .hero {
   height: 100vh;
   min-height: 600px;
-  background: #111;
+  background: #fff;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -306,7 +306,7 @@ body.nav-open { overflow: hidden; }
   line-height: 0.88;
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--ink);
   padding: 0 32px;
   white-space: nowrap;
   overflow: hidden;
