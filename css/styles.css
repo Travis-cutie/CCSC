@@ -173,11 +173,12 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 768px) {
   .nav-toggle { display: flex; z-index: 260; }
   .nav-toggle.open {
-    border: 1px solid rgba(26,26,26,0.4);
+    border: 1px solid rgba(255,255,255,0.5);
     border-radius: 50%;
     width: 36px;
     height: 36px;
   }
+  .nav-toggle.open span { background: #fff; }
   .nav-links {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -207,9 +208,9 @@ body.nav-open { overflow: hidden; }
     letter-spacing: -0.02em;
     line-height: 1.3;
     text-transform: none;
-    color: var(--ink);
+    color: #fff;
   }
-  nav .nav-links a.active { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  nav .nav-links a.active { color: #fff; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
   .nav-mobile-extra {
     display: flex;
     flex-direction: column;
@@ -225,13 +226,13 @@ body.nav-open { overflow: hidden; }
     justify-content: center;
     gap: 8px;
     padding: 12px 18px;
-    border: 1px solid rgba(26,26,26,0.5);
+    border: 1px solid rgba(255,255,255,0.6);
     border-radius: 999px;
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: #fff;
     text-decoration: none;
     white-space: nowrap;
     line-height: 1;
@@ -243,15 +244,15 @@ body.nav-open { overflow: hidden; }
     align-items: center;
     width: 100%;
     padding-top: 20px;
-    border-top: 1px solid rgba(26,26,26,0.2);
+    border-top: 1px solid rgba(255,255,255,0.25);
   }
   .nav-mobile-social { display: flex; gap: 16px; }
-  .nav-mobile-social a { color: var(--ink); display: flex; }
+  .nav-mobile-social a { color: #fff; display: flex; }
   .nav-mobile-copy {
     font-family: var(--mono);
     font-size: 9px;
     letter-spacing: 0.06em;
-    color: rgba(26,26,26,0.65);
+    color: rgba(255,255,255,0.7);
   }
 }
 
@@ -426,12 +427,17 @@ body.nav-open { overflow: hidden; }
 }
 .drink-item { cursor: pointer; }
 .drink-item:hover .drink-cover { filter: brightness(0.92); }
-.drink-cover {
+.drink-cover-frame {
   width: 100%;
   aspect-ratio: 2/3;
+  overflow: hidden;
+}
+.drink-cover {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
-  transition: filter 0.4s;
+  transition: filter 0.4s, transform 0.4s;
 }
 .drink-meta { padding: 14px 0 0; }
 .drink-num {
@@ -957,15 +963,18 @@ footer {
   nav.scrolled { padding: 14px 24px; }
 
   .hero-tagline { padding: 0 24px 12px; }
-  .hero-name { padding: 0 24px; }
+  .hero-name { padding: 0 24px; font-size: 8.5vw; }
   .hero-subline { padding: 16px 24px 32px; }
+
+  .intro-headline { font-size: 8.5vw; }
 
   .text-band { padding: 16px 24px; }
 
   .drinks-section { padding: 80px 24px 56px; }
   .drinks-header { grid-template-columns: 1fr; row-gap: 12px; margin-bottom: 40px; }
   .drinks-header-right { text-align: left; }
-  .drinks-grid { grid-template-columns: repeat(2, 1fr); }
+  .drinks-grid { grid-template-columns: repeat(2, 1fr); row-gap: 48px; }
+  .drink-cover { transform: translateY(-40px) scale(1.4); object-position: bottom; }
 
   .philosophy-section, .prof-section {
     grid-template-columns: 1fr;

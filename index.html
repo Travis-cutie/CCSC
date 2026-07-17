@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
   <style>
     /* Hero background line-drawing */
     .hero-video-bg {
@@ -47,6 +47,9 @@
       -webkit-mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
       mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
     }
+    @media (max-width: 768px) {
+      .hero-video-bg .hero-bg-svg-2 { transform: translate(-40%, calc(-50% - 190px)); }
+    }
   </style>
 </head>
 <body>
@@ -68,9 +71,6 @@
       <a href="#">Our Story</a>
       <a href="#">Franchise</a>
       <div class="nav-mobile-extra">
-        <div class="nav-cta-row">
-                    <a href="locations.html" class="nav-cta"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Order Online</a>
-        </div>
         <div class="nav-mobile-bottom">
           <div class="nav-mobile-social">
             <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
@@ -134,28 +134,28 @@
     </div>
     <div class="drinks-grid">
       <div class="drink-item r">
-        <img class="drink-cover" src="images/drink_osmanthus_oolong_tea_honey.webp" alt="Honey Osmanthus Oolong Tea" loading="lazy">
+        <div class="drink-cover-frame"><img class="drink-cover" src="images/drink_osmanthus_oolong_tea_honey.webp" alt="Honey Osmanthus Oolong Tea" loading="lazy"></div>
         <div class="drink-meta">
           <div class="drink-label">Honey Osmanthus Oolong</div>
           <div class="drink-note">Osmanthus · Oolong · Honey</div>
         </div>
       </div>
       <div class="drink-item r d1">
-        <img class="drink-cover" src="images/drink_cassia_mousse.jpg" alt="Cassia Black Tea Mousse" loading="lazy">
+        <div class="drink-cover-frame"><img class="drink-cover" src="images/drink_cassia_mousse.jpg" alt="Cassia Black Tea Mousse" loading="lazy"></div>
         <div class="drink-meta">
           <div class="drink-label">Cassia Black Tea Mousse</div>
           <div class="drink-note">Cassia Black · Mousse</div>
         </div>
       </div>
       <div class="drink-item r d2">
-        <img class="drink-cover" src="images/drink_dong_ding.jpg" alt="Dong Ding Oolong Latte" loading="lazy">
+        <div class="drink-cover-frame"><img class="drink-cover" src="images/drink_dong_ding.jpg" alt="Dong Ding Oolong Latte" loading="lazy"></div>
         <div class="drink-meta">
           <div class="drink-label">Dong Ding Oolong Latte</div>
           <div class="drink-note">Dong Ding · Fresh Milk</div>
         </div>
       </div>
       <div class="drink-item r d3">
-        <img class="drink-cover" src="images/drink_brown_sugar.jpg" alt="Brown Sugar Bubble Milk" loading="lazy">
+        <div class="drink-cover-frame"><img class="drink-cover" src="images/drink_brown_sugar.jpg" alt="Brown Sugar Bubble Milk" loading="lazy"></div>
         <div class="drink-meta">
           <div class="drink-label">Brown Sugar Bubble Milk</div>
           <div class="drink-note">Fresh Milk · Brown Sugar · Tapioca</div>
@@ -312,13 +312,15 @@
       if (!hero) return;
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const leftRestY = isMobile ? -190 : -290;
       const layers = [
         // right svg — faster
         { el: document.getElementById('heroBgSvg'), strength: 0.4,
           build: px => `translateY(${-40 + px}px)` },
         // left svg — slower, keeps its -40% left-crop and -50% vertical centering
         { el: document.getElementById('heroBgSvg2'), strength: 0.7,
-          build: px => `translate(-40%, calc(-50% + ${-290 + px}px))` },
+          build: px => `translate(-40%, calc(-50% + ${leftRestY + px}px))` },
       ].filter(l => l.el);
       if (!layers.length) return;
 
