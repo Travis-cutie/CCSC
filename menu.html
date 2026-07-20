@@ -192,7 +192,7 @@
       flex-direction: column;
       cursor: pointer;
     }
-    .menu-item:hover .menu-item-photo { transform: scale(1.07); }
+    .menu-item:hover .menu-item-photo { filter: brightness(0.92); }
     .menu-item-photo-wrap {
       width: 100%;
       aspect-ratio: 3 / 4;
@@ -207,7 +207,7 @@
       display: block;
       transform: scale(1.02);
       transform-origin: center;
-      transition: transform 0.5s ease;
+      transition: filter 0.4s, transform 0.4s;
     }
     .menu-item-photo-placeholder {
       width: 100%;
@@ -343,11 +343,14 @@
     }
     @media (max-width: 640px) {
       .customize-row {
-        grid-template-columns: 32px 1fr;
+        grid-template-columns: 1fr;
         row-gap: 12px;
+        justify-items: center;
+        text-align: center;
       }
       .customize-row > .customize-options {
-        grid-column: 1 / -1;
+        grid-column: auto;
+        justify-content: center;
       }
     }
 
@@ -394,17 +397,19 @@
       padding-right: 0;
     }
     @media (max-width: 560px) {
-      .toppings-section { justify-content: flex-start; padding: 40px 24px; }
-      .toppings-list { justify-content: flex-start; text-align: left; }
+      .toppings-section { justify-content: center; flex-direction: column; align-items: center; text-align: center; padding: 40px 24px; }
+      .toppings-list { justify-content: center; text-align: center; }
     }
     @media (max-width: 768px) {
-      .menu-header { grid-template-columns: 1fr; min-height: auto; }
+      .menu-header { grid-template-columns: 1fr; min-height: 400px; }
       .menu-header-content { padding: 48px 24px 24px; }
-      .menu-header-image { padding: 0 24px 32px; }
+      .menu-header-image { display: none; }
       .menu-disclaimer { padding: 14px 24px; }
       .menu-tabs { padding: 0 24px; }
       .menu-body { padding: 0 24px 80px; }
       .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; margin-top: 32px; }
+      .menu-item-photo-wrap { aspect-ratio: 2/3; }
+      .menu-item-photo { transform: scale(1.4) translateY(-40px); object-position: bottom; }
     }
 
     /* ── FEATURE STRIP ──

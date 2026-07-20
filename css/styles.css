@@ -179,6 +179,10 @@ body.nav-open { overflow: hidden; }
     height: 36px;
   }
   .nav-toggle.open span { background: #fff; }
+  body.nav-open nav > a:first-child img {
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+  }
   .nav-links {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
