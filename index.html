@@ -8,63 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=2">
-  <style>
-    /* Hero background line-drawing */
-    .hero-video-bg {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-    .hero-video-bg .hero-bg-svg {
-      --restY: -40px;
-      position: static;
-      width: 70.3%;
-      max-width: 914px;
-      height: auto;
-      display: block;
-      pointer-events: none;
-      transform: translateY(var(--restY));
-      opacity: 0;
-      animation: heroFadeIn 3.2s ease-out forwards, heroDrift1 18s ease-in-out 3.2s infinite;
-      -webkit-mask-image: linear-gradient(to left, black 0%, black 75%, transparent 100%);
-      mask-image: linear-gradient(to left, black 0%, black 75%, transparent 100%);
-    }
-    @keyframes heroFadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes heroDrift1 {
-      0%, 100% { transform: translateY(var(--restY)) translateX(0); }
-      50%      { transform: translateY(calc(var(--restY) - 10px)) translateX(-10px); }
-    }
-    .hero-video-bg .hero-bg-svg-2 {
-      --restY: -290px;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 70.3%;
-      max-width: 914px;
-      height: auto;
-      display: block;
-      pointer-events: none;
-      transform: translate(-40%, calc(-50% + var(--restY)));
-      opacity: 0;
-      animation: heroFadeIn 3.2s ease-out forwards, heroDrift2 24s ease-in-out 3.2s infinite;
-      -webkit-mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
-      mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
-    }
-    @keyframes heroDrift2 {
-      0%, 100% { transform: translate(-40%, calc(-50% + var(--restY))); }
-      50%      { transform: translate(-42.5%, calc(-50% + var(--restY) - 14px)); }
-    }
-    @media (max-width: 768px) {
-      .hero-video-bg .hero-bg-svg-2 { --restY: -190px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-video-bg .hero-bg-svg,
-      .hero-video-bg .hero-bg-svg-2 { animation: heroFadeIn 3.2s ease-out forwards; }
-    }
-  </style>
 </head>
 <body>
 
@@ -101,11 +44,14 @@
 
   <!-- HERO -->
   <section class="hero">
-    <!-- Wireframe terrain background -->
+    <!-- High-mountain tea harvest banner -->
     <div class="hero-video-bg">
-      <img src="images/MT_Linedrawing.svg" alt="" class="hero-bg-svg" id="heroBgSvg">
-      <img src="images/MT_Linedrawing.svg" alt="" class="hero-bg-svg-2" id="heroBgSvg2">
-      <div class="hero-video-overlay"></div>
+      <video id="heroVideo" autoplay muted playsinline preload="auto">
+        <source src="videos/banner3.mp4" type="video/mp4">
+      </video>
+      <video id="heroVideo2" muted playsinline preload="auto">
+        <source src="videos/banner3.mp4" type="video/mp4">
+      </video>
     </div>
 <div class="hero-name">A Moment<br>Worth Sharing</div>
     <div class="hero-subline">
@@ -314,42 +260,52 @@
       }, 1800);
     })();
 
+    // Slow-motion hero banner with seamless crossfade loop
+    (function() {
+      const vA = document.getElementById('heroVideo');
+      const vB = document.getElementById('heroVideo2');
+      if (!vA || !vB) return;
+
+      const RATE = 0.5;
+      const CROSSFADE = 0.6; // seconds of *video* time (unaffected by playbackRate)
+
+      [vA, vB].forEach(v => { v.playbackRate = RATE; });
+
+      let active = vA, standby = vB;
+
+      function onTimeUpdate() {
+        if (active.duration && active.currentTime >= active.duration - CROSSFADE) {
+          active.removeEventListener('timeupdate', onTimeUpdate);
+          crossfade();
+        }
+      }
+      active.addEventListener('timeupdate', onTimeUpdate);
+
+      function crossfade() {
+        standby.currentTime = 0;
+        standby.playbackRate = RATE;
+        standby.play();
+        standby.style.opacity = '1';
+        active.style.opacity = '0';
+
+        const finishedActive = active;
+        setTimeout(() => {
+          finishedActive.pause();
+          finishedActive.currentTime = 0;
+        }, (CROSSFADE / RATE) * 1000 + 100);
+
+        const tmp = active;
+        active = standby;
+        standby = tmp;
+        active.addEventListener('timeupdate', onTimeUpdate);
+      }
+    })();
+
     // Nav scroll background
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
-
-    // ── HERO SVG SCROLL PARALLAX ──
-    (function() {
-      const hero = document.querySelector('.hero');
-      if (!hero) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      const leftRestY = isMobile ? -190 : -290;
-      const layers = [
-        // right svg — faster
-        { el: document.getElementById('heroBgSvg'), strength: 0.4,
-          build: px => `translateY(${-40 + px}px)` },
-        // left svg — slower, keeps its -40% left-crop and -50% vertical centering
-        { el: document.getElementById('heroBgSvg2'), strength: 0.7,
-          build: px => `translate(-40%, calc(-50% + ${leftRestY + px}px))` },
-      ].filter(l => l.el);
-      if (!layers.length) return;
-
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (y <= 0) return; // let the idle drift own the resting state
-        const heroH = hero.offsetHeight;
-        const fade = Math.min(y / heroH, 1);
-        layers.forEach(({ el, strength, build }) => {
-          el.style.animation = 'none'; // hand off from idle drift to scroll-driven transform
-          el.style.transform = build(Math.min(y, heroH) * strength);
-          el.style.opacity = String(1 - fade * 0.6);
-        });
-      }, { passive: true });
-    })();
 
     // Scroll reveal
     const obs = new IntersectionObserver((entries) => {

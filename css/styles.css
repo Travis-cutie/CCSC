@@ -273,15 +273,13 @@ body.nav-open { overflow: hidden; }
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transform: scale(1.35);
+  object-fit: contain;
   pointer-events: none;
+  clip-path: inset(0 4px);
+  opacity: 1;
+  transition: opacity 1.2s linear;
 }
-.hero-video-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.30);
-}
+.hero-video-bg video#heroVideo2 { opacity: 0; }
 .hero-tagline, .hero-name, .hero-subline {
   position: relative;
   z-index: 1;
@@ -433,7 +431,7 @@ body.nav-open { overflow: hidden; }
 .drink-item:hover .drink-cover { filter: brightness(0.92); }
 .drink-cover-frame {
   width: 100%;
-  aspect-ratio: 2/3;
+  aspect-ratio: 3/4;
   overflow: hidden;
 }
 .drink-cover {
@@ -968,7 +966,9 @@ footer {
 
   .hero-tagline { padding: 0 24px 12px; }
   .hero-name { padding: 0 24px; font-size: 8.5vw; }
-  .hero-subline { padding: 16px 24px 32px; }
+  .hero-subline { padding: 16px 24px 32px; justify-content: flex-start; }
+
+  .hero-video-bg video { transform: scale(1.44); }
 
   .intro-headline { font-size: 8.5vw; }
 
@@ -978,6 +978,7 @@ footer {
   .drinks-header { grid-template-columns: 1fr; row-gap: 12px; margin-bottom: 40px; }
   .drinks-header-right { text-align: left; }
   .drinks-grid { grid-template-columns: repeat(2, 1fr); row-gap: 48px; }
+  .drink-cover-frame { aspect-ratio: 2/3; }
   .drink-cover { transform: translateY(-40px) scale(1.4); object-position: bottom; }
 
   .philosophy-section, .prof-section {
