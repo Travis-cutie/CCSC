@@ -18,9 +18,6 @@
     nav.scrolled {
       background: rgba(250,249,247,0.96);
     }
-    nav.scrolled {
-      padding: 28px 40px;
-    }
     .nav-links a { color: var(--mid); }
     .nav-links a.active {
       color: var(--ink);
@@ -67,16 +64,6 @@
       object-position: center;
       display: block;
     }
-    .menu-header-tag {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      color: var(--mid);
-      border: 1px solid #ddd;
-      padding: 4px 10px;
-      margin-bottom: 24px;
-    }
     .menu-header-title {
       font-family: 'Sentient', serif;
       font-weight: 300;
@@ -94,17 +81,6 @@
       margin-bottom: 8px;
       max-width: 420px;
       line-height: 1.6;
-    }
-
-    /* ── DISCLAIMER BAR ── */
-    .menu-disclaimer {
-      background: #f7f6f4;
-      border-bottom: 1px solid #e8e8e8;
-      padding: 14px 40px;
-      font-size: 12px;
-      font-style: italic;
-      color: var(--mid);
-      line-height: 1.5;
     }
 
     /* ── CATEGORY TABS ── */
@@ -240,14 +216,6 @@
       letter-spacing: 0.08em;
       color: var(--mid);
     }
-    .menu-item-price {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--ink);
-      margin-top: 2px;
-    }
-
     /* ── ITEM TAG ── */
     .menu-item-tag {
       display: inline-block;
@@ -400,16 +368,28 @@
       .toppings-section { justify-content: center; flex-direction: column; align-items: center; text-align: center; padding: 40px 24px; }
       .toppings-list { justify-content: center; text-align: center; }
     }
+    .iti-badge-mobile { display: none; }
+    .oolong-title-break { display: none; }
     @media (max-width: 768px) {
+      .oolong-title-break { display: block; }
       .menu-header { grid-template-columns: 1fr; min-height: 400px; }
       .menu-header-content { padding: 48px 24px 24px; }
       .menu-header-image { display: none; }
-      .menu-disclaimer { padding: 14px 24px; }
       .menu-tabs { padding: 0 24px; }
       .menu-body { padding: 0 24px 80px; }
       .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; margin-top: 32px; }
       .menu-item-photo-wrap { aspect-ratio: 2/3; }
       .menu-item-photo { transform: scale(1.4) translateY(-40px); object-position: bottom; }
+
+      .iti-badge-mobile.show {
+        display: block;
+        position: absolute;
+        top: 85px;
+        right: 16px;
+        width: 67px;
+        z-index: 150;
+      }
+      .iti-badge-mobile img { width: 100%; height: auto; display: block; }
     }
 
     /* ── FEATURE STRIP ──
@@ -464,14 +444,6 @@
       line-height: 1.7;
       color: var(--mid);
     }
-    .feature-block-link {
-      font-size: 13px;
-      color: var(--ink);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      width: fit-content;
-      margin-top: 6px;
-    }
     @media (min-width: 640px) {
       .feature-strip { gap: 32px; }
       .feature-block-text { padding: 32px 36px; }
@@ -522,6 +494,11 @@
     </button>
   </nav>
 
+  <!-- ITI badge (mobile only): sits below the hamburger button -->
+  <div id="itiBadgeMobile" class="iti-badge-mobile">
+    <img id="itiBadgeImgMobile" src="images/ITI_Diamond.svg" alt="ITI Award">
+  </div>
+
   <!-- PAGE HEADER -->
   <div class="menu-header">
     <div class="menu-header-content">
@@ -529,7 +506,6 @@
         <div class="menu-header-title" id="headerTitle">Popular</div>
         <div class="menu-header-sub" id="headerSub">At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.</div>
         <div class="menu-header-disclaimer" style="display:flex; align-items:center; gap:28px;">
-          <img id="itiBadgeSimple" src="images/ITI_logo.webp" alt="International Taste Institute Brussels" style="display:none; width:80px; height:80px; object-fit:contain; flex-shrink:0; opacity:0.9;">
           <span>Menu items and pricing vary by location.<br>Please check with your nearest store for current offerings.</span>
         </div>
       </div>
@@ -538,20 +514,10 @@
       <div style="position:relative; width:100%; height:100%; overflow:visible;">
         <img src="images/popular_section.webp" alt="Chicha San Chen">
         <div id="headerImgCaption" style="display:none; position:absolute; bottom:0; left:0; right:0; padding:20px 24px; background:#000; color:#fff; font-family:'Inter',sans-serif; font-size:14px; letter-spacing:0.01em; line-height:1.6; font-weight:400;"></div>
-        <!-- Rotating badge: green tea only -->
-        <div id="itiBadgeRotating" style="display:none; position:absolute; top:20px; left:10px; width:163px; height:163px; z-index:10;">
-          <svg viewBox="0 0 136 136" width="163" height="163" style="position:absolute;top:0;left:0;animation:spinText 12s linear infinite reverse;">
-            <defs>
-              <path id="circle-path" d="M68,68 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/>
-            </defs>
-            <text font-family="JetBrains Mono, monospace" font-size="9.5" letter-spacing="3.2" fill="#1a1a18" opacity="0.85">
-              <textPath href="#circle-path">ITI 3-STAR DIAMOND AWARD 2026 ✦ </textPath>
-            </text>
-          </svg>
+        <!-- ITI award badge: green (diamond) + black/pouchong/oolong/dongding/cassia (2-star) -->
+        <div id="itiBadgeRotating" style="display:none; position:absolute; top:20px; right:10px; width:163px; height:163px; z-index:10;">
+          <img id="itiBadgeImg" src="images/ITI_Diamond.svg" alt="ITI Award" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); height:197px; width:auto; z-index:1;">
         </div>
-        <style>
-          @keyframes spinText { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        </style>
       </div>
       </div>
     </div>
@@ -1369,11 +1335,11 @@
     const headerContent = {
       signature: { title: 'Popular', desc: 'At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.', img: 'images/popular_section.webp' },
       seasonal:  { title: 'Seasonal', desc: 'Limited creations crafted with the freshest seasonal ingredients. Bright, expressive, and available for a short time only.', img: 'images/dong_ding_oolong_tea_cover.webp' },
-      green:     { title: 'Green Tea', desc: 'With its exceptional quality, it has been awarded the prestigious iTi 3-Star Superior Taste Award—known as the "Michelin Guide of the food and beverage industry"—for seven consecutive years.', img: 'images/cover.webp' },
+      green:     { title: 'Green Tea', desc: 'With its exceptional quality, it has been awarded the prestigious ITI 3-Star <strong>Diamond Taste Award</strong>—known as the "Michelin Guide of the food and beverage industry"—for seven consecutive years.', img: 'images/cover.webp' },
       black:     { title: 'Black Tea', desc: 'Bold and full-bodied with a distinct malty aroma and a rich, lingering finish, enhanced by the smooth richness of cream, milk, and honey.', img: 'images/cover.webp' },
       pouchong:  { title: 'High Mountain Pouchong Tea', desc: 'It is highly celebrated for its clean, smooth finish, natural floral notes, and subtle, creamy "milky" undertone.', img: 'images/cover.webp' },
-      oolong:    { title: 'Osmanthus Oolong Tea', desc: 'Lightly floral with a natural sweetness, our Osmanthus Oolong balances the complexity of oolong with the gentle fragrance of osmanthus blossom.', img: 'images/cover.webp' },
-      dongding:  { title: 'Dong Ding Oolong Tea', desc: 'A classic Taiwanese oolong from the Dong Ding mountains — smooth, roasted, and richly layered with depth.', img: 'images/cover.webp' },
+      oolong:    { title: 'Osmanthus <br class="oolong-title-break">Oolong Tea', desc: 'Lightly floral with a natural sweetness, our Osmanthus Oolong balances the complexity of oolong with the gentle fragrance of osmanthus blossom.', img: 'images/cover.webp' },
+      dongding:  { title: 'Dong Ding <br class="oolong-title-break">Oolong Tea', desc: 'A classic Taiwanese oolong from the Dong Ding mountains — smooth, roasted, and richly layered with depth.', img: 'images/cover.webp' },
       cassia:    { title: 'Cassia Black Tea', desc: 'A distinctive black tea with warm, spiced character — bold yet nuanced, with a natural sweetness that lingers.', img: 'images/cover.webp' },
       customize: { title: 'Build Your Own', desc: 'Every cup begins the same way — choose your tea, your flavor, one topping, your sweetness, and your ice. Five decisions, one perfectly balanced drink.', img: 'images/drink_bubble_milk_tea.webp' },
     };
@@ -1382,7 +1348,17 @@
     const headerSub = document.getElementById('headerSub');
     const headerImg = document.querySelector('.menu-header-image div img:first-child');
     const itiBadgeRotating = document.getElementById('itiBadgeRotating');
-    const itiBadgeSimple = document.getElementById('itiBadgeSimple');
+    const itiBadgeImg = document.getElementById('itiBadgeImg');
+    const itiBadgeMobile = document.getElementById('itiBadgeMobile');
+    const itiBadgeImgMobile = document.getElementById('itiBadgeImgMobile');
+    const itiBadges = {
+      green:    { src: 'images/ITI_Diamond.svg', alt: 'ITI Diamond Taste Award' },
+      black:    { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
+      pouchong: { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
+      oolong:   { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
+      dongding: { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
+      cassia:   { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
+    };
     const headerImgCaption = document.getElementById('headerImgCaption');
     const imgCaptions = {
       customize: 'The order never changes: tea, flavor, topping, sugar, ice. Same sequence, same precision, every single cup.'
@@ -1451,12 +1427,22 @@
     function updateHeader(cat) {
       const content = headerContent[cat];
       if (!content) return;
-      headerTitle.textContent = content.title;
-      headerSub.textContent = content.desc;
+      headerTitle.innerHTML = content.title;
+      headerSub.innerHTML = content.desc;
       if (content.img) headerImg.src = content.img;
       updateFeatures(cat);
-      itiBadgeRotating.style.display = cat === 'green' ? 'block' : 'none';
-      itiBadgeSimple.style.display = ['green', 'black', 'pouchong', 'oolong', 'dongding', 'cassia'].includes(cat) ? 'block' : 'none';
+      const badge = itiBadges[cat];
+      if (badge) {
+        itiBadgeImg.src = badge.src;
+        itiBadgeImg.alt = badge.alt;
+        itiBadgeRotating.style.display = 'block';
+        itiBadgeImgMobile.src = badge.src;
+        itiBadgeImgMobile.alt = badge.alt;
+        itiBadgeMobile.classList.add('show');
+      } else {
+        itiBadgeRotating.style.display = 'none';
+        itiBadgeMobile.classList.remove('show');
+      }
       const caption = imgCaptions[cat];
       headerImgCaption.textContent = caption || '';
       headerImgCaption.style.display = caption ? 'block' : 'none';
