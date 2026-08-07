@@ -240,87 +240,6 @@
       padding: 40px 0 24px;
     }
 
-    /* ── BUILD YOUR OWN / CUSTOMIZE ── */
-    .customize-intro {
-      max-width: 640px;
-      margin: 48px 0 8px;
-      font-size: 14px;
-      line-height: 1.8;
-      color: var(--mid);
-    }
-    .customize-rows { margin-top: 24px; }
-    .customize-row {
-      display: grid;
-      grid-template-columns: 48px 220px 1fr;
-      align-items: start;
-      gap: 24px;
-      padding: 32px 0;
-      border-bottom: 1px solid #e8e8e8;
-    }
-    .customize-row:first-child { border-top: 1px solid #e8e8e8; }
-    .customize-num {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      color: var(--faint);
-      padding-top: 6px;
-    }
-    .customize-label {
-      font-family: 'Sentient', serif;
-      font-weight: 300;
-      font-size: 22px;
-      color: var(--ink);
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-    .customize-sub {
-      font-family: var(--mono);
-      font-size: 9.5px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-    }
-    .customize-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-content: flex-start;
-    }
-    .customize-option {
-      font-family: var(--mono);
-      font-size: 10.5px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ink);
-      border: 1px solid #ddd;
-      padding: 9px 16px;
-      transition: border-color 0.2s, color 0.2s;
-      cursor: default;
-    }
-    .customize-option:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .customize-footnote {
-      font-size: 11px;
-      font-style: italic;
-      color: #aaa;
-      line-height: 1.6;
-      margin-top: 32px;
-      max-width: 480px;
-    }
-    @media (max-width: 640px) {
-      .customize-row {
-        grid-template-columns: 1fr;
-        row-gap: 12px;
-        justify-items: center;
-        text-align: center;
-      }
-      .customize-row > .customize-options {
-        grid-column: auto;
-        justify-content: center;
-      }
-    }
 
     /* ── TOPPINGS SECTION ── */
     .toppings-section {
@@ -513,9 +432,8 @@
     <div class="menu-header-image">
       <div style="position:relative; width:100%; height:100%; overflow:visible;">
         <img src="images/popular_section.webp" alt="Chicha San Chen">
-        <div id="headerImgCaption" style="display:none; position:absolute; bottom:0; left:0; right:0; padding:20px 24px; background:#000; color:#fff; font-family:'Inter',sans-serif; font-size:14px; letter-spacing:0.01em; line-height:1.6; font-weight:400;"></div>
         <!-- ITI award badge: green (diamond) + black/pouchong/oolong/dongding/cassia (2-star) -->
-        <div id="itiBadgeRotating" style="display:none; position:absolute; top:20px; right:10px; width:163px; height:163px; z-index:10;">
+        <div id="itiBadgeRotating" style="display:none; position:absolute; top:10px; right:10px; width:163px; height:163px; z-index:10;">
           <img id="itiBadgeImg" src="images/ITI_Diamond.svg" alt="ITI Award" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); height:197px; width:auto; z-index:1;">
         </div>
       </div>
@@ -536,7 +454,6 @@
       <a class="menu-tab" href="#" data-cat="oolong">Osmanthus Oolong Tea</a>
       <a class="menu-tab" href="#" data-cat="dongding">Dong Ding Oolong Tea</a>
       <a class="menu-tab" href="#" data-cat="cassia">Cassia Black Tea</a>
-      <a class="menu-tab" href="#" data-cat="customize">Build Your Own</a>
     </div>
     <button class="tabs-arrow tabs-arrow-right" id="tabsRight" aria-label="Scroll right">→</button>
   </div>
@@ -1153,85 +1070,6 @@
       </div>
     </div>
 
-    <!-- BUILD YOUR OWN -->
-    <div class="menu-category" id="cat-customize">
-      <div class="customize-intro">Every cup follows the same five steps, in the same order, every time — the only thing that changes is what you choose. Select a tea, a flavor, one topping, your sweetness, and your ice, and we'll brew it exactly to spec.</div>
-      <div class="customize-rows">
-        <div class="customize-row r">
-          <div class="customize-num">01</div>
-          <div>
-            <div class="customize-label">Tea</div>
-            <div class="customize-sub">Choose your base</div>
-          </div>
-          <div class="customize-options">
-            <span class="customize-option">Green Tea</span>
-            <span class="customize-option">Black Tea</span>
-            <span class="customize-option">Osmanthus Oolong Tea</span>
-            <span class="customize-option">Dong Ding Oolong Tea</span>
-            <span class="customize-option">High Mountain Pouchong Tea</span>
-            <span class="customize-option">Cassia Black Tea</span>
-          </div>
-        </div>
-        <div class="customize-row r">
-          <div class="customize-num">02</div>
-          <div>
-            <div class="customize-label">Flavor</div>
-            <div class="customize-sub">Milk &amp; juice, mixed to taste</div>
-          </div>
-          <div class="customize-options">
-            <span class="customize-option">Honey</span>
-            <span class="customize-option">Lemon Juice</span>
-            <span class="customize-option">Passion Fruit</span>
-            <span class="customize-option">Mango</span>
-            <span class="customize-option">Cream</span>
-            <span class="customize-option">Mousse</span>
-            <span class="customize-option">Fresh Milk</span>
-            <span class="customize-option">Oat Milk</span>
-          </div>
-        </div>
-        <div class="customize-row r">
-          <div class="customize-num">03</div>
-          <div>
-            <div class="customize-label">Topping</div>
-            <div class="customize-sub">One per cup</div>
-          </div>
-          <div class="customize-options">
-            <span class="customize-option">Bubble</span>
-            <span class="customize-option">Konjac</span>
-            <span class="customize-option">Coconut Jelly</span>
-            <span class="customize-option">Grass Jelly</span>
-            <span class="customize-option">Taro Ball</span>
-          </div>
-        </div>
-        <div class="customize-row r">
-          <div class="customize-num">04</div>
-          <div>
-            <div class="customize-label">Sugar</div>
-            <div class="customize-sub">Sweetness level</div>
-          </div>
-          <div class="customize-options">
-            <span class="customize-option">Perfect</span>
-            <span class="customize-option">Light</span>
-            <span class="customize-option">No Sugar</span>
-          </div>
-        </div>
-        <div class="customize-row r">
-          <div class="customize-num">05</div>
-          <div>
-            <div class="customize-label">Ice</div>
-            <div class="customize-sub">Temperature &amp; volume</div>
-          </div>
-          <div class="customize-options">
-            <span class="customize-option">Normal Ice</span>
-            <span class="customize-option">Less Ice</span>
-            <span class="customize-option">Ice Free</span>
-            <span class="customize-option">Hot</span>
-          </div>
-        </div>
-      </div>
-      <div class="customize-footnote">Available toppings, flavors, and hot preparation vary by location. Please check with your nearest store for current customization options.</div>
-    </div>
-
   </div><!-- /menu-body -->
 
   <!-- TOPPINGS -->
@@ -1333,15 +1171,14 @@
 
     // Header content per category
     const headerContent = {
-      signature: { title: 'Popular', desc: 'At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.', img: 'images/popular_section.webp' },
-      seasonal:  { title: 'Seasonal', desc: 'Limited creations crafted with the freshest seasonal ingredients. Bright, expressive, and available for a short time only.', img: 'images/dong_ding_oolong_tea_cover.webp' },
-      green:     { title: 'Green Tea', desc: 'With its exceptional quality, it has been awarded the prestigious ITI 3-Star <strong>Diamond Taste Award</strong>—known as the "Michelin Guide of the food and beverage industry"—for seven consecutive years.', img: 'images/cover.webp' },
-      black:     { title: 'Black Tea', desc: 'Bold and full-bodied with a distinct malty aroma and a rich, lingering finish, enhanced by the smooth richness of cream, milk, and honey.', img: 'images/cover.webp' },
-      pouchong:  { title: 'High Mountain Pouchong Tea', desc: 'It is highly celebrated for its clean, smooth finish, natural floral notes, and subtle, creamy "milky" undertone.', img: 'images/cover.webp' },
-      oolong:    { title: 'Osmanthus <br class="oolong-title-break">Oolong Tea', desc: 'Lightly floral with a natural sweetness, our Osmanthus Oolong balances the complexity of oolong with the gentle fragrance of osmanthus blossom.', img: 'images/cover.webp' },
-      dongding:  { title: 'Dong Ding <br class="oolong-title-break">Oolong Tea', desc: 'A classic Taiwanese oolong from the Dong Ding mountains — smooth, roasted, and richly layered with depth.', img: 'images/cover.webp' },
-      cassia:    { title: 'Cassia Black Tea', desc: 'A distinctive black tea with warm, spiced character — bold yet nuanced, with a natural sweetness that lingers.', img: 'images/cover.webp' },
-      customize: { title: 'Build Your Own', desc: 'Every cup begins the same way — choose your tea, your flavor, one topping, your sweetness, and your ice. Five decisions, one perfectly balanced drink.', img: 'images/drink_bubble_milk_tea.webp' },
+      signature: { title: 'Popular', desc: 'At Chicha San Chen, every cup is brewed to taste exactly the same—not almost, but precisely. By controlling every variable throughout the brewing process, we deliver a perfectly balanced cup with the same rich flavor, aroma, and quality, no matter when or where you enjoy it.', img: 'images/popularcover.webp' },
+      seasonal:  { title: 'Seasonal', desc: 'Limited creations crafted with the freshest seasonal ingredients. Bright, expressive, and available for a short time only.', img: 'images/seasonal.webp' },
+      green:     { title: 'Green Tea', desc: 'With its exceptional quality, it has been awarded the prestigious ITI 3-Star <strong>Diamond Taste Award</strong>—known as the "Michelin Guide of the food and beverage industry"—for seven consecutive years.', img: 'images/greenteacover.webp' },
+      black:     { title: 'Black Tea', desc: 'Bold and full-bodied with a distinct malty aroma and a rich, lingering finish, enhanced by the smooth richness of cream, milk, and honey.', img: 'images/BlackteaCover3.webp' },
+      pouchong:  { title: 'High Mountain Pouchong Tea', desc: 'It is highly celebrated for its clean, smooth finish, natural floral notes, and subtle, creamy "milky" undertone.', img: 'images/OolongCover.webp' },
+      oolong:    { title: 'Osmanthus <br class="oolong-title-break">Oolong Tea', desc: 'Lightly floral with a natural sweetness, our Osmanthus Oolong balances the complexity of oolong with the gentle fragrance of osmanthus blossom.', img: 'images/OsmanthusOolong.webp' },
+      dongding:  { title: 'Dong Ding <br class="oolong-title-break">Oolong Tea', desc: 'A classic Taiwanese oolong from the Dong Ding mountains — smooth, roasted, and richly layered with depth.', img: 'images/dongdingoolong.webp' },
+      cassia:    { title: 'Cassia Black Tea', desc: 'A distinctive black tea with warm, spiced character — bold yet nuanced, with a natural sweetness that lingers.', img: 'images/Cassiacover.webp' },
     };
 
     const headerTitle = document.getElementById('headerTitle');
@@ -1359,11 +1196,6 @@
       dongding: { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
       cassia:   { src: 'images/ITI_2Stars.svg', alt: 'ITI Superior Taste Award — Two Stars' },
     };
-    const headerImgCaption = document.getElementById('headerImgCaption');
-    const imgCaptions = {
-      customize: 'The order never changes: tea, flavor, topping, sugar, ice. Same sequence, same precision, every single cup.'
-    };
-
     // Feature strip content per category (two cards: process/quality fact + recognition)
     const featureContent = {
       signature: [
@@ -1397,10 +1229,6 @@
       cassia: [
         { img: 'images/cassia_cover.webp', title: 'Leveled Tea Bed', body: 'A flat, even bed ensures every leaf is exposed to the same water flow, pressure, and brew time, eliminating inconsistency within a single serving.' },
         { img: 'images/ITI.webp', title: 'ITI Recognition', body: 'Our Cassia black tea awarded the 2025 ITI Superior Taste Award – Two Stars for its exceptional taste and outstanding quality.', bw: true },
-      ],
-      customize: [
-        { img: 'images/drink_bubble_milk_tea.webp', title: 'Five-Step Precision', body: 'The order never changes: tea, flavor, topping, sugar, ice. Same sequence, same precision, every single cup.' },
-        { img: 'images/drink_bubble_volcano.webp', title: '0.3mg Tolerance', body: 'All raw materials, including sugar, are measured with a margin of error of no more than 0.3mg — eliminating variation across every cup.' },
       ],
     };
     const feature1Img = document.getElementById('feature1Img');
@@ -1443,9 +1271,6 @@
         itiBadgeRotating.style.display = 'none';
         itiBadgeMobile.classList.remove('show');
       }
-      const caption = imgCaptions[cat];
-      headerImgCaption.textContent = caption || '';
-      headerImgCaption.style.display = caption ? 'block' : 'none';
     }
 
     // Tab switching
