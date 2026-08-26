@@ -66,6 +66,18 @@
       text-transform: uppercase;
       color: var(--ink);
       padding: 0 56px 36px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .region-label::after {
+      content: '';
+      display: block;
+      width: 42px;
+      height: 7px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
     }
 
     /* ── GRID WRAPPER ── */
@@ -157,6 +169,18 @@
       text-transform: uppercase;
       color: var(--mid);
       margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .franchise-label::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 6px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
     }
     .franchise-title {
       font-family: 'Sentient', serif;
@@ -223,6 +247,7 @@
 </head>
 <body class="page-fade">
 <div class="load-bar" id="loadBar"></div>
+<div class="float-icon" aria-hidden="true"></div>
 
 
   <!-- NAV -->

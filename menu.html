@@ -239,6 +239,16 @@
       color: var(--ink);
       padding: 40px 0 24px;
     }
+    .menu-category-label::after {
+      content: '';
+      display: block;
+      width: 42px;
+      height: 7px;
+      margin-top: 12px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
 
 
     /* ── TOPPINGS SECTION ── */
@@ -303,7 +313,7 @@
       .iti-badge-mobile.show {
         display: block;
         position: absolute;
-        top: 85px;
+        top: 105px;
         right: 16px;
         width: 67px;
         z-index: 150;
@@ -385,6 +395,7 @@
 </head>
 <body class="page-fade" style="padding-top: 75px; background: #fff;">
 <div class="load-bar" id="loadBar"></div>
+<div class="float-icon" aria-hidden="true"></div>
 
 
   <!-- NAV -->
@@ -433,7 +444,7 @@
       <div style="position:relative; width:100%; height:100%; overflow:visible;">
         <img src="images/popular_section.webp" alt="Chicha San Chen">
         <!-- ITI award badge: green (diamond) + black/pouchong/oolong/dongding/cassia (2-star) -->
-        <div id="itiBadgeRotating" style="display:none; position:absolute; top:10px; right:10px; width:163px; height:163px; z-index:10;">
+        <div id="itiBadgeRotating" style="display:none; position:absolute; top:30px; right:10px; width:163px; height:163px; z-index:10;">
           <img id="itiBadgeImg" src="images/ITI_Diamond.svg" alt="ITI Award" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); height:197px; width:auto; z-index:1;">
         </div>
       </div>
