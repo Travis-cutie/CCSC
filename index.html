@@ -28,50 +28,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=9">
   <style>
-    /* ── BACK TO TOP (homepage only) ── */
-    .back-to-top {
-      position: fixed;
-      bottom: 90px; right: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px);
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    }
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    .back-to-top-icon {
-      width: 44px; height: 44px;
-      background-image: url('images/1.svg');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      animation: floatBob 2.4s ease-in-out infinite;
-    }
-    .back-to-top-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid);
-      white-space: nowrap;
-    }
-    @media (max-width: 768px) {
-      .back-to-top { bottom: 72px; right: 24px; }
-      .back-to-top-icon { width: 34px; height: 34px; }
-    }
   </style>
 </head>
 <body class="home">
@@ -95,7 +53,7 @@
       <a href="menu.html">Menu</a>
       <a href="locations.html">Locations</a>
       <a href="about.html">Our Story</a>
-      <a href="#">Franchise</a>
+      <a href="franchise.html">Franchise</a>
       <div class="nav-mobile-extra">
         <div class="nav-mobile-bottom">
           <div class="nav-mobile-social">
@@ -251,7 +209,7 @@
         <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
         <p class="footer-brand-desc">Overseas brand licensing and master franchise partnerships with one of Asia's most celebrated tea brands — built on 25+ years of tea expertise.</p>
       </div>
-      <a href="#" class="footer-brand-link">
+      <a href="franchise.html" class="footer-brand-link">
         <span class="arrow-circle">→</span>
         Explore Franchise Opportunity
       </a>
@@ -263,7 +221,7 @@
       <div class="footer-nav-group-label">Explore</div>
       <div class="footer-nav-links">
         <a href="about.html">Our Story</a>
-        <a href="#">Franchise</a>
+        <a href="franchise.html">Franchise</a>
         <a href="#">Catering</a>
         <a href="#">News</a>
       </div>
@@ -413,27 +371,6 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── BACK TO TOP ──
-    // Appears once the user has scrolled through a third of the page,
-    // scrolls back up on click.
-    (function() {
-      const btn = document.getElementById('backToTop');
-      if (!btn) return;
-
-      function thresholdPassed() {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        return scrollable > 0 && window.scrollY > scrollable / 3;
-      }
-
-      window.addEventListener('scroll', () => {
-        btn.classList.toggle('show', thresholdPassed());
-      }, { passive: true });
-
-      btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
-      });
-    })();
-
     // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
@@ -459,5 +396,6 @@
       });
     })();
   </script>
+  <script src="js/back-to-top.js"></script>
 </body>
 </html>

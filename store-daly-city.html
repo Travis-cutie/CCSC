@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=9">
   <style>
     nav { background: #fff; pointer-events: all; border-bottom: none !important; }
     nav.scrolled { background: rgba(250,249,247,0.96); padding: 28px 40px; border-bottom: 1px solid #e8e8e8 !important; }
@@ -18,7 +18,10 @@
 </head>
 <body class="page-fade">
 <div class="load-bar" id="loadBar"></div>
-<div class="float-icon" aria-hidden="true"></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
 
   <nav id="mainNav">
     <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chicha San Chen" style="height:36px;width:auto;display:block;"></a>
@@ -26,7 +29,7 @@
       <a href="menu.html">Menu</a>
       <a href="locations.html" class="active">Locations</a>
       <a href="about.html">Our Story</a>
-      <a href="#">Franchise</a>
+      <a href="franchise.html">Franchise</a>
       <div class="nav-mobile-extra">
         <div class="nav-mobile-bottom">
           <div class="nav-mobile-social">
@@ -81,7 +84,7 @@
         <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
         <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
       </div>
-      <a href="#" class="footer-brand-link">
+      <a href="franchise.html" class="footer-brand-link">
         <span class="arrow-circle">→</span>
         Explore Franchise Opportunity
       </a>
@@ -91,7 +94,7 @@
       <div class="footer-nav-group-label">Explore</div>
       <div class="footer-nav-links">
         <a href="about.html">Our Story</a>
-        <a href="#">Franchise</a>
+        <a href="franchise.html">Franchise</a>
         <a href="#">Catering</a>
         <a href="#">News</a>
       </div>
@@ -157,5 +160,6 @@
       });
     })();
   </script>
+  <script src="js/back-to-top.js"></script>
 </body>
 </html>

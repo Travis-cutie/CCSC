@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Franchise — Chicha San Chen</title>
+  <meta name="description" content="Partner with Chicha San Chen — 25+ years of tea expertise, 150+ overseas stores and a complete master franchise system, from consultation to opening day.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=9">
+  <style>
+    /* ── BLACK & WHITE PHOTOGRAPHY (franchise page) ── */
+    .philosophy-img img,
+    .fr-pillar-img img,
+    .fr-gallery img,
+    .fr-apply-img img,
+    .footer-col-img { filter: grayscale(1); }
+
+    /* ── NAV OVERRIDE ── */
+    nav {
+      background: #fff;
+      pointer-events: all;
+      border-bottom: none !important;
+    }
+    nav.scrolled {
+      background: rgba(250,249,247,0.96);
+      padding: 28px 40px;
+      border-bottom: 1px solid #e8e8e8 !important;
+    }
+    .nav-links a { color: var(--mid); }
+    .nav-links a.active { color: var(--ink); }
+
+    /* ── PAGE SHELL ── */
+    body {
+      padding-top: 75px;
+      background: #fff;
+    }
+
+    /* ── PAGE HEADER (matches Our Story) ── */
+    .fr-header {
+      min-height: 540px;
+      padding: 100px 56px 64px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 40px;
+    }
+    .fr-eyebrow {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+    }
+    .fr-header-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+    }
+    .fr-header-right {
+      justify-self: end;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .fr-header-sub {
+      font-size: 14px;
+      color: var(--mid);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+
+    /* ── SPLIT SECTIONS (extends .philosophy-section) ── */
+    .fr-split .phil-title { font-weight: 400; }
+    .fr-split .phil-body { max-width: 420px; }
+    .fr-split .phil-body + .phil-body { margin-top: -12px; }
+    .fr-split .philosophy-img { min-height: 520px; }
+    .fr-split .philosophy-img img { position: absolute; inset: 0; }
+
+    /* ── STATS ── */
+    .fr-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 80px 40px 0;
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .fr-stat {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fr-stat + .fr-stat { border-left: 1px solid #e8e8e8; }
+    .fr-stat-num {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .fr-stat-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION INTRO ── */
+    .fr-section { padding: 200px 0 0; }
+    .fr-section-head {
+      padding: 0 56px 48px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 40px;
+      align-items: end;
+    }
+    .fr-section-head .sec-label { color: var(--ink); margin-bottom: 20px; }
+    .fr-section-head .sec-label::after { display: none; }
+    .fr-section-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+      max-width: 8em;
+      text-wrap: balance;
+    }
+    .fr-section-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink);
+      max-width: 440px;
+      justify-self: end;
+    }
+
+    /* ── 01 PILLARS ── */
+    .fr-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 0 40px;
+    }
+    .fr-pillar { display: flex; flex-direction: column; }
+    .fr-pillar-img {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #e8e5e0;
+      margin-bottom: 24px;
+    }
+    .fr-pillar-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .fr-pillar:hover .fr-pillar-img img { transform: scale(1.03); }
+    .fr-pillar-num {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 12px;
+    }
+    .fr-pillar-title {
+      font-family: 'Sentient', serif;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .fr-pillar-body {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--ink);
+      padding-right: 8px;
+    }
+
+    /* ── 02 PROVEN DEMAND ── */
+    .fr-gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 16px;
+      margin: 0 40px;
+    }
+    .fr-gallery figure {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #e8e5e0;
+    }
+    .fr-gallery figure:first-child { aspect-ratio: auto; }
+    .fr-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .fr-gallery figure:hover img { transform: scale(1.03); }
+    .fr-gallery figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    }
+
+    /* ── 03 BRAND ADVANTAGES ── */
+    .fr-adv {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 40px;
+      border-top: 1px solid #e8e8e8;
+      list-style: none;
+    }
+    .fr-adv-item {
+      padding: 40px 32px 44px;
+      border-bottom: 1px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.25s;
+    }
+    .fr-adv-item:not(:nth-child(3n+1)) { border-left: 1px solid #e8e8e8; }
+    .fr-adv-item:hover { background: #faf9f7; }
+    .fr-adv-num {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      color: var(--accent-dark);
+    }
+    .fr-adv-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+    .fr-adv-body {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--ink);
+      max-width: 340px;
+    }
+
+    /* ── 04 GLOBAL PRESENCE ── */
+    .fr-regions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 40px;
+      border-top: 1px solid #e8e8e8;
+    }
+    .fr-map {
+      position: relative;
+      margin: 0 40px 56px;
+    }
+    .fr-map img,
+    .fr-map svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .fr-map svg {
+      position: absolute;
+      inset: 0;
+      overflow: visible;
+    }
+    .fr-city { cursor: default; outline: none; }
+    .fr-city-dot {
+      fill: var(--accent);
+      stroke: #fff;
+      stroke-width: 4;
+    }
+    .fr-city-pulse {
+      fill: var(--accent);
+      opacity: 0.35;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cityPulse 2.8s ease-out infinite;
+    }
+    .fr-city:nth-child(3n+2) .fr-city-pulse { animation-delay: 0.9s; }
+    .fr-city:nth-child(3n+3) .fr-city-pulse { animation-delay: 1.8s; }
+    @keyframes cityPulse {
+      0%   { transform: scale(1);   opacity: 0.4; }
+      100% { transform: scale(3.2); opacity: 0; }
+    }
+    .fr-city-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      fill: var(--ink);
+      paint-order: stroke;
+      stroke: #fff;
+      stroke-width: 10px;
+      stroke-linejoin: round;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .fr-city:hover .fr-city-label,
+    .fr-city:focus .fr-city-label { opacity: 1; }
+    .fr-city:hover .fr-city-dot,
+    .fr-city:focus .fr-city-dot { fill: var(--accent-dark); }
+    .fr-regions { align-items: start; }
+    .fr-region { border-bottom: 1px solid #e8e8e8; }
+    .fr-region + .fr-region { border-left: 1px solid #e8e8e8; }
+    .fr-region-head {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 26px 32px;
+      transition: background 0.25s;
+    }
+    .fr-region-head::-webkit-details-marker { display: none; }
+    .fr-region-head:hover { background: #faf9f7; }
+    .fr-region-head .fr-faq-icon { margin-left: auto; }
+    .fr-region-count {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+    }
+    .fr-region[open] .fr-faq-icon::after { transform: rotate(0deg); }
+    .fr-region ul { padding: 0 32px 24px; }
+    .fr-region-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fr-region-label::after {
+      content: '';
+      width: 42px;
+      height: 7px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    .fr-region ul { list-style: none; }
+    .fr-region li {
+      font-size: 14px;
+      color: var(--ink);
+      padding: 11px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fr-region li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── 05 PROCESS ── */
+    .fr-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin: 0 40px;
+      list-style: none;
+    }
+    .fr-step {
+      padding: 0 24px 0 0;
+      position: relative;
+    }
+    .fr-step-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .fr-step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 22px;
+      color: var(--ink);
+      flex-shrink: 0;
+      background: #fff;
+    }
+    .fr-step-top::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+    .fr-step:last-child .fr-step-top::after { display: none; }
+    .fr-step-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+    .fr-step-title {
+      font-family: 'Sentient', serif;
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .fr-step-body {
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+
+    /* ── 06 FAQ ── */
+    .fr-faq {
+      margin: 0 40px;
+      border-top: 1px solid #e8e8e8;
+    }
+    .fr-faq details { border-bottom: 1px solid #e8e8e8; }
+    .fr-faq summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 64px 1fr 32px;
+      gap: 16px;
+      align-items: baseline;
+      padding: 26px 16px;
+      transition: background 0.25s;
+    }
+    .fr-faq summary::-webkit-details-marker { display: none; }
+    .fr-faq summary:hover { background: #faf9f7; }
+    .fr-faq-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--accent-dark);
+    }
+    .fr-faq-q {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 22px;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .fr-faq-icon {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      justify-self: end;
+      align-self: center;
+    }
+    .fr-faq-icon::before,
+    .fr-faq-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 14px;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 0.3s ease;
+    }
+    .fr-faq-icon::after { transform: rotate(90deg); }
+    .fr-faq details[open] .fr-faq-icon::after { transform: rotate(0deg); }
+    .fr-faq-a {
+      padding: 0 64px 32px 96px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink);
+      max-width: 860px;
+    }
+    .fr-faq-a p + p,
+    .fr-faq-a p + ul,
+    .fr-faq-a ul + p { margin-top: 12px; }
+    .fr-faq-a ul { list-style: none; }
+    .fr-faq-a li {
+      padding-left: 18px;
+      position: relative;
+    }
+    .fr-faq-a li + li { margin-top: 4px; }
+    .fr-faq-a li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.8em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .fr-faq-a strong { font-weight: 500; }
+    .fr-faq-a a { color: var(--accent-dark); }
+
+    /* ── APPLY ── */
+    .fr-apply {
+      margin: 200px 40px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #faf9f7;
+    }
+    .fr-apply-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+    }
+    .fr-apply-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .fr-apply-text {
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 28px;
+    }
+    .fr-apply-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+      max-width: 8em;
+      text-wrap: balance;
+    }
+    .fr-apply-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink);
+      max-width: 420px;
+    }
+    .fr-apply-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      width: fit-content;
+    }
+    .fr-apply-btn .arrow-circle { transition: transform 0.25s; }
+    .fr-apply-btn:hover .arrow-circle { transform: translateX(4px); }
+    .fr-contact {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid #e8e8e8;
+      max-width: 420px;
+    }
+    .fr-contact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .fr-contact-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      flex-shrink: 0;
+    }
+    .fr-contact-row a {
+      font-size: 13.5px;
+      color: var(--ink);
+      text-decoration: none;
+      text-align: right;
+      word-break: break-all;
+      transition: color 0.2s;
+    }
+    .fr-contact-row a:hover { color: var(--accent-dark); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav.scrolled { padding: 14px 24px; }
+      .fr-header { grid-template-columns: 1fr; min-height: 420px; padding: 48px 24px 40px; gap: 24px; }
+      .fr-header-right { justify-self: start; }
+
+      .fr-split .philosophy-img { min-height: 320px; }
+
+      .fr-stats { grid-template-columns: repeat(2, 1fr); margin: 56px 24px 0; }
+      .fr-stat { padding: 28px 16px; }
+      .fr-stat:nth-child(3) { border-left: none; }
+      .fr-stat:nth-child(n+3) { border-top: 1px solid #e8e8e8; }
+
+      .fr-section { padding-top: 120px; }
+      .fr-section-head { grid-template-columns: 1fr; padding: 0 24px 36px; gap: 20px; }
+      .fr-section-body { justify-self: start; }
+
+      .fr-pillars { grid-template-columns: 1fr 1fr; margin: 0 24px; gap: 32px 12px; }
+      .fr-pillar-title { font-size: 15px; }
+
+      .fr-gallery { grid-template-columns: 1fr 1fr; margin: 0 24px; gap: 10px; }
+      .fr-gallery figure:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+
+      .fr-adv { grid-template-columns: 1fr; margin: 0 24px; }
+      .fr-adv-item { padding: 32px 4px; }
+      .fr-adv-item:not(:nth-child(3n+1)) { border-left: none; }
+
+      .fr-map { margin: 0 24px 32px; }
+      .fr-city-dot, .fr-city-pulse { transform-box: fill-box; transform-origin: center; }
+      .fr-city-dot { transform: scale(2.4); }
+      .fr-city-pulse { animation-name: cityPulseMobile; }
+      @keyframes cityPulseMobile { 0% { transform: scale(2.4); opacity: 0.4; } 100% { transform: scale(6); opacity: 0; } }
+      .fr-regions { grid-template-columns: 1fr; margin: 0 24px; }
+      .fr-region + .fr-region { border-left: none; }
+      .fr-region-head { padding: 22px 4px; }
+      .fr-region ul { padding: 0 4px 20px; }
+
+      .fr-steps { grid-template-columns: 1fr; margin: 0 24px; }
+      .fr-step { padding: 0 0 36px 76px; }
+      .fr-step-top { position: absolute; left: 0; top: 0; bottom: 0; flex-direction: column; margin: 0; }
+      .fr-step-top::after { width: 1px; height: auto; }
+
+      .fr-faq { margin: 0 24px; }
+      .fr-faq summary { grid-template-columns: 36px 1fr 20px; gap: 10px; padding: 22px 4px; }
+      .fr-faq-q { font-size: 18px; }
+      .fr-faq-a { padding: 0 8px 28px 50px; }
+
+      .fr-apply { grid-template-columns: 1fr; margin: 120px 24px 56px; }
+      .fr-apply-img { min-height: 320px; }
+      .fr-apply-text { padding: 48px 28px; }
+    }
+  </style>
+</head>
+<body class="page-fade">
+<div class="load-bar" id="loadBar"></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chicha San Chen" style="height:36px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html">Menu</a>
+      <a href="locations.html">Locations</a>
+      <a href="about.html">Our Story</a>
+      <a href="franchise.html" class="active">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="fr-header">
+    <div>
+      <div class="fr-eyebrow r">Franchise</div>
+      <h1 class="fr-header-title r d1">Grow with<br>Chicha San Chen</h1>
+    </div>
+    <div class="fr-header-right">
+      <p class="fr-header-sub r d2">Partner with one of Asia's premier tea brands — 25+ years of expertise, 150+ overseas stores, and a headquarters team that supports you from first consultation to opening day.</p>
+      <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=r7osHmV-EEqOaS8gT11NUb9Jt4bHqOxNhlsoGT0-SNxUN0VKNlA2S1ZKRjE5VTJCRThLT1RHUVE2MyQlQCN0PWcu" class="phil-link r d3" target="_blank" rel="noopener">Start Your Application</a>
+    </div>
+  </header>
+
+  <!-- MASTER FRANCHISE -->
+  <section class="philosophy-section fr-split" id="master-franchise">
+    <div class="philosophy-img r">
+      <img src="images/franchise2.webp" alt="The Chicha San Chen store team lined up in uniform, smiling" loading="lazy">
+    </div>
+    <div class="philosophy-text">
+      <div class="phil-index r">Master Franchise</div>
+      <h2 class="phil-title r d1">Partner by country,<br>city or region.</h2>
+      <p class="phil-body r d2">Chicha San Chen grows through master franchising. Each master franchisee holds exclusive rights to a country, city or region, builds its own management team, opens an agreed number of stores, and works directly with our headquarters in Taichung.</p>
+      <p class="phil-body r d2">Within each territory, sublicensed stores give first-time entrepreneurs a path to running their own shop — supported day to day by the master franchisee.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="fr-stats">
+    <div class="fr-stat r"><span class="fr-stat-num">150+</span><span class="fr-stat-label">Overseas<br>stores</span></div>
+    <div class="fr-stat r d1"><span class="fr-stat-num">30</span><span class="fr-stat-label">Cities worldwide<br>since 2018</span></div>
+    <div class="fr-stat r d2"><span class="fr-stat-num">1998</span><span class="fr-stat-label">Founded in<br>Taichung, Taiwan</span></div>
+    <div class="fr-stat r d3"><span class="fr-stat-num">60s</span><span class="fr-stat-label">Teapresso extraction,<br>1,000 precision settings</span></div>
+  </div>
+
+  <!-- 01 FRANCHISE ADVANTAGE -->
+  <section class="fr-section" id="advantage">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">01 — Franchise Advantage</div>
+        <h2 class="fr-section-title r d1">Everything you need to lead.</h2>
+      </div>
+      <p class="fr-section-body r d2">R&amp;D, marketing, patented technology and a premium retail experience — every partner is backed by a complete franchise system, built and refined at our headquarters.</p>
+    </div>
+    <div class="fr-pillars">
+      <article class="fr-pillar r">
+        <div class="fr-pillar-img"><img src="images/advantage_1.webp" alt="A barista measuring ingredients with a jigger at the brewing bar" loading="lazy"></div>
+        <div class="fr-pillar-num">Advantage 01</div>
+        <h3 class="fr-pillar-title">Exclusive Beverage R&amp;D</h3>
+        <p class="fr-pillar-body">Signature drinks like Bubble Milk Tea, Bubble Volcano, Dong Ding Oolong Tea Latte and Cassia Black Tea Mousse — developed by analyzing consumption patterns around the world.</p>
+      </article>
+      <article class="fr-pillar r d1">
+        <div class="fr-pillar-img"><img src="images/advantage_2.webp" alt="A bright Chicha San Chen store interior with pendant lights and a long tea bar" loading="lazy"></div>
+        <div class="fr-pillar-num">Advantage 02</div>
+        <h3 class="fr-pillar-title">Premium Store Design</h3>
+        <p class="fr-pillar-body">Distinctive store concepts that carry the craft and warmth of our Taichung concept store into every new market.</p>
+      </article>
+      <article class="fr-pillar r d2">
+        <div class="fr-pillar-img"><img src="images/advantage_3.webp" alt="Freshly brewed tea extracting from the teapresso machine into a glass pitcher" loading="lazy"></div>
+        <div class="fr-pillar-num">Advantage 03</div>
+        <h3 class="fr-pillar-title">Technical Guidance</h3>
+        <p class="fr-pillar-body">A high-tech intelligent system powered by thousands of parameters, yet simple to operate — producing consistently high-quality tea with just a few inputs.</p>
+      </article>
+      <article class="fr-pillar r d3">
+        <div class="fr-pillar-img"><img src="images/advantage_4.webp" alt="Hands picking fresh tea leaves in the tea garden" loading="lazy"></div>
+        <div class="fr-pillar-num">Advantage 04</div>
+        <h3 class="fr-pillar-title">Shared Marketing</h3>
+        <p class="fr-pillar-body">Co-branding and a premium visual identity: storefront graphics, campaign posters, merchandise, co-branded products and limited-edition goods, ready to launch.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 02 PROVEN DEMAND -->
+  <section class="fr-section" id="demand">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">02 — Proven Demand</div>
+        <h2 class="fr-section-title r d1">A steady stream of eager customers.</h2>
+      </div>
+      <p class="fr-section-body r d2">From California to New York, new Chicha San Chen stores open to lines out the door — and our tea has been recommended by creators with millions of followers.</p>
+    </div>
+    <div class="fr-gallery">
+      <figure class="r"><img src="images/franchise_opening_1.webp" alt="Guests lining up outside a new Chicha San Chen store on opening day" loading="lazy"><figcaption>Grand Opening</figcaption></figure>
+      <figure class="r d1"><img src="images/franchise_opening_2.webp" alt="A line of customers along a Chicha San Chen storefront" loading="lazy"><figcaption>Lines Out the Door</figcaption></figure>
+      <figure class="r d2"><img src="images/franchise_opening_3.webp" alt="Customers queuing at the entrance of a Chicha San Chen store" loading="lazy"><figcaption>Opening Day</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 03 BRAND ADVANTAGES -->
+  <section class="fr-section" id="brand-advantages">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">03 — Brand Advantages</div>
+        <h2 class="fr-section-title r d1">Why partner with us.</h2>
+      </div>
+      <p class="fr-section-body r d2">Two decades of operating experience, award-winning tea and international food-safety certification — the foundation every partner builds on.</p>
+    </div>
+    <ol class="fr-adv">
+      <li class="fr-adv-item r"><span class="fr-adv-num">01</span><h3 class="fr-adv-title">20+ Years of Experience</h3><p class="fr-adv-body">More than two decades of steady brand operation, deeply rooted in Taiwan.</p></li>
+      <li class="fr-adv-item r d1"><span class="fr-adv-num">02</span><h3 class="fr-adv-title">International Taste Institute</h3><p class="fr-adv-body">Our beverages have earned star-level Superior Taste Awards from the International Taste Institute in Brussels.</p></li>
+      <li class="fr-adv-item r d2"><span class="fr-adv-num">03</span><h3 class="fr-adv-title">Exclusive Patent</h3><p class="fr-adv-body">The world's first intelligent patented teapresso machine brews the freshest tea — 60-second extraction with 1,000 precision settings.</p></li>
+      <li class="fr-adv-item r"><span class="fr-adv-num">04</span><h3 class="fr-adv-title">Research &amp; Development</h3><p class="fr-adv-body">We analyze consumption patterns globally to launch innovative new products.</p></li>
+      <li class="fr-adv-item r d1"><span class="fr-adv-num">05</span><h3 class="fr-adv-title">Brand Marketing</h3><p class="fr-adv-body">A professional marketing team handles international strategy, media campaigns, store promotion and image design.</p></li>
+      <li class="fr-adv-item r d2"><span class="fr-adv-num">06</span><h3 class="fr-adv-title">Education &amp; Training</h3><p class="fr-adv-body">Instructor-led training guides you from pre-opening preparation and fundamentals through store management and a hands-on internship.</p></li>
+      <li class="fr-adv-item r"><span class="fr-adv-num">07</span><h3 class="fr-adv-title">Global Management</h3><p class="fr-adv-body">Dedicated supervisors hold domestic and overseas stores to the same standards, with regular visits from regional management teams.</p></li>
+      <li class="fr-adv-item r d1"><span class="fr-adv-num">08</span><h3 class="fr-adv-title">ISO &amp; HACCP Certified</h3><p class="fr-adv-body">Our ingredients carry ISO 22000 and HACCP international food-safety certification, and comply with SGS and U.S. FDA standards.</p></li>
+      <li class="fr-adv-item r d2"><span class="fr-adv-num">09</span><h3 class="fr-adv-title">Carefully Selected Ingredients</h3><p class="fr-adv-body">A three-tier inspection process — at the tea factory, at headquarters (SGS) and in store — protects quality for every customer.</p></li>
+    </ol>
+  </section>
+
+  <!-- 04 GLOBAL PRESENCE -->
+  <section class="fr-section" id="global">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">04 — Global Presence</div>
+        <h2 class="fr-section-title r d1">Presence in 30 cities.</h2>
+      </div>
+      <p class="fr-section-body r d2">Since 2018 we've opened 150+ overseas stores across Singapore, the U.S., Hong Kong, Malaysia, Indonesia, Cambodia, Canada, Russia, China, Vietnam, the Philippines, Australia and beyond.</p>
+    </div>
+    <div class="fr-map r">
+      <img src="images/world_dots.svg" alt="" width="2850" height="1180">
+      <svg viewBox="0 0 2850 1180" role="img" aria-label="Map of Chicha San Chen locations worldwide">
+        <g class="fr-city" transform="translate(957 478)" tabindex="0" aria-label="Taiwan"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Taiwan</text></g>
+        <g class="fr-city" transform="translate(892 497)" tabindex="0" aria-label="Hong Kong"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Hong Kong</text></g>
+        <g class="fr-city" transform="translate(886 498)" tabindex="0" aria-label="Macao"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Macao</text></g>
+        <g class="fr-city" transform="translate(914 321)" tabindex="0" aria-label="China"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">China</text></g>
+        <g class="fr-city" transform="translate(788 706)" tabindex="0" aria-label="Singapore"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Singapore</text></g>
+        <g class="fr-city" transform="translate(767 689)" tabindex="0" aria-label="Malaysia"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Malaysia</text></g>
+        <g class="fr-city" transform="translate(755 582)" tabindex="0" aria-label="Bangkok"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Bangkok</text></g>
+        <g class="fr-city" transform="translate(818 782)" tabindex="0" aria-label="Indonesia"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Indonesia</text></g>
+        <g class="fr-city" transform="translate(960 574)" tabindex="0" aria-label="The Philippines"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">The Philippines</text></g>
+        <g class="fr-city" transform="translate(126 162)" tabindex="0" aria-label="Russia"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Russia</text></g>
+        <g class="fr-city" transform="translate(303 468)" tabindex="0" aria-label="United Arab Emirates"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">United Arab Emirates</text></g>
+        <g class="fr-city" transform="translate(2556 284)" tabindex="0" aria-label="Canada"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="-26" y="8" text-anchor="end">Canada</text></g>
+        <g class="fr-city" transform="translate(2127 244)" tabindex="0" aria-label="Washington"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Washington</text></g>
+        <g class="fr-city" transform="translate(2123 265)" tabindex="0" aria-label="Oregon"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Oregon</text></g>
+        <g class="fr-city" transform="translate(2126 342)" tabindex="0" aria-label="Northern California"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Northern California</text></g>
+        <g class="fr-city" transform="translate(2168 380)" tabindex="0" aria-label="Southern California"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Southern California</text></g>
+        <g class="fr-city" transform="translate(2199 358)" tabindex="0" aria-label="Nevada"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Nevada</text></g>
+        <g class="fr-city" transform="translate(2231 312)" tabindex="0" aria-label="Utah"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Utah</text></g>
+        <g class="fr-city" transform="translate(2396 422)" tabindex="0" aria-label="Texas"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Texas</text></g>
+        <g class="fr-city" transform="translate(2509 380)" tabindex="0" aria-label="Georgia"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="-26" y="8" text-anchor="end">Georgia</text></g>
+        <g class="fr-city" transform="translate(2598 320)" tabindex="0" aria-label="Pennsylvania"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="-26" y="8" text-anchor="end">Pennsylvania</text></g>
+        <g class="fr-city" transform="translate(2610 313)" tabindex="0" aria-label="New York"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="-26" y="8" text-anchor="end">New York</text></g>
+        <g class="fr-city" transform="translate(2639 296)" tabindex="0" aria-label="Massachusetts"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="-26" y="8" text-anchor="end">Massachusetts</text></g>
+        <g class="fr-city" transform="translate(1262 1059)" tabindex="0" aria-label="Australia (NSW)"><circle class="fr-city-pulse" r="11"/><circle class="fr-city-dot" r="11"/><text class="fr-city-label" x="26" y="8" text-anchor="start">Australia (NSW)</text></g>
+      </svg>
+    </div>
+    <div class="fr-regions">
+      <details class="fr-region r">
+        <summary class="fr-region-head"><span class="fr-region-label">Asia &amp; Middle East</span><span class="fr-region-count">11</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <ul>
+          <li>Taiwan</li>
+          <li>Hong Kong</li>
+          <li>Macao</li>
+          <li>China</li>
+          <li>Singapore</li>
+          <li>Malaysia</li>
+          <li>Bangkok, Thailand</li>
+          <li>Indonesia</li>
+          <li>The Philippines</li>
+          <li>Russia</li>
+          <li>United Arab Emirates</li>
+        </ul>
+      </details>
+      <details class="fr-region r d1">
+        <summary class="fr-region-head"><span class="fr-region-label">North America</span><span class="fr-region-count">12</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <ul>
+          <li>Canada</li>
+          <li>Washington</li>
+          <li>Oregon</li>
+          <li>Northern California</li>
+          <li>Southern California</li>
+          <li>Nevada</li>
+          <li>Utah</li>
+          <li>Texas</li>
+          <li>Georgia</li>
+          <li>Pennsylvania</li>
+          <li>New York</li>
+          <li>Massachusetts</li>
+        </ul>
+      </details>
+      <details class="fr-region r d2">
+        <summary class="fr-region-head"><span class="fr-region-label">Oceania</span><span class="fr-region-count">01</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <ul>
+          <li>Australia (New South Wales)</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- 05 PROCESS -->
+  <section class="fr-section" id="process">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">05 — The Process</div>
+        <h2 class="fr-section-title r d1">Streamlined, end to end.</h2>
+      </div>
+      <p class="fr-section-body r d2">From your first enquiry to your first cup, our headquarters team guides every step of becoming a Chicha San Chen partner.</p>
+    </div>
+    <ol class="fr-steps">
+      <li class="fr-step r">
+        <div class="fr-step-top"><span class="fr-step-num">1</span></div>
+        <div class="fr-step-label">Step 01</div>
+        <h3 class="fr-step-title">Provide Your Details</h3>
+        <p class="fr-step-body">Complete the online Master Franchise Application.</p>
+      </li>
+      <li class="fr-step r d1">
+        <div class="fr-step-top"><span class="fr-step-num">2</span></div>
+        <div class="fr-step-label">Step 02</div>
+        <h3 class="fr-step-title">Personalized Consultation</h3>
+        <p class="fr-step-body">After a preliminary assessment of 3–5 working days, our team contacts you to talk through your plans.</p>
+      </li>
+      <li class="fr-step r d2">
+        <div class="fr-step-top"><span class="fr-step-num">3</span></div>
+        <div class="fr-step-label">Step 03</div>
+        <h3 class="fr-step-title">Strategic Evaluation by HQ</h3>
+        <p class="fr-step-body">Headquarters evaluates your region and qualifications, including a visit to our concept store in Taichung.</p>
+      </li>
+      <li class="fr-step r d3">
+        <div class="fr-step-top"><span class="fr-step-num">4</span></div>
+        <div class="fr-step-label">Step 04</div>
+        <h3 class="fr-step-title">Sign Your Exclusive Agreement</h3>
+        <p class="fr-step-body">Exclusive master franchise rights for your territory, typically for five to eight years.</p>
+      </li>
+      <li class="fr-step r d3">
+        <div class="fr-step-top"><span class="fr-step-num">5</span></div>
+        <div class="fr-step-label">Step 05</div>
+        <h3 class="fr-step-title">Expert Technical Onboarding</h3>
+        <p class="fr-step-body">Training, equipment and technical support to get your first store open — and running to our standards.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 06 FAQ -->
+  <section class="fr-section" id="faq">
+    <div class="fr-section-head">
+      <div>
+        <div class="sec-label r">06 — FAQ</div>
+        <h2 class="fr-section-title r d1">Questions, answered.</h2>
+      </div>
+      <p class="fr-section-body r d2">Everything you need to know before applying. Can't find your answer? Our franchise team is happy to help.</p>
+    </div>
+    <div class="fr-faq">
+      <details class="r">
+        <summary><span class="fr-faq-num">01</span><span class="fr-faq-q">How do I become a Chicha San Chen partner?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>Thank you for your interest in the Chicha San Chen brand. We hope to collaborate with partners around the world and bring our tea to the global market. To receive more information, please complete the <a href="#apply">Master Franchise Application</a> online and our team will contact you.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">02</span><span class="fr-faq-q">What's the difference between a master franchise and a sublicense?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a">
+          <p>Taking our company operations and market-development strategy into account, Chicha San Chen operates on a master franchise model.</p>
+          <ul>
+            <li><strong>Master franchise</strong> — granted per country, city or region. The master franchisee must have its own management team, open an agreed number of stores in its territory, and communicate directly with headquarters.</li>
+            <li><strong>Sublicense</strong> — granted per store. Suited to partners without prior experience who want to start their own business; their main contact is the master franchisee for the area.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">03</span><span class="fr-faq-q">How is a master franchise structured, and for how long?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>Master franchises are discussed per country, city or region on a sole-franchise basis. The franchise period is five to eight years.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">04</span><span class="fr-faq-q">What does the initial investment cover?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>Initial capital includes the franchise fee, the store site, the build-out of the first store, equipment and raw materials for the first store, and the operating costs of the master franchise.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">05</span><span class="fr-faq-q">What qualifications does a master franchisee need?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a">
+          <ul>
+            <li>Alignment with the Chicha San Chen management philosophy.</li>
+            <li>Strong enthusiasm for the food and beverage industry — previous restaurant experience preferred.</li>
+            <li>Proven management skills.</li>
+            <li>An in-house management team covering marketing, operations, finance and more.</li>
+            <li>Knowledge of managing the region and familiarity with competing brands.</li>
+            <li>The ability to secure store sites.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">06</span><span class="fr-faq-q">How long until someone contacts me after I apply?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>Once we receive your complete Master Franchise Application, the preliminary assessment takes about 3–5 working days, after which our team will contact you.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">07</span><span class="fr-faq-q">What is the franchise fee for my region?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>Headquarters sets the franchise fee for each region based on its level of economic development and average per-capita spending.</p><p>Please complete the Master Franchise Application. After a preliminary qualification assessment and a visit to our concept store in Taichung, Taiwan, we'll begin the quotation process.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">08</span><span class="fr-faq-q">Who can I talk to about a master franchise?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a"><p>All master franchise matters are handled centrally by our headquarters in Taichung, Taiwan. Please complete the Master Franchise Application online and our team will reply as soon as possible. For other questions, contact our international affairs department at <a href="mailto:chichasanchen.global@teashop168.com.tw">chichasanchen.global@teashop168.com.tw</a>.</p></div>
+      </details>
+      <details class="r">
+        <summary><span class="fr-faq-num">09</span><span class="fr-faq-q">How are raw materials supplied?</span><span class="fr-faq-icon" aria-hidden="true"></span></summary>
+        <div class="fr-faq-a">
+          <p>Chicha San Chen is committed to serving the best tea, guided by three principles:</p>
+          <ul>
+            <li>Use only the highest-quality, natural ingredients.</li>
+            <li>Uphold food hygiene and safety.</li>
+            <li>Serve every customer fresh, freshly brewed products.</li>
+          </ul>
+          <p>To keep products consistent across stores, all partners purchase key equipment and raw materials from headquarters. Provided quality and texture are unchanged, some milk, agricultural products and non-technical equipment may be sourced locally once approved by our R&amp;D team.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section class="fr-apply r" id="apply">
+    <div class="fr-apply-img">
+      <img src="images/store_taiwan.webp" alt="The Chicha San Chen concept store in Taichung" loading="lazy">
+    </div>
+    <div class="fr-apply-text">
+      <div class="phil-index">Join Our Global Network</div>
+      <h2 class="fr-apply-title">Book your private consultation.</h2>
+      <p class="fr-apply-body">Complete the Master Franchise Application and a member of our team will be in touch within 3–5 working days.</p>
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=r7osHmV-EEqOaS8gT11NUb9Jt4bHqOxNhlsoGT0-SNxUN0VKNlA2S1ZKRjE5VTJCRThLT1RHUVE2MyQlQCN0PWcu" class="fr-apply-btn" target="_blank" rel="noopener">
+        <span class="arrow-circle">→</span>
+        Online Application Form
+      </a>
+      <div class="fr-contact">
+        <div class="fr-contact-row"><span class="fr-contact-label">Franchising</span><a href="mailto:chichasanchen.global@teashop168.com.tw">chichasanchen.global@teashop168.com.tw</a></div>
+        <div class="fr-contact-row"><span class="fr-contact-label">Phone</span><a href="tel:+886423285535">+886-4-2328-5535</a></div>
+        <div class="fr-contact-row"><span class="fr-contact-label">Concept Store</span><a href="https://maps.google.com/?q=No.607+Daying+St,+Nantun+Dist,+Taichung+City,+Taiwan" target="_blank" rel="noopener">No. 607, Daying St., Nantun Dist., Taichung</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
+      </div>
+      <a href="franchise.html" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="about.html">Our Story</a>
+        <a href="franchise.html">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+  <script>
+    (function() {
+      var bar = document.getElementById('loadBar');
+      requestAnimationFrame(function() { bar.style.width = '75%'; });
+      window.addEventListener('load', function() {
+        bar.style.width = '100%';
+        document.body.classList.add('is-loaded');
+        setTimeout(function() { bar.classList.add('done'); }, 250);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

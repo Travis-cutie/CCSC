@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=9">
   <style>
 
     /* ── MENU NAV OVERRIDE ── */
@@ -402,7 +402,10 @@
 </head>
 <body class="page-fade" style="padding-top: 75px; background: #fff;">
 <div class="load-bar" id="loadBar"></div>
-<div class="float-icon" aria-hidden="true"></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
 
 
   <!-- NAV -->
@@ -412,7 +415,7 @@
       <a href="menu.html" class="active">Menu</a>
       <a href="locations.html">Locations</a>
       <a href="about.html">Our Story</a>
-      <a href="#">Franchise</a>
+      <a href="franchise.html">Franchise</a>
       <div class="nav-mobile-extra">
         <div class="nav-mobile-bottom">
           <div class="nav-mobile-social">
@@ -1123,7 +1126,7 @@
         <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
         <p class="footer-brand-desc">Overseas brand licensing and master franchise partnerships with one of Asia's most celebrated tea brands — built on 25+ years of tea expertise.</p>
       </div>
-      <a href="#" class="footer-brand-link">
+      <a href="franchise.html" class="footer-brand-link">
         <span class="arrow-circle">→</span>
         Explore Franchise Opportunity
       </a>
@@ -1134,7 +1137,7 @@
       <div class="footer-nav-group-label">Explore</div>
       <div class="footer-nav-links">
         <a href="about.html">Our Story</a>
-        <a href="#">Franchise</a>
+        <a href="franchise.html">Franchise</a>
         <a href="#">Catering</a>
         <a href="#">News</a>
       </div>
@@ -1402,5 +1405,6 @@
       });
     })();
   </script>
+  <script src="js/back-to-top.js"></script>
 </body>
 </html>

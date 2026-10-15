@@ -8,51 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=8">
+  <link rel="stylesheet" href="css/styles.css?v=9">
   <style>
 
-    /* ── BACK TO TOP (matches homepage) ── */
-    .back-to-top {
-      position: fixed;
-      bottom: 90px; right: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px);
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    }
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    .back-to-top-icon {
-      width: 44px; height: 44px;
-      background-image: url('images/1.svg');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      animation: floatBob 2.4s ease-in-out infinite;
-    }
-    .back-to-top-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid);
-      white-space: nowrap;
-    }
-    @media (max-width: 768px) {
-      .back-to-top { bottom: 72px; right: 24px; }
-      .back-to-top-icon { width: 34px; height: 34px; }
-    }
+    /* ── BLACK & WHITE PHOTOGRAPHY (about page) ── */
+    .philosophy-img img,
+    .ab-gallery img,
+    .footer-col-img { filter: grayscale(1); }
 
     /* ── NAV OVERRIDE ── */
     nav {
@@ -108,6 +70,45 @@
       line-height: 1.6;
       justify-self: end;
     }
+
+    /* ── ANCHOR NAV (matches menu category tabs) ── */
+    .ab-anchors {
+      position: sticky;
+      top: 61px;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 40px;
+    }
+    .ab-anchors-list {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 40px;
+      list-style: none;
+    }
+    .ab-anchors-list::-webkit-scrollbar { display: none; }
+    .ab-anchor {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: 18px 24px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      text-decoration: none;
+      display: flex;
+      gap: 10px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .ab-anchors-list li:first-child .ab-anchor { padding-left: 0; }
+    .ab-anchor-num { color: var(--faint); transition: color 0.2s; }
+    .ab-anchor:hover { color: var(--ink); }
+    .ab-anchor.active { color: var(--ink); border-bottom-color: var(--accent); }
+    .ab-anchor.active .ab-anchor-num { color: var(--accent-dark); }
+    #brand-story, #professionalism, #milestones, #art-and-craft, #humanities { scroll-margin-top: 116px; }
 
     /* ── SPLIT SECTIONS (extends .philosophy-section) ── */
     .ab-split + .ab-split { margin-top: 40px; }
@@ -296,6 +297,9 @@
       nav.scrolled { padding: 14px 24px; }
       .ab-header { grid-template-columns: 1fr; min-height: 420px; padding: 48px 24px 40px; gap: 24px; }
       .ab-header-sub { justify-self: start; }
+      .ab-anchors { margin-bottom: 24px; }
+      .ab-anchors-list { padding: 0 24px; }
+      .ab-anchor { padding: 16px 18px; }
 
       .ab-split.reverse .philosophy-img { order: 0; }
       .ab-split.reverse .philosophy-text { border-right: none; }
@@ -337,7 +341,7 @@
       <a href="menu.html">Menu</a>
       <a href="locations.html">Locations</a>
       <a href="about.html" class="active">Our Story</a>
-      <a href="#">Franchise</a>
+      <a href="franchise.html">Franchise</a>
       <div class="nav-mobile-extra">
         <div class="nav-mobile-bottom">
           <div class="nav-mobile-social">
@@ -361,6 +365,17 @@
     </div>
     <p class="ab-header-sub r d2">Since 1998, we've searched the island of Taiwan for the finest ingredients — and spent more than 20 years perfecting how to brew them.</p>
   </header>
+
+  <!-- ANCHOR NAV -->
+  <div class="ab-anchors" role="navigation" aria-label="On this page">
+    <ul class="ab-anchors-list">
+      <li><a class="ab-anchor active" href="#brand-story"><span class="ab-anchor-num">01</span>Brand Story</a></li>
+      <li><a class="ab-anchor" href="#professionalism"><span class="ab-anchor-num">02</span>Professionalism</a></li>
+      <li><a class="ab-anchor" href="#milestones"><span class="ab-anchor-num">03</span>Milestones</a></li>
+      <li><a class="ab-anchor" href="#art-and-craft"><span class="ab-anchor-num">04</span>Art &amp; Craft</a></li>
+      <li><a class="ab-anchor" href="#humanities"><span class="ab-anchor-num">05</span>Humanities</a></li>
+    </ul>
+  </div>
 
   <!-- 01 BRAND STORY -->
   <section class="philosophy-section ab-split" id="brand-story">
@@ -486,7 +501,7 @@
         <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
         <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
       </div>
-      <a href="#" class="footer-brand-link">
+      <a href="franchise.html" class="footer-brand-link">
         <span class="arrow-circle">→</span>
         Explore Franchise Opportunity
       </a>
@@ -496,7 +511,7 @@
       <div class="footer-nav-group-label">Explore</div>
       <div class="footer-nav-links">
         <a href="about.html">Our Story</a>
-        <a href="#">Franchise</a>
+        <a href="franchise.html">Franchise</a>
         <a href="#">Catering</a>
         <a href="#">News</a>
       </div>
@@ -542,24 +557,29 @@
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
 
-    // Back to top — appears once a third of the page has been scrolled
+    // Anchor nav — highlight the section currently in view
     (function() {
-      const btn = document.getElementById('backToTop');
-      if (!btn) return;
-      const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const links = [...document.querySelectorAll('.ab-anchor')];
+      const sections = links.map(a => document.querySelector(a.getAttribute('href')));
+      const list = document.querySelector('.ab-anchors-list');
+      let current = null;
 
-      function thresholdPassed() {
-        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        return scrollable > 0 && window.scrollY > scrollable / 3;
+      function update() {
+        const line = 140;
+        let idx = 0;
+        sections.forEach((sec, i) => { if (sec.getBoundingClientRect().top <= line) idx = i; });
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) idx = sections.length - 1;
+        if (idx === current) return;
+        current = idx;
+        links.forEach((a, i) => a.classList.toggle('active', i === idx));
+        const active = links[idx];
+        if (list.scrollWidth > list.clientWidth) {
+          list.scrollTo({ left: active.parentElement.offsetLeft - 24, behavior: 'smooth' });
+        }
       }
 
-      window.addEventListener('scroll', () => {
-        btn.classList.toggle('show', thresholdPassed());
-      }, { passive: true });
-
-      btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
-      });
+      window.addEventListener('scroll', update, { passive: true });
+      update();
     })();
 
     // Scroll reveal
@@ -598,5 +618,6 @@
       });
     })();
   </script>
+  <script src="js/back-to-top.js"></script>
 </body>
 </html>

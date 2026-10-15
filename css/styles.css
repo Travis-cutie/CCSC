@@ -76,6 +76,51 @@ body.home .float-icon { bottom: 90px; }
   body.home .float-icon { bottom: 72px; }
 }
 
+/* ── BACK TO TOP ──
+   Wave icon + label, lower-right. Fades in once a third of the page has
+   been scrolled (see js/back-to-top.js) and scrolls back up on click. */
+.back-to-top {
+  position: fixed;
+  bottom: 90px; right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top-icon {
+  width: 44px; height: 44px;
+  background-image: url('../images/1.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: floatBob 2.4s ease-in-out infinite;
+}
+.back-to-top-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid);
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .back-to-top { bottom: 72px; right: 24px; }
+  .back-to-top-icon { width: 34px; height: 34px; }
+}
+
 /* ── BASE ── */
 body {
   font-family: 'Inter', -apple-system, sans-serif;
