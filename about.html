@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story — Chicha San Chen</title>
+  <meta name="description" content="Since 1998, Chicha San Chen has searched Taiwan for the finest tea and spent more than 20 years perfecting how to brew it.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=8">
+  <style>
+
+    /* ── BACK TO TOP (matches homepage) ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 90px; right: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top-icon {
+      width: 44px; height: 44px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      animation: floatBob 2.4s ease-in-out infinite;
+    }
+    .back-to-top-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 72px; right: 24px; }
+      .back-to-top-icon { width: 34px; height: 34px; }
+    }
+
+    /* ── NAV OVERRIDE ── */
+    nav {
+      background: #fff;
+      pointer-events: all;
+      border-bottom: none !important;
+    }
+    nav.scrolled {
+      background: rgba(250,249,247,0.96);
+      padding: 28px 40px;
+      border-bottom: 1px solid #e8e8e8 !important;
+    }
+    .nav-links a { color: var(--mid); }
+    .nav-links a.active { color: var(--ink); }
+
+    /* ── PAGE SHELL ── */
+    body {
+      padding-top: 75px;
+      background: #fff;
+    }
+
+    /* ── PAGE HEADER ── */
+    .ab-header {
+      min-height: 540px;
+      padding: 100px 56px 64px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 40px;
+    }
+    .ab-eyebrow {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+    }
+    .ab-header-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+    }
+    .ab-header-sub {
+      font-size: 14px;
+      color: var(--mid);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      max-width: 420px;
+      line-height: 1.6;
+      justify-self: end;
+    }
+
+    /* ── SPLIT SECTIONS (extends .philosophy-section) ── */
+    .ab-split + .ab-split { margin-top: 40px; }
+    .ab-split.reverse .philosophy-img { order: 2; }
+    .ab-split.reverse .philosophy-text { border-left: none; border-right: 1px solid #e8e8e8; }
+    .ab-split .phil-title { font-weight: 400; }
+    .ab-split .phil-body { max-width: 420px; }
+    .ab-split .phil-body + .phil-body { margin-top: -12px; }
+    .ab-split .philosophy-img { min-height: 520px; }
+    .ab-split .philosophy-img img { position: absolute; inset: 0; }
+
+    /* ── STATS ── */
+    .ab-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin: 80px 40px;
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .ab-stat {
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ab-stat + .ab-stat { border-left: 1px solid #e8e8e8; }
+    .ab-stat-num {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .ab-stat-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── SECTION INTRO ── */
+    .ab-section { padding: 112px 0 0; }
+    #milestones, #art-and-craft { padding-top: 200px; }
+    .ab-section-head {
+      padding: 0 56px 48px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 40px;
+      align-items: end;
+    }
+    .ab-section-head .sec-label { color: var(--ink); margin-bottom: 20px; }
+    .ab-section-head .sec-label::after { display: none; }
+    .ab-section-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+      max-width: 8em;
+      text-wrap: balance;
+    }
+    .ab-section-body {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--ink);
+      max-width: 440px;
+      justify-self: end;
+    }
+
+    /* ── QUOTE ── */
+    .ab-quote {
+      font-family: 'Sentient', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--accent-dark);
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+      max-width: 380px;
+    }
+
+    /* ── MILESTONES ── */
+    .ab-timeline {
+      list-style: none;
+      margin: 0 40px;
+      border-top: 1px solid #e8e8e8;
+    }
+    .ab-tl-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 40px;
+      padding: 28px 16px;
+      border-bottom: 1px solid #e8e8e8;
+      align-items: baseline;
+      transition: background 0.25s;
+    }
+    .ab-tl-row:hover { background: #faf9f7; }
+    .ab-tl-year {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .ab-tl-year::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      transform: translateY(-3px);
+    }
+    .ab-tl-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--ink);
+      max-width: 640px;
+    }
+    .ab-tl-text li { list-style: none; }
+    .ab-tl-text li + li { margin-top: 6px; }
+
+    /* ── GALLERY ── */
+    .ab-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 0 40px 40px;
+    }
+    .ab-gallery figure {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: #e8e5e0;
+    }
+    .ab-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .ab-gallery figure:hover img { transform: scale(1.03); }
+    .ab-gallery figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 14px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+    }
+
+    /* ── CTA ── */
+    .ab-cta {
+      margin: 112px 40px 80px;
+      padding: 72px 56px;
+      background: #faf9f7;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+    }
+    .ab-cta-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      color: var(--ink);
+    }
+    .ab-cta-links { display: flex; gap: 32px; flex-wrap: wrap; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav.scrolled { padding: 14px 24px; }
+      .ab-header { grid-template-columns: 1fr; min-height: 420px; padding: 48px 24px 40px; gap: 24px; }
+      .ab-header-sub { justify-self: start; }
+
+      .ab-split.reverse .philosophy-img { order: 0; }
+      .ab-split.reverse .philosophy-text { border-right: none; }
+      .ab-split .philosophy-img { min-height: 320px; }
+
+      .ab-stats { grid-template-columns: repeat(2, 1fr); margin: 56px 24px; }
+      .ab-stat { padding: 28px 16px; }
+      .ab-stat:nth-child(3) { border-left: none; }
+      .ab-stat:nth-child(n+3) { border-top: 1px solid #e8e8e8; }
+
+      .ab-section { padding-top: 80px; }
+      #milestones, #art-and-craft { padding-top: 120px; }
+      .ab-section-head { grid-template-columns: 1fr; padding: 0 24px 36px; gap: 20px; }
+      .ab-section-body { justify-self: start; }
+
+      .ab-timeline { margin: 0 24px; }
+      .ab-tl-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 4px; }
+      .ab-tl-year { font-size: 26px; }
+
+      .ab-gallery { grid-template-columns: 1fr 1fr; margin: 0 24px 24px; gap: 10px; }
+      .ab-gallery figure:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+
+      .ab-cta { grid-template-columns: 1fr; margin: 80px 24px 56px; padding: 48px 28px; }
+    }
+  </style>
+</head>
+<body class="page-fade">
+<div class="load-bar" id="loadBar"></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chicha San Chen" style="height:36px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html">Menu</a>
+      <a href="locations.html">Locations</a>
+      <a href="about.html" class="active">Our Story</a>
+      <a href="#">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="ab-header">
+    <div>
+      <div class="ab-eyebrow r">Our Story</div>
+      <h1 class="ab-header-title r d1">Offering<br>the Best</h1>
+    </div>
+    <p class="ab-header-sub r d2">Since 1998, we've searched the island of Taiwan for the finest ingredients — and spent more than 20 years perfecting how to brew them.</p>
+  </header>
+
+  <!-- 01 BRAND STORY -->
+  <section class="philosophy-section ab-split" id="brand-story">
+    <div class="philosophy-img r">
+      <img src="images/HANDPICKED.webp" alt="A freshly picked tea bud held between two hands" loading="lazy">
+    </div>
+    <div class="philosophy-text">
+      <div class="phil-index r">01 — Brand Story</div>
+      <h2 class="phil-title r d1">Serving the best drink is<br>our faith, now and forever.</h2>
+      <p class="phil-body r d2">Our mission began with a simple promise: discover the best ingredients the beautiful island of Taiwan has to offer. More than two decades later, we're still moving forward.</p>
+      <p class="phil-body r d2">Great tea deserves a professional presentation. Our exclusive teapresso machine is tuned for each tea we pour, so every cup carries its original taste. We believe that when tea is treated with heart, its finest aroma reveals itself.</p>
+      <p class="phil-body r d3">We select only the essence of the tea branch — the flavor you taste is our insistence.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="ab-stats">
+    <div class="ab-stat r"><span class="ab-stat-num">1998</span><span class="ab-stat-label">Founded in<br>Taichung, Taiwan</span></div>
+    <div class="ab-stat r d1"><span class="ab-stat-num">20+</span><span class="ab-stat-label">Years devoted<br>to tea brewing</span></div>
+    <div class="ab-stat r d2"><span class="ab-stat-num">6</span><span class="ab-stat-label">Teas, each with its<br>own brewing recipe</span></div>
+    <div class="ab-stat r d3"><span class="ab-stat-num">14</span><span class="ab-stat-label">Countries &amp; regions<br>worldwide</span></div>
+  </div>
+
+  <!-- 02 PROFESSIONALISM -->
+  <section class="ab-section" id="professionalism">
+    <div class="ab-section-head">
+      <div>
+        <div class="sec-label r">02 — Professionalism</div>
+        <h2 class="ab-section-title r d1">Customized for the best taste, from the origin.</h2>
+      </div>
+      <p class="ab-section-body r d2">We never compromise on ingredients — if it isn't qualified, we keep looking. For us, professionalism is the result of devotion and insistence: exacting standards for every measurement, and practice until accuracy becomes second nature.</p>
+    </div>
+    <div class="philosophy-section ab-split reverse">
+      <div class="philosophy-img r">
+        <img src="images/teapresso.webp" alt="The LION teapresso machine on the brewing bar" loading="lazy">
+      </div>
+      <div class="philosophy-text">
+        <div class="phil-index r">The LION Teapresso</div>
+        <h3 class="phil-title r d1">Two years in the making.</h3>
+        <p class="phil-body r d2">We spent two years developing our exclusive teapresso machine, LION, and have upgraded it again and again. An open chassis and smart touch panel allow precise settings for six types of tea, while high-temperature pressing extracts the essence of finely ground leaves in seconds.</p>
+        <p class="phil-body r d2">Every tea follows its own brewing recipe, and every variable that could affect the flavor is minimized — so the aftertaste stays true.</p>
+        <blockquote class="ab-quote r d3">“One minute on stage, ten years of practice off stage.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 MILESTONES -->
+  <section class="ab-section" id="milestones">
+    <div class="ab-section-head">
+      <div>
+        <div class="sec-label r">03 — Milestones</div>
+        <h2 class="ab-section-title r d1">From one tea shop in Taichung to the world.</h2>
+      </div>
+      <p class="ab-section-body r d2">Recognized for the quality of every cup and the warmth of our hospitality, and backed by an expert team and a comprehensive training program, Chicha San Chen has grown from a single shop into a global brand.</p>
+    </div>
+    <ol class="ab-timeline">
+      <li class="ab-tl-row r"><span class="ab-tl-year">1998</span><p class="ab-tl-text">CHICHA Tea Shop is founded in Taichung City.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">1999</span><p class="ab-tl-text">We begin serving tea to every guest who walks through our doors — grateful to each of you for coming.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2004</span><p class="ab-tl-text">Our chain-store business model is established, and CHICHA headquarters is founded in Xitun.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2008</span><p class="ab-tl-text">Expansion across Taiwan, with more than 100 stores in central Taiwan.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2013</span><p class="ab-tl-text">As the company grows, we support more than 200 branch stores and keep expanding.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2014</span><p class="ab-tl-text">Diversified management, and the launch of our overseas business department.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2015</span><ul class="ab-tl-text"><li>International operations begin with expansion into China.</li><li>ISO 22000 and HACCP certification are introduced to our process.</li><li>Xiamen Crown Beauty Catering Management Co., Ltd. is established.</li></ul></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2019</span><p class="ab-tl-text">Expansion into the tier-one cities of Beijing and Shanghai.</p></li>
+      <li class="ab-tl-row r"><span class="ab-tl-year">2019 —</span><p class="ab-tl-text">Global expansion into new markets, including New York, California, Tokyo, Hong Kong, Malaysia, Thailand, Vietnam, Australia, Singapore and Canada.</p></li>
+    </ol>
+  </section>
+
+  <!-- 04 ART & CRAFT -->
+  <section class="ab-section" id="art-and-craft">
+    <div class="ab-section-head">
+      <div>
+        <div class="sec-label r">04 — Art &amp; Craft</div>
+        <h2 class="ab-section-title r d1">A designer's fantasy, made real.</h2>
+      </div>
+      <p class="ab-section-body r d2">We believe a space with cultural and aesthetic character is tied to the history of its building. Our first concept store in Taiwan was reconstructed from a 40-year-old building — rather than demolish it, we kept its original design as a way of living alongside history.</p>
+    </div>
+    <div class="ab-gallery">
+      <figure class="r"><img src="images/store_taiwan.webp" alt="The Chicha San Chen concept store in Taichung, a restored brick building with a glass extension" loading="lazy"><figcaption>Taichung Concept Store</figcaption></figure>
+      <figure class="r d1"><img src="images/about_store_night.webp" alt="The concept store lit up at night" loading="lazy"><figcaption>After Dark</figcaption></figure>
+      <figure class="r d2"><img src="images/about_interior.webp" alt="Overhead view of the concept store's brewing bar" loading="lazy"><figcaption>The Brewing Bar</figcaption></figure>
+    </div>
+    <div class="philosophy-section ab-split">
+      <div class="philosophy-img r">
+        <img src="images/about_tea_garden_mist.webp" alt="Tea trees in the misty sky tea garden greenhouse" loading="lazy">
+      </div>
+      <div class="philosophy-text">
+        <div class="phil-index r">The Sky Tea Garden</div>
+        <h3 class="phil-title r d1">Bringing the tea mountain<br>to the city.</h3>
+        <p class="phil-body r d2">We refresh our minds in nature, so we had a crazy idea: bring tea trees from the mountain into the city. Tea thrives at 75–80% humidity with 1,800–3,000 mm of annual rainfall, so we built a misty greenhouse that simulates high-altitude conditions.</p>
+        <p class="phil-body r d2">Controlled temperature, high humidity and plenty of sunlight help the trees flourish — and raise the nitrogen and aroma content of their leaves. The garden is our promise to the tea, and to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 HUMANITIES -->
+  <section class="ab-section" id="humanities">
+    <div class="philosophy-section ab-split reverse">
+      <div class="philosophy-img r">
+        <img src="images/location2.webp" alt="A Chicha San Chen team member handing a tea to a guest" loading="lazy">
+      </div>
+      <div class="philosophy-text">
+        <div class="phil-index r">05 — Humanities</div>
+        <h2 class="phil-title r d1">Taiwanese-style service,<br>made true.</h2>
+        <p class="phil-body r d2">Hospitality isn't an SOP — it's what makes Taiwan so welcoming. Rather than treating service as a script, we aim to share the spirit of our brand with every guest.</p>
+        <p class="phil-body r d2">Built on professionalism and human warmth, service should never become a formality or lose its meaning. We sincerely invite you to experience the Made-in-Taiwan spirit with us.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="ab-cta r">
+    <h2 class="ab-cta-title">Taste the story<br>for yourself.</h2>
+    <div class="ab-cta-links">
+      <a href="locations.html" class="phil-link">Find a Store</a>
+      <a href="menu.html" class="phil-link">Explore the Menu</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
+      </div>
+      <a href="#" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="about.html">Our Story</a>
+        <a href="#">Franchise</a>
+        <a href="#">Catering</a>
+        <a href="#">News</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Back to top — appears once a third of the page has been scrolled
+    (function() {
+      const btn = document.getElementById('backToTop');
+      if (!btn) return;
+      const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function thresholdPassed() {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        return scrollable > 0 && window.scrollY > scrollable / 3;
+      }
+
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('show', thresholdPassed());
+      }, { passive: true });
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+      });
+    })();
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+  <script>
+    (function() {
+      var bar = document.getElementById('loadBar');
+      requestAnimationFrame(function() { bar.style.width = '75%'; });
+      window.addEventListener('load', function() {
+        bar.style.width = '100%';
+        document.body.classList.add('is-loaded');
+        setTimeout(function() { bar.classList.add('done'); }, 250);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
