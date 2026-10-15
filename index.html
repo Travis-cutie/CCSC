@@ -3,14 +3,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chicha San Chen</title>
+  <title>Chicha San Chen — Freshly Brewed Original Tea</title>
+  <meta name="description" content="Chicha San Chen brews freshly made original tea from single-origin Taiwanese leaves. Award-winning oolong, black and green teas, brewed to order since 1998.">
+  <link rel="canonical" href="https://www.chichasanchen.com/">
+  <meta name="theme-color" content="#93C90F">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chicha San Chen">
+  <meta property="og:title" content="Chicha San Chen — Freshly Brewed Original Tea">
+  <meta property="og:description" content="Freshly brewed original tea from single-origin Taiwanese leaves. Award-winning oolong, black and green teas, brewed to order since 1998.">
+  <meta property="og:url" content="https://www.chichasanchen.com/">
+  <meta property="og:image" content="https://www.chichasanchen.com/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Hands holding a freshly plucked tea leaf">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chicha San Chen — Freshly Brewed Original Tea">
+  <meta name="twitter:description" content="Freshly brewed original tea from single-origin Taiwanese leaves. Award-winning oolong, black and green teas, brewed to order since 1998.">
+  <meta name="twitter:image" content="https://www.chichasanchen.com/images/og-image.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=7">
+  <style>
+    /* ── BACK TO TOP (homepage only) ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 90px; right: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top-icon {
+      width: 44px; height: 44px;
+      background-image: url('images/1.svg');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      animation: floatBob 2.4s ease-in-out infinite;
+    }
+    .back-to-top-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .back-to-top { bottom: 72px; right: 24px; }
+      .back-to-top-icon { width: 34px; height: 34px; }
+    }
+  </style>
 </head>
 <body class="home">
-<div class="float-icon" aria-hidden="true"></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
 
   <!-- INTRO CURTAIN -->
   <div id="intro">
@@ -50,7 +118,7 @@
       <video id="heroVideo" autoplay muted playsinline preload="auto">
         <source src="videos/banner-web-2.mp4" type="video/mp4">
       </video>
-      <video id="heroVideo2" muted playsinline preload="auto">
+      <video id="heroVideo2" muted playsinline preload="none">
         <source src="videos/banner-web-2.mp4" type="video/mp4">
       </video>
     </div>
@@ -124,7 +192,7 @@
   <!-- PHILOSOPHY -->
   <section class="philosophy-section">
     <div class="philosophy-img r">
-      <video src="videos/philosophy_video2.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;object-position:bottom;display:block;position:absolute;top:0;left:0;"></video>
+      <video id="philosophyVideo" data-src="videos/philosophy_video2.mp4" loop muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover;object-position:bottom;display:block;position:absolute;top:0;left:0;"></video>
     </div>
     <div class="philosophy-text">
       <div class="phil-index r">Our Philosophy</div>
@@ -240,9 +308,13 @@
   </footer>
 
   <script>
+    // Honour the OS "reduce motion" setting across the intro, videos and reveals.
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // ── INTRO CURTAIN ──
     (function() {
       const intro = document.getElementById('intro');
+      if (REDUCED) { intro.style.display = 'none'; return; }
       // Trigger text reveal on next frame
       requestAnimationFrame(() => {
         requestAnimationFrame(() => intro.classList.add('reveal'));
@@ -262,10 +334,24 @@
       const vB = document.getElementById('heroVideo2');
       if (!vA || !vB) return;
 
+      if (REDUCED) {
+        // Hold a still frame instead of looping footage.
+        vA.removeAttribute('autoplay');
+        vA.pause();
+        return;
+      }
+
       const RATE = 0.5;
       const CROSSFADE = 0.6; // seconds of *video* time (unaffected by playbackRate)
 
       [vA, vB].forEach(v => { v.playbackRate = RATE; });
+
+      // vB carries preload="none" so it doesn't compete with vA for bandwidth
+      // on first paint. It isn't needed until the first crossfade (a full
+      // playthrough away at RATE 0.5), so warm it up once the page is idle.
+      window.addEventListener('load', () => {
+        setTimeout(() => vB.load(), 2000);
+      }, { once: true });
 
       let active = vA, standby = vB;
 
@@ -297,18 +383,62 @@
       }
     })();
 
+    // ── PHILOSOPHY VIDEO ──
+    // 15MB of footage sitting well below the fold: fetch it only once the
+    // section is close to view, and leave it paused under "reduce motion".
+    (function() {
+      const v = document.getElementById('philosophyVideo');
+      if (!v) return;
+      const src = v.dataset.src;
+      if (!src) return;
+
+      function load() {
+        if (v.src) return;
+        v.src = src;
+        if (!REDUCED) v.play().catch(() => {});
+      }
+
+      if (!('IntersectionObserver' in window)) { load(); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { load(); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '400px 0px' });
+      io.observe(v);
+    })();
+
     // Nav scroll background
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
+    // ── BACK TO TOP ──
+    // Appears once the user has scrolled through a third of the page,
+    // scrolls back up on click.
+    (function() {
+      const btn = document.getElementById('backToTop');
+      if (!btn) return;
+
+      function thresholdPassed() {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        return scrollable > 0 && window.scrollY > scrollable / 3;
+      }
+
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('show', thresholdPassed());
+      }, { passive: true });
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
+      });
+    })();
+
     // Scroll reveal
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
     }, { threshold: 0.07 });
     document.querySelectorAll('.r').forEach(el => obs.observe(el));
-
   </script>
   <script>
     (function() {

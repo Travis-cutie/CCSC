@@ -15,6 +15,13 @@
   font-weight: 100 900;
   font-style: italic;
 }
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Thin.woff2') format('woff2'),
+       url('../fonts/JetBrainsMono-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,6 +33,7 @@ html { scroll-behavior: smooth; }
   --mid: #888;
   --faint: #c8c8c8;
   --accent: #93C90F;
+  --accent-dark: #5A7B09;
   --mono: 'JetBrains Mono', monospace;
 }
 
@@ -89,10 +97,10 @@ body {
   pointer-events: none;
 }
 .intro-headline {
-  font-family: 'Sentient', serif;
-  font-size: 10.5vw;
-  font-weight: 300;
-  line-height: 0.88;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6.3vw;
+  font-weight: 100;
+  line-height: 1.05;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
@@ -155,6 +163,8 @@ nav a img { pointer-events: all; }
 body.home nav:not(.scrolled) .logo-default { filter: brightness(0) invert(1); }
 body.home nav:not(.scrolled) .nav-links a { color: #fff; }
 body.home nav:not(.scrolled) .nav-links a:hover { color: var(--accent); }
+/* The hamburger sits over the hero video too, so it whitens with the rest. */
+body.home nav:not(.scrolled) .nav-toggle span { background: #fff; }
 
 .nav-toggle {
   display: none;
@@ -247,25 +257,6 @@ body.nav-open { overflow: hidden; }
     margin-top: auto;
     padding-top: 40px;
   }
-  .nav-cta-row { display: flex; gap: 10px; }
-  .nav-mobile-extra .nav-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 18px;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 999px;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-    line-height: 1;
-  }
-  .nav-cta svg { flex-shrink: 0; width: 12px; height: 12px; }
   .nav-mobile-bottom {
     display: flex;
     justify-content: space-between;
@@ -326,10 +317,10 @@ body.nav-open { overflow: hidden; }
   overflow: hidden;
 }
 .hero-name {
-  font-family: 'Sentient', serif;
-  font-weight: 300;
-  font-size: 10.5vw;
-  line-height: 0.88;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 100;
+  font-size: 6.3vw;
+  line-height: 1.05;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
@@ -366,9 +357,24 @@ body.nav-open { overflow: hidden; }
 
 /* ── TEXT BAND ── */
 .text-band {
-  background: var(--accent);
+  /* Light-green glows drift left → right on two out-of-sync layers over the dark base */
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(147,201,15,0.85) 22%, transparent 50%, rgba(147,201,15,0.55) 74%, transparent 100%),
+    linear-gradient(90deg, rgba(147,201,15,0.9) 0%, transparent 30%, rgba(147,201,15,0.6) 58%, transparent 82%, rgba(147,201,15,0.9) 100%),
+    var(--accent-dark);
+  background-size: 200% 100%, 300% 100%, auto;
+  background-repeat: repeat-x, repeat-x, no-repeat;
+  animation: band-flow 18s ease-in-out infinite;
   padding: 20px 40px;
   overflow: hidden;
+}
+@keyframes band-flow {
+  0%   { background-position: 0% 0, 0% 0, 0 0; }
+  50%  { background-position: -120% 0, -170% 0, 0 0; }
+  100% { background-position: -200% 0, -300% 0, 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-band { animation: none; }
 }
 .text-band-track {
   display: inline-flex;
@@ -421,7 +427,6 @@ body.nav-open { overflow: hidden; }
   grid-template-columns: repeat(4, 1fr);
   gap: 2px;
 }
-.drink-item { cursor: pointer; }
 .drink-item:hover .drink-cover { filter: brightness(0.92); }
 .drink-cover-frame {
   width: 100%;
@@ -904,7 +909,7 @@ footer {
 @media (max-width: 768px) {
   .loc-header { padding: 48px 40px 24px; }
   .su-wrap { grid-template-columns: 1fr; }
-  .su-photo { position: relative; top: 0; height: 260px; }
+  .su-photo { position: relative; top: 0; height: auto; aspect-ratio: 4 / 5; }
   .su-content { padding: 40px 24px; }
   .su-header-row { flex-direction: column; gap: 12px; }
   .su-title { margin-bottom: 24px; }
@@ -915,11 +920,11 @@ footer {
   nav { padding: 20px 24px; }
   nav.scrolled { padding: 14px 24px; }
 
-  .hero-name { padding: 0 24px 32px; font-size: 8.5vw; }
+  .hero-name { padding: 0 24px 32px; font-size: 5.1vw; }
 
   .hero-video-bg video { transform: scale(1.44); }
 
-  .intro-headline { font-size: 8.5vw; }
+  .intro-headline { font-size: 5.1vw; }
 
   .text-band { padding: 16px 24px; }
 
@@ -962,3 +967,18 @@ footer {
 .r.d2 { transition-delay: 0.2s; }
 .r.d3 { transition-delay: 0.3s; }
 .r.on { opacity: 1; transform: none; }
+
+/* ── REDUCED MOTION ──
+   Strips the decorative loops (marquee, float bob, Ken Burns, curtain wipe)
+   and makes scroll reveals instant, while leaving layout and colour intact. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .text-band-track { animation: none !important; transform: none !important; }
+  .float-icon { animation: none !important; }
+  .r { opacity: 1 !important; transform: none !important; }
+}

@@ -41,10 +41,18 @@ Hybrid approach:
 - Standardized mobile side padding to ~24px across the site
 - Added a hamburger menu for mobile nav, then redesigned it: full-screen green overlay, large serif nav links, an "Order Online" button, social icons + copyright at the bottom, sliding in from the right
 
+**Homepage (Oct 15)**
+- Cut initial page weight from ~29MB to ~14MB of video: the philosophy video (15MB) sat below the fold but autoplayed on load, so it now lazy-loads via IntersectionObserver (400px rootMargin) once the section nears view. The hero's second `<video>` (the crossfade standby) dropped from `preload="auto"` to `preload="none"` and warms up 2s after `window.load`, so it no longer competes with the visible hero for bandwidth on first paint.
+- Added the "Order Online" button to the homepage's mobile menu — every other page already had it; index.html was the only one missing `.nav-cta-row`
+- Fixed the mobile hamburger being invisible on the homepage: the Sep 17 commit whitened the logo and nav links over the hero video but missed `.nav-toggle span`, leaving dark bars on dark footage
+- Added SEO/social meta: title, description, canonical, theme-color, Open Graph + Twitter card, and a 1200x630 `images/og-image.jpg` cropped from `footer_thumb.jpg`
+- Added a `prefers-reduced-motion` block: skips the intro curtain, holds a still hero frame, stops the marquee/float/Ken Burns loops, and makes scroll reveals instant
+
 ## Known gaps (not yet resolved)
 
 - 6 store pages are missing a verified phone number: Arcadia, Koreatown, Daly City, Fremont, San Jose, Boston
-- Duluth store page has no confirmed online ordering link
+- No favicon yet — both logo SVGs are wide wordmarks that turn to mush at 32px, so this needs a proper square mark from the design side
+- Meta/OG tags are on the homepage only; the other pages still need their own
 - No single official national Facebook page was found — only scattered regional ones — so no Facebook icon was added to the footer. Worth getting the right URL from the client if one exists.
 
 ## Working with this file structure
