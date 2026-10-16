@@ -3,18 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Story — Chicha San Chen</title>
-  <meta name="description" content="Since 1998, Chicha San Chen has searched Taiwan for the finest tea and spent more than 20 years perfecting how to brew it.">
+  <title>Our Story — Chi Cha San Chen</title>
+  <meta name="description" content="Since 1998, Chi Cha San Chen has searched Taiwan for the finest tea and spent more than 20 years perfecting how to brew it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=9">
   <style>
-
-    /* ── BLACK & WHITE PHOTOGRAPHY (about page) ── */
-    .philosophy-img img,
-    .ab-gallery img,
-    .footer-col-img { filter: grayscale(1); }
 
     /* ── NAV OVERRIDE ── */
     nav {
@@ -58,7 +53,7 @@
       font-weight: 300;
       font-size: clamp(40px, 5vw, 72px);
       letter-spacing: -0.02em;
-      line-height: 0.95;
+      line-height: 1.1;
       color: var(--ink);
     }
     .ab-header-sub {
@@ -169,7 +164,7 @@
       font-weight: 300;
       font-size: clamp(40px, 5vw, 72px);
       letter-spacing: -0.02em;
-      line-height: 0.95;
+      line-height: 1.1;
       color: var(--ink);
       max-width: 8em;
       text-wrap: balance;
@@ -195,46 +190,72 @@
       max-width: 380px;
     }
 
-    /* ── MILESTONES ── */
-    .ab-timeline {
-      list-style: none;
-      margin: 0 40px;
-      border-top: 1px solid #e8e8e8;
+    /* ── MILESTONES (horizontal timeline) ── */
+    .ab-tl-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin: 0 40px 28px;
     }
-    .ab-tl-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 40px;
-      padding: 28px 16px;
-      border-bottom: 1px solid #e8e8e8;
-      align-items: baseline;
-      transition: background 0.25s;
-    }
-    .ab-tl-row:hover { background: #faf9f7; }
-    .ab-tl-year {
-      font-family: 'Sentient', serif;
-      font-weight: 300;
-      font-size: 32px;
-      letter-spacing: -0.01em;
+    .ab-tl-btn {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
       color: var(--ink);
+      font-size: 16px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 14px;
+      justify-content: center;
+      transition: background 0.2s, opacity 0.2s, border-color 0.2s;
     }
-    .ab-tl-year::before {
+    .ab-tl-btn:hover:not(:disabled) { background: #faf9f7; border-color: var(--ink); }
+    .ab-tl-btn:disabled { opacity: 0.3; cursor: default; }
+    .ab-timeline {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 40px;
+      scrollbar-width: none;
+      padding: 6px 40px 8px;
+      list-style: none;
+    }
+    .ab-timeline::-webkit-scrollbar { display: none; }
+    .ab-timeline::after { content: ''; flex: 0 0 1px; }
+    .ab-tl-row {
+      flex: 0 0 300px;
+      scroll-snap-align: start;
+      position: relative;
+      border-top: 1px solid #e8e8e8;
+      padding: 32px 40px 0 0;
+    }
+    .ab-tl-row::before {
       content: '';
-      width: 7px;
-      height: 7px;
+      position: absolute;
+      top: -5px;
+      left: 0;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--accent);
-      flex-shrink: 0;
-      transform: translateY(-3px);
+      transition: transform 0.25s;
+    }
+    .ab-tl-row:hover::before { transform: scale(1.5); }
+    .ab-tl-year {
+      display: block;
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: 40px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 18px;
     }
     .ab-tl-text {
       font-size: 14px;
       line-height: 1.8;
       color: var(--ink);
-      max-width: 640px;
     }
     .ab-tl-text li { list-style: none; }
     .ab-tl-text li + li { margin-top: 6px; }
@@ -287,7 +308,7 @@
       font-weight: 300;
       font-size: clamp(40px, 5vw, 72px);
       letter-spacing: -0.02em;
-      line-height: 0.95;
+      line-height: 1.1;
       color: var(--ink);
     }
     .ab-cta-links { display: flex; gap: 32px; flex-wrap: wrap; }
@@ -315,9 +336,10 @@
       .ab-section-head { grid-template-columns: 1fr; padding: 0 24px 36px; gap: 20px; }
       .ab-section-body { justify-self: start; }
 
-      .ab-timeline { margin: 0 24px; }
-      .ab-tl-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 4px; }
-      .ab-tl-year { font-size: 26px; }
+      .ab-tl-controls { margin: 0 24px 20px; }
+      .ab-timeline { padding: 6px 24px 8px; scroll-padding-left: 24px; }
+      .ab-tl-row { flex-basis: 250px; padding-right: 28px; }
+      .ab-tl-year { font-size: 32px; }
 
       .ab-gallery { grid-template-columns: 1fr 1fr; margin: 0 24px 24px; gap: 10px; }
       .ab-gallery figure:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
@@ -336,7 +358,7 @@
 
   <!-- NAV -->
   <nav id="mainNav">
-    <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chicha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chicha San Chen" style="height:36px;width:auto;display:block;"></a>
+    <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chi Cha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chi Cha San Chen" style="height:36px;width:auto;display:block;"></a>
     <div class="nav-links">
       <a href="menu.html">Menu</a>
       <a href="locations.html">Locations</a>
@@ -348,7 +370,7 @@
             <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
             <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
           </div>
-          <span class="nav-mobile-copy">&copy; 2026 Chicha San Chen</span>
+          <span class="nav-mobile-copy">&copy; 2026 Chi Cha San Chen</span>
         </div>
       </div>
     </div>
@@ -429,9 +451,13 @@
         <div class="sec-label r">03 — Milestones</div>
         <h2 class="ab-section-title r d1">From one tea shop in Taichung to the world.</h2>
       </div>
-      <p class="ab-section-body r d2">Recognized for the quality of every cup and the warmth of our hospitality, and backed by an expert team and a comprehensive training program, Chicha San Chen has grown from a single shop into a global brand.</p>
+      <p class="ab-section-body r d2">Recognized for the quality of every cup and the warmth of our hospitality, and backed by an expert team and a comprehensive training program, Chi Cha San Chen has grown from a single shop into a global brand.</p>
     </div>
-    <ol class="ab-timeline">
+    <div class="ab-tl-controls r">
+      <button type="button" class="ab-tl-btn" id="tlPrev" aria-label="Earlier milestones">&#8592;</button>
+      <button type="button" class="ab-tl-btn" id="tlNext" aria-label="Later milestones">&#8594;</button>
+    </div>
+    <ol class="ab-timeline" id="timeline">
       <li class="ab-tl-row r"><span class="ab-tl-year">1998</span><p class="ab-tl-text">CHICHA Tea Shop is founded in Taichung City.</p></li>
       <li class="ab-tl-row r"><span class="ab-tl-year">1999</span><p class="ab-tl-text">We begin serving tea to every guest who walks through our doors — grateful to each of you for coming.</p></li>
       <li class="ab-tl-row r"><span class="ab-tl-year">2004</span><p class="ab-tl-text">Our chain-store business model is established, and CHICHA headquarters is founded in Xitun.</p></li>
@@ -454,7 +480,7 @@
       <p class="ab-section-body r d2">We believe a space with cultural and aesthetic character is tied to the history of its building. Our first concept store in Taiwan was reconstructed from a 40-year-old building — rather than demolish it, we kept its original design as a way of living alongside history.</p>
     </div>
     <div class="ab-gallery">
-      <figure class="r"><img src="images/store_taiwan.webp" alt="The Chicha San Chen concept store in Taichung, a restored brick building with a glass extension" loading="lazy"><figcaption>Taichung Concept Store</figcaption></figure>
+      <figure class="r"><img src="images/store_taiwan.webp" alt="The Chi Cha San Chen concept store in Taichung, a restored brick building with a glass extension" loading="lazy"><figcaption>Taichung Concept Store</figcaption></figure>
       <figure class="r d1"><img src="images/about_store_night.webp" alt="The concept store lit up at night" loading="lazy"><figcaption>After Dark</figcaption></figure>
       <figure class="r d2"><img src="images/about_interior.webp" alt="Overhead view of the concept store's brewing bar" loading="lazy"><figcaption>The Brewing Bar</figcaption></figure>
     </div>
@@ -475,7 +501,7 @@
   <section class="ab-section" id="humanities">
     <div class="philosophy-section ab-split reverse">
       <div class="philosophy-img r">
-        <img src="images/location2.webp" alt="A Chicha San Chen team member handing a tea to a guest" loading="lazy">
+        <img src="images/about_new.webp" alt="A Chi Cha San Chen server pouring tea at the tasting bar" loading="lazy">
       </div>
       <div class="philosophy-text">
         <div class="phil-index r">05 — Humanities</div>
@@ -498,7 +524,7 @@
   <footer>
     <div class="footer-col footer-col-left">
       <div>
-        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chicha San Chen tea">
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chi Cha San Chen tea">
         <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
       </div>
       <a href="franchise.html" class="footer-brand-link">
@@ -542,7 +568,7 @@
       </form>
     </div>
     <div class="footer-bottom">
-      <span class="footer-bottom-copy">© 2026 Chicha San Chen. All rights reserved.</span>
+      <span class="footer-bottom-copy">© 2026 Chi Cha San Chen. All rights reserved.</span>
       <div class="footer-bottom-social">
         <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
         <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
@@ -579,6 +605,31 @@
       }
 
       window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    // Milestones timeline — arrow controls
+    (function() {
+      const track = document.getElementById('timeline');
+      const prev = document.getElementById('tlPrev');
+      const next = document.getElementById('tlNext');
+      if (!track) return;
+      const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const step = () => track.querySelector('.ab-tl-row').offsetWidth;
+
+      function update() {
+        const max = track.scrollWidth - track.clientWidth;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max - 2;
+      }
+      function go(dir) {
+        track.scrollBy({ left: dir * step(), behavior: REDUCED ? 'auto' : 'smooth' });
+        setTimeout(update, REDUCED ? 0 : 450);
+      }
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
       update();
     })();
 
