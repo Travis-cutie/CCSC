@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Chi Cha San Chen</title>
+  <meta name="description" content="Get in touch with Chi Cha San Chen — questions about our drinks, stores, franchising or press.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=10">
+  <style>
+
+    /* ── GREEN PAGE SHELL ── */
+    body {
+      padding-top: 75px;
+      background: var(--accent);
+      color: var(--ink);
+    }
+    /* Organic glow: soft light-green blobs drifting over the darker brand green,
+       each on its own path and timing so the light never moves uniformly */
+    .ct-glow {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: var(--accent-dark);
+      pointer-events: none;
+    }
+    .ct-glow span {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(147,201,15,0.95) 0%, rgba(147,201,15,0.75) 35%, rgba(147,201,15,0) 70%);
+      filter: blur(40px);
+      will-change: transform;
+      animation: ease-in-out infinite alternate;
+    }
+    .ct-glow span:nth-child(1) { width: 95vmax; height: 95vmax; left: -30vmax; top: -40vmax; animation-name: glowA; animation-duration: 26s; }
+    .ct-glow span:nth-child(2) { width: 80vmax; height: 70vmax; right: -30vmax; top: -5vmax; animation-name: glowB; animation-duration: 34s; }
+    .ct-glow span:nth-child(3) { width: 85vmax; height: 85vmax; left: 5vw; bottom: -55vmax; animation-name: glowC; animation-duration: 30s; }
+    .ct-glow span:nth-child(4) {
+      width: 50vmax; height: 45vmax; left: 35vw; top: 15vh;
+      background: radial-gradient(circle at center, rgba(190,228,70,0.7) 0%, rgba(147,201,15,0) 70%);
+      animation-name: glowD; animation-duration: 22s;
+    }
+    @keyframes glowA {
+      0%   { transform: translate(0, 0) scale(1); }
+      40%  { transform: translate(12vw, 8vh) scale(1.12); }
+      100% { transform: translate(4vw, 18vh) scale(0.92); }
+    }
+    @keyframes glowB {
+      0%   { transform: translate(0, 0) scale(1); }
+      35%  { transform: translate(-14vw, 10vh) scale(0.9); }
+      100% { transform: translate(-6vw, -8vh) scale(1.15); }
+    }
+    @keyframes glowC {
+      0%   { transform: translate(0, 0) scale(1.05); }
+      50%  { transform: translate(18vw, -12vh) scale(0.95); }
+      100% { transform: translate(-10vw, -4vh) scale(1.1); }
+    }
+    @keyframes glowD {
+      0%   { transform: translate(0, 0) scale(0.9); opacity: 0.6; }
+      45%  { transform: translate(-20vw, 14vh) scale(1.2); opacity: 1; }
+      100% { transform: translate(15vw, 22vh) scale(1); opacity: 0.7; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ct-glow span { animation: none; }
+    }
+    /* footer keeps its own light background over the moving layer */
+    footer { position: relative; }
+
+    /* ── NAV ON GREEN ── */
+    nav { pointer-events: all; }
+    nav.scrolled {
+      background: rgba(147,201,15,0.92);
+      border-color: rgba(26,26,26,0.12);
+    }
+    /* The logo's green letters would vanish on the green page — render it solid ink */
+    .logo-default { filter: brightness(0); }
+    /* The white Chinese logo is only for the open mobile menu; an inline display:block
+       keeps it rendered on desktop, where only this green page would reveal it */
+    @media (min-width: 769px) { nav .logo-open { display: none !important; } }
+    .nav-links a { color: rgba(26,26,26,0.6); }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    /* Back-to-top wave is green by default — ink so it shows on the green page */
+    .back-to-top-icon { filter: brightness(0); }
+    .back-to-top-label { color: var(--ink); }
+
+    /* ── PAGE HEADER (matches Our Story / Franchise) ── */
+    .ct-header {
+      min-height: 420px;
+      padding: 100px 56px 64px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 40px;
+    }
+    .ct-eyebrow {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .ct-title {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 72px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .ct-sub {
+      font-size: 14px;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      max-width: 420px;
+      justify-self: end;
+    }
+
+    /* ── MAIN: DETAILS + FORM ── */
+    .ct-main {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      margin: 0 40px;
+      padding: 56px 0 120px;
+      border-top: 1px solid rgba(26,26,26,0.2);
+    }
+
+    .ct-details { display: flex; flex-direction: column; }
+    .ct-detail {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(26,26,26,0.2);
+    }
+    .ct-detail:first-child { padding-top: 0; }
+    .ct-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.7;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .ct-detail a,
+    .ct-detail p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink);
+      text-decoration: none;
+      word-break: break-word;
+    }
+    .ct-detail a { border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .ct-detail a:hover { border-bottom-color: var(--ink); }
+    .ct-social { display: flex; gap: 10px; margin-top: 4px; }
+    .ct-social a {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(26,26,26,0.35);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .ct-social a:hover { background: var(--ink); color: var(--accent); border-color: var(--ink); }
+
+    /* ── FORM ── */
+    .ct-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 32px;
+    }
+    .ct-field { display: flex; flex-direction: column; }
+    .ct-field.full { grid-column: 1 / -1; }
+    .ct-field label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .ct-field label .opt { opacity: 0.6; letter-spacing: 0.1em; text-transform: none; margin-left: 4px; }
+    .ct-field input,
+    .ct-field select,
+    .ct-field textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(26,26,26,0.4);
+      border-radius: 0;
+      padding: 8px 0 12px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .ct-field input::placeholder,
+    .ct-field textarea::placeholder { color: rgba(26,26,26,0.45); }
+    .ct-field input:focus,
+    .ct-field select:focus,
+    .ct-field textarea:focus {
+      border-bottom-color: var(--ink);
+      box-shadow: 0 1px 0 0 var(--ink);
+    }
+    .ct-field select {
+      cursor: pointer;
+      padding-right: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231a1a1a' stroke-width='1.2'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+    }
+    /* the open dropdown list is drawn by the OS on white — keep its options dark */
+    .ct-field select option { color: var(--ink); background: #fff; }
+    .ct-field textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+    .ct-error {
+      font-size: 12px;
+      color: #6b0f0f;
+      margin-top: 8px;
+      min-height: 0;
+      display: none;
+    }
+    .ct-field.invalid .ct-error { display: block; }
+    .ct-field.invalid input,
+    .ct-field.invalid textarea,
+    .ct-field.invalid select { border-bottom-color: #6b0f0f; box-shadow: 0 1px 0 0 #6b0f0f; }
+
+    .ct-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .ct-note {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--ink);
+      opacity: 0.75;
+      max-width: 360px;
+    }
+    .ct-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--ink);
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      padding: 16px 28px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .ct-submit:hover { background: transparent; color: var(--ink); }
+    .ct-submit:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+    .ct-submit .ct-arrow { transition: transform 0.25s; }
+    .ct-submit:hover .ct-arrow { transform: translateX(4px); }
+
+    /* ── SUCCESS STATE ── */
+    .ct-success {
+      display: none;
+      padding: 48px 0;
+      border-top: 1px solid rgba(26,26,26,0.2);
+    }
+    .ct-success.show { display: block; }
+    .ct-success h2 {
+      font-family: 'Sentient', serif;
+      font-weight: 300;
+      font-size: clamp(30px, 3.4vw, 44px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .ct-success p { font-size: 14px; line-height: 1.8; max-width: 460px; }
+    .ct-success button {
+      margin-top: 24px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--ink);
+      padding: 0 0 3px;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav.scrolled { padding: 14px 24px; }
+      .ct-header { grid-template-columns: 1fr; min-height: 340px; padding: 48px 24px 40px; gap: 24px; }
+      .ct-sub { justify-self: start; }
+      .ct-main { grid-template-columns: 1fr; gap: 56px; margin: 0 24px; padding: 40px 0 96px; }
+      .ct-form { grid-template-columns: 1fr; gap: 28px; }
+      .ct-actions { flex-direction: column-reverse; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body class="page-fade">
+<div class="load-bar" id="loadBar"></div>
+<div class="ct-glow" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
+  <span class="back-to-top-icon" aria-hidden="true"></span>
+  <span class="back-to-top-label">Back to Top</span>
+</button>
+
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html"><img class="logo-default" src="images/logo_header.svg" alt="Chi Cha San Chen" style="height:11px;width:auto;display:block;"><img class="logo-open" src="images/chinese_Logo.svg" alt="Chi Cha San Chen" style="height:36px;width:auto;display:block;"></a>
+    <div class="nav-links">
+      <a href="menu.html">Menu</a>
+      <a href="locations.html">Locations</a>
+      <a href="about.html">Our Story</a>
+      <a href="franchise.html">Franchise</a>
+      <div class="nav-mobile-extra">
+        <div class="nav-mobile-bottom">
+          <div class="nav-mobile-social">
+            <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+            <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+          </div>
+          <span class="nav-mobile-copy">&copy; 2026 Chi Cha San Chen</span>
+        </div>
+      </div>
+    </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="ct-header">
+    <div>
+      <div class="ct-eyebrow r">Contact Us</div>
+      <h1 class="ct-title r d1">Let's talk tea.</h1>
+    </div>
+    <p class="ct-sub r d2">Questions about a drink, a store or a partnership? Send us a note and a member of our team will get back to you.</p>
+  </header>
+
+  <!-- DETAILS + FORM -->
+  <main class="ct-main">
+    <aside class="ct-details r">
+      <div class="ct-detail">
+        <span class="ct-label">General Inquiries</span>
+        <a href="mailto:chichasanchen.com@teashop168.com.tw">chichasanchen.com@teashop168.com.tw</a>
+      </div>
+      <div class="ct-detail">
+        <span class="ct-label">Franchise &amp; Licensing</span>
+        <a href="mailto:chichasanchen.global@teashop168.com.tw">chichasanchen.global@teashop168.com.tw</a>
+      </div>
+      <div class="ct-detail">
+        <span class="ct-label">Headquarters</span>
+        <a href="tel:+886423285535">+886-4-2328-5535</a>
+      </div>
+      <div class="ct-detail">
+        <span class="ct-label">Taiwan Concept Store</span>
+        <a href="https://maps.google.com/?q=No.607+Daying+St,+Nantun+Dist,+Taichung+City,+Taiwan" target="_blank" rel="noopener">No. 607, Daying St., Nantun Dist.,<br>Taichung City, Taiwan</a>
+      </div>
+      <div class="ct-detail">
+        <span class="ct-label">Follow Us</span>
+        <div class="ct-social">
+          <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+          <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="r d1">
+      <form class="ct-form" id="contactForm" novalidate>
+        <div class="ct-field">
+          <label for="ctFirst">First Name</label>
+          <input id="ctFirst" name="first_name" type="text" autocomplete="given-name" placeholder="Jane" required>
+          <span class="ct-error">Please enter your first name.</span>
+        </div>
+        <div class="ct-field">
+          <label for="ctLast">Last Name</label>
+          <input id="ctLast" name="last_name" type="text" autocomplete="family-name" placeholder="Chen" required>
+          <span class="ct-error">Please enter your last name.</span>
+        </div>
+        <div class="ct-field">
+          <label for="ctEmail">Email</label>
+          <input id="ctEmail" name="email" type="email" autocomplete="email" placeholder="your@email.com" required>
+          <span class="ct-error">Please enter a valid email address.</span>
+        </div>
+        <div class="ct-field">
+          <label for="ctPhone">Phone <span class="opt">(optional)</span></label>
+          <input id="ctPhone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567">
+        </div>
+        <div class="ct-field">
+          <label for="ctTopic">Topic</label>
+          <select id="ctTopic" name="topic" required>
+            <option value="" disabled selected>Select a topic</option>
+            <option>General question</option>
+            <option>Store feedback</option>
+            <option>Franchise &amp; partnerships</option>
+            <option>Press &amp; media</option>
+            <option>Other</option>
+          </select>
+          <span class="ct-error">Please choose a topic.</span>
+        </div>
+        <div class="ct-field">
+          <label for="ctStore">Store <span class="opt">(optional)</span></label>
+          <input id="ctStore" name="store" type="text" placeholder="e.g. Boston, Sawtelle">
+        </div>
+        <div class="ct-field full">
+          <label for="ctMessage">Message</label>
+          <textarea id="ctMessage" name="message" rows="5" placeholder="How can we help?" required></textarea>
+          <span class="ct-error">Please write a short message.</span>
+        </div>
+        <div class="ct-actions">
+          <p class="ct-note">We'll only use your details to reply to your message.</p>
+          <button type="submit" class="ct-submit">Send Message <span class="ct-arrow" aria-hidden="true">→</span></button>
+        </div>
+      </form>
+
+      <div class="ct-success" id="contactSuccess" role="status" aria-live="polite">
+        <h2>Thank you<span id="ctThanksName"></span>.</h2>
+        <p id="ctSuccessText">Your message is on its way. A member of our team will get back to you as soon as possible.</p>
+        <button type="button" id="ctAgain">Send another message</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-col footer-col-left">
+      <div>
+        <img class="footer-col-img" src="images/tw_banner_list_18l18_vtdi3jpa93.png" alt="Chi Cha San Chen tea">
+        <p class="footer-brand-desc">Grow with one of Asia's premier tea brands, built on 25+ years of expertise.</p>
+      </div>
+      <a href="franchise.html" class="footer-brand-link">
+        <span class="arrow-circle">→</span>
+        Explore Franchise Opportunity
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-nav">
+      <div class="footer-nav-group-label">Explore</div>
+      <div class="footer-nav-links">
+        <a href="menu.html">Menu</a>
+        <a href="locations.html">Locations</a>
+        <a href="about.html">Our Story</a>
+        <a href="franchise.html">Franchise</a>
+      </div>
+      <div class="footer-nav-group-label">Support</div>
+      <div class="footer-nav-links">
+        <a href="contact.html">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-col footer-col-news">
+      <div class="footer-col-label">Newsletter</div>
+      <form class="footer-form" onsubmit="return false;">
+        <div class="footer-form-row">
+          <div class="footer-field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="footer-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+        </div>        <button class="footer-subscribe" type="submit">
+          <span class="arrow-circle">→</span>
+          Subscribe
+        </button>
+      </form>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-bottom-copy">© 2026 Chi Cha San Chen. All rights reserved.</span>
+      <div class="footer-bottom-social">
+        <a href="https://www.instagram.com/chichasanchen.us.official/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg></a>
+        <a href="https://www.linkedin.com/company/chicha-san-chen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.94 6 2.5 6S0 4.88 0 3.5 1.04 1 2.48 1s2.5 1.12 2.5 2.5zM.5 8h4V24h-4V8zm7 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4 0 4.75 2.63 4.75 6.05V24h-4v-7.4c0-1.76-.03-4.02-2.45-4.02-2.45 0-2.83 1.92-2.83 3.9V24h-4V8z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── CONTACT FORM ──
+    // No server is wired up yet. Set FORM_ENDPOINT to a form service URL
+    // (e.g. https://formspree.io/f/xxxxxxx) to post submissions there;
+    // while it's empty, Send opens the visitor's email app with the message
+    // pre-filled to CONTACT_EMAIL.
+    (function() {
+      const FORM_ENDPOINT = '';
+      const CONTACT_EMAIL = 'chichasanchen.com@teashop168.com.tw';
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('contactSuccess');
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function validField(el) {
+        const v = el.value.trim();
+        if (!el.required) return true;
+        if (el.type === 'email') return EMAIL_RE.test(v);
+        return v.length > 0;
+      }
+      function check(el) {
+        const ok = validField(el);
+        el.closest('.ct-field').classList.toggle('invalid', !ok);
+        el.setAttribute('aria-invalid', String(!ok));
+        return ok;
+      }
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('blur', () => { if (el.value.trim()) check(el); });
+        el.addEventListener('input', () => { if (el.closest('.ct-field').classList.contains('invalid')) check(el); });
+        el.addEventListener('change', () => { if (el.closest('.ct-field').classList.contains('invalid')) check(el); });
+      });
+
+      function showSuccess(data, viaEmail) {
+        document.getElementById('ctThanksName').textContent = data.first_name ? ', ' + data.first_name : '';
+        document.getElementById('ctSuccessText').textContent = viaEmail
+          ? 'Your email app should open with your message ready to send. If it doesn\'t, write to us at ' + CONTACT_EMAIL + '.'
+          : 'Your message is on its way. A member of our team will get back to you as soon as possible.';
+        form.style.display = 'none';
+        success.classList.add('show');
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fields = [...form.querySelectorAll('[required]')];
+        const results = fields.map(check);
+        if (results.includes(false)) {
+          fields[results.indexOf(false)].focus();
+          return;
+        }
+        const data = Object.fromEntries(new FormData(form).entries());
+
+        if (FORM_ENDPOINT) {
+          try {
+            const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
+            if (!res.ok) throw new Error(res.status);
+            showSuccess(data, false);
+          } catch (err) {
+            alert('Sorry, your message could not be sent. Please email us at ' + CONTACT_EMAIL + '.');
+          }
+          return;
+        }
+
+        const subject = (data.topic || 'Inquiry') + ' — ' + data.first_name + ' ' + data.last_name;
+        const body = [
+          data.message, '',
+          '—',
+          'Name: ' + data.first_name + ' ' + data.last_name,
+          'Email: ' + data.email,
+          data.phone ? 'Phone: ' + data.phone : '',
+          data.store ? 'Store: ' + data.store : ''
+        ].filter(Boolean).join('\n');
+        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        showSuccess(data, true);
+      });
+
+      document.getElementById('ctAgain').addEventListener('click', () => {
+        form.reset();
+        form.querySelectorAll('.invalid').forEach(f => f.classList.remove('invalid'));
+        success.classList.remove('show');
+        form.style.display = '';
+      });
+    })();
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.r').forEach(el => obs.observe(el));
+  </script>
+  <script>
+    (function() {
+      var bar = document.getElementById('loadBar');
+      requestAnimationFrame(function() { bar.style.width = '75%'; });
+      window.addEventListener('load', function() {
+        bar.style.width = '100%';
+        document.body.classList.add('is-loaded');
+        setTimeout(function() { bar.classList.add('done'); }, 250);
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var navToggle = document.getElementById('navToggle');
+      var navLinksEl = document.querySelector('.nav-links');
+      if (!navToggle || !navLinksEl) return;
+      navToggle.addEventListener('click', function() {
+        var isOpen = navLinksEl.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        document.body.classList.toggle('nav-open', isOpen);
+      });
+      navLinksEl.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          navLinksEl.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.classList.remove('nav-open');
+        });
+      });
+    })();
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>
