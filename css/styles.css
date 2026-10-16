@@ -138,17 +138,17 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 32px 56px;
   pointer-events: none;
 }
 .intro-headline {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 6.3vw;
+  font-size: 4.4vw;
   font-weight: 100;
   line-height: 1.05;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
+  padding: 0 32px calc(72px - 0.17em); /* matches .hero-name so the text doesn't jump */
   white-space: nowrap;
   overflow: hidden;
   clip-path: inset(0 100% 0 0);
@@ -364,12 +364,13 @@ body.nav-open { overflow: hidden; }
 .hero-name {
   font-family: 'JetBrains Mono', monospace;
   font-weight: 100;
-  font-size: 6.3vw;
+  font-size: 4.4vw;
   line-height: 1.05;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #fff;
-  padding: 0 32px 40px;
+  /* bottom padding = 32px edge gap + 40px lift, minus the font's descender space */
+  padding: 0 32px calc(72px - 0.17em);
   white-space: nowrap;
   overflow: hidden;
 }
@@ -965,11 +966,11 @@ footer {
   nav { padding: 20px 24px; }
   nav.scrolled { padding: 14px 24px; }
 
-  .hero-name { padding: 0 24px 32px; font-size: 5.1vw; }
+  .hero-name { padding: 0 24px calc(64px - 0.17em); font-size: 8.4vw; }
 
   .hero-video-bg video { transform: scale(1.44); }
 
-  .intro-headline { font-size: 5.1vw; }
+  .intro-headline { padding: 0 24px calc(64px - 0.17em); font-size: 8.4vw; }
 
   .text-band { padding: 16px 24px; }
 
